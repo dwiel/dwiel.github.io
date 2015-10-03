@@ -49,6 +49,40 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.959Z"><a href="/2015/10/02/what-species-of-wood-should-be-used-for-bond-beams-lintels-gringo-blocks-etc-when-building-a-ceb-wall-if-i-dont-want-to-treat-the-wood-with-chemicals/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/what-species-of-wood-should-be-used-for-bond-beams-lintels-gringo-blocks-etc-when-building-a-ceb-wall-if-i-dont-want-to-treat-the-wood-with-chemicals/"> What species of wood should be used for bond beams, lintels, gringo blocks, etc. when building a CEB wall, if I don&#39;t want to treat the wood with chemicals? </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>It appears no to matter much, but around here (Bloomington, Indiana) the most common rot resistant woods are Black Locust, White Oak and Cedar. I might just wind up using poplar because it is easy to source and cheap. Especially for the wood parts that aren’t in direct contact with the CEBs. Not sure if black Locust everywhere that touches the CEBs is overkill …</p>
+<p>Tip seems to think that poplar should be fine, especially if it is coated with pine tar in places it touches the CEBs.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:52.951Z"><a href="/2015/10/02/ceb-wheelbarrow/">2015-10-02</a></time>
       
       
@@ -83,19 +117,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.943Z"><a href="/2015/10/02/w/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.951Z"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/w/"> w </a></h1>
+    <h1 class="title"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Just remembered that I hadn’t published this script that I use fairly often which centers the currently active window on the screen using wmctrl (requires the patch provided)</p>
-<p><a href="http://dwiel.net/wp-content/uploads/2008/11/wmctrl.diffs" target="_blank" rel="external">wmctrl-patch</a></p>
-<p><a href="http://dwiel.net/wp-content/uploads/2008/11/center_active_window.py" target="_blank" rel="external">center_active_window.py</a></p>
+        <p>The code I had that caused this problem looked like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>If this were a normal call to foo, the error instead would be:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
+<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>Even this would be ok:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -347,42 +386,6 @@
         <p>simple rules that ants follow create emergant behavior which is the ant colony</p>
 <p>simple rules that people follow create emergant behavior which is the society and culture</p>
 <p>simple rules that the universe follows creates emergant behavior which is ???</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.611Z"><a href="/2015/10/02/tip-ceb-blocks-zipties/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/tip-ceb-blocks-zipties/"> Tip, CEB Blocks, Zipties </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I had a great meeting with <a href="http://dwiel.net/tip" target="_blank" rel="external">Tip</a>, a nice day out in town and then pressed a few more bricks. One of the best parts of the meeting with Tip was his change of mind in the difficulty of building our own windows and doors. This was one of the last jobs that he didn’t think we’d be able to do, and I feel confident now that we can do it, and that we can get exactly what we want by doing it that way.</p>
-<p>Also got some other questions answered by Tip, though it seems like there are always a million more. It seems like we are starting to gain the confidence in ourselves to not have to ask Tip about each and every detail.</p>
-<p>We pressed some bricks with added lime &amp; sand, just lime and just sand. They definitely feel much stronger and solid. Will be interesting to see how they dry. There were some bricks that were made from some pretty big sized aggregate that turned out pretty bad, but the others are looking pretty good.</p>
-<p>Also got a switch installed to control the shaker motor which seems to be doing its job pretty well.  We added some zipties and carboard to the hydraulic cables in an effort to reduce rubbing so that they last longer. It was a little tricky, mostly because the line to the primary cylinder isn’t long enough and so is pretty taught and inflexible.  This made it hard to ziptie it in a way that would prevent it from rubbing.</p>
 
       
     </div>
