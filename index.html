@@ -49,25 +49,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-02T02:42:58.575Z"><a href="/2015/10/01/hello-world/">2015-10-01</a></time>
+        <time datetime="2015-10-03T03:56:52.447Z"><a href="/2015/10/02/build-tolua-files-with-makefile/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/01/hello-world/">Hello World</a></h1>
+    <h1 class="title"><a href="/2015/10/02/build-tolua-files-with-makefile/"> Build tolua++ files with makefile </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>Here is how you can have your makefile build your tolua++ .cpp and .h files for you.  It should work for plain tolua also.</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TOLUA = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_<span class="variable">%.</span>cpp tolua_<span class="variable">%.</span>h : <span class="variable">%.</span>pkg</span><br><span class="line">	<span class="variable">$(</span>TOLUA) -o <span class="variable">$(</span><span class="variable">@:</span><span class="variable">%.</span>h=<span class="variable">%.</span>cpp) -H <span class="variable">$(</span><span class="variable">@:</span><span class="variable">%.</span>cpp=<span class="variable">%.</span>h) <span class="variable">$&lt;</span></span><br></pre></td></tr></table></figure>
+<p>this will generate tolua_file.cpp and tolua_file.h files from corresponding file.pkg files anytime they the .cpp or .h file is depended on somewhere else in the file.  In my case I just added tolua_file.o to my list of objects.  Here is the full makefile for the project which required this - for reference:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># LINUX</span></span><br><span class="line"><span class="constant">LIBLUA</span>=lua5.<span class="number">1</span></span><br><span class="line"><span class="comment"># MAC OSX</span></span><br><span class="line"><span class="comment">#LIBLUA=lua</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># LDFLAGS=-arch x86_64</span></span><br><span class="line"><span class="constant">OBJS</span> = swarm.o group.o scene.o vmath.o tolua_group.o tolua_swarm.o tolua_vmath.o</span><br><span class="line"><span class="constant">CXX</span> = g++</span><br><span class="line"><span class="constant">CXXFLAGS</span> = -<span class="constant">Wall</span> -c -<span class="constant">O2</span> <span class="string">`sdl-config --cflags`</span></span><br><span class="line"><span class="constant">LDFLAGS</span> = -<span class="constant">Wall</span> <span class="string">`sdl-config --libs`</span></span><br><span class="line"><span class="constant">INCLUDES</span> = -<span class="constant">I</span>./<span class="keyword">include</span> -<span class="constant">I</span>/usr/<span class="keyword">include</span>/lua5.<span class="number">1</span> -<span class="constant">I</span>/opt/local/<span class="keyword">include</span></span><br><span class="line"><span class="constant">LIBS</span> = -<span class="constant">L</span>./<span class="class"><span class="keyword">lib</span> -<span class="title">lANN</span> -<span class="title">lGL</span> -<span class="title">lGLU</span> -<span class="title">llo</span> -<span class="title">ltolua</span>++5.1 -<span class="title">l</span>$(<span class="title">LIBLUA</span>)</span></span><br><span class="line"><span class="constant">TOLUA</span> = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_%.cpp tolua_%.h <span class="symbol">:</span> %.pkg</span><br><span class="line">	<span class="variable">$(</span><span class="constant">TOLUA</span>) -o <span class="variable">$(</span>@<span class="symbol">:%</span>.h=%.cpp) -<span class="constant">H</span> <span class="variable">$(</span>@<span class="symbol">:%</span>.cpp=%.h) <span class="variable">$&lt;</span></span><br><span class="line"> </span><br><span class="line">%.<span class="symbol">o:</span> %.cpp</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">INCLUDES</span>) <span class="variable">$(</span><span class="constant">CXXFLAGS</span>) -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># the executable</span></span><br><span class="line"><span class="symbol">swarm:</span> <span class="variable">$(</span><span class="constant">OBJS</span>)</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">LDFLAGS</span>) -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(</span><span class="constant">LIBS</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="http://github.com/dwiel/swarm/raw/8716451c8b9844bbf9ec8e7f9649aca0b622c752/makefile" target="_blank" rel="external">download</a></p>
 
       
     </div>
@@ -90,17 +86,314 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-02T02:26:03.000Z"><a href="/2015/10/01/test-page/">2015-10-01</a></time>
+        <time datetime="2015-10-03T03:56:51.615Z"><a href="/2015/10/02/introducing-quiqi/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/01/test-page/">test_page</a></h1>
+    <h1 class="title"><a href="/2015/10/02/introducing-quiqi/"> Introducing Quiqi </a></h1>
   
 
     </header>
     <div class="entry">
       
+        <p><a href="http://quiqi.org/" target="_blank" rel="external">Quiqi</a> is a <a href="http://userscripts.org/scripts/show/63868" target="_blank" rel="external">greasemonkey script</a> and firefox plugin which shows you quick answers to your search queries inline and unobtrusively in Google searches. Quick answers are provided by users, editable by anyone.</p>
+<p>Some example answers (so far mostly answers to programming questions):</p>
+<p>ruby string to int -&gt; str.to_i<br>apt-get ab -&gt; apt-get install apache2-utils<br>jquery checkbox status -&gt; .is(\’:checked\’)<br>js string to int -&gt; parseInt(str)<br>usb 2 speed -&gt; 480Mbps<br>javascript array copy -&gt; new_copy = original.slice()<br>php referrer -&gt; $_SERVER[‘HTTP_REFERER’]<br>water couscous -&gt; 1 1/2:1 water to couscous<br>when to plant thyme -&gt; outside: 2 weeks after average last frost or when soil is &ge; 70&deg; inside: 8 weeks before last frost<br>error: &lsquo;memcpy&rsquo; was not declared in this scope -&gt; #include </p>
+<p>And an example screen shot.  Notice how the answer isn’t provided in the excerpted content.</p>
+<p><img src="/images/1.png" alt="Example 1"></p>
+
+      
+    </div>
+    <footer>
+      
         
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.455Z"><a href="/2015/10/02/list-of-bound-variables-in-python-excluding-variables-from-modules/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/list-of-bound-variables-in-python-excluding-variables-from-modules/"> List of bound variables in Python (excluding variables from modules) </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I’ve heard multiple people ask for a way to see a list of locally bound variables in python.  It would be especially useful for use in the interactive prompt.  They like the interface that matlab gave them and this is one of the features they miss the most.  I’m not sure what the best way to accomplish this is, but I’ve coded together one solution.  Here is an example use case:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">from</span> boundvars <span class="keyword">import</span> boundvars</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span> :</span></span><br><span class="line">         a = <span class="number">1</span></span><br><span class="line">         b = <span class="number">2</span></span><br><span class="line">         <span class="keyword">assert</span> boundvars(vars()) == &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line">         <span class="keyword">import</span> urllib</span><br><span class="line">         <span class="keyword">assert</span> boundvars(vars()) == &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line"> </span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">boundvars(vars())</span><br><span class="line">= &#123;<span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'test'</span>: &lt;function test at <span class="number">0x0000</span>&gt;&#125;</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> *</span><br><span class="line">boundvars(vars())</span><br><span class="line">= &#123;<span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'test'</span> : &lt;function test at <span class="number">0x0000</span>&gt;&#125;</span><br><span class="line"> </span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<p>As you can see, boundvars is called with vars() as a parameter which then returns a dictionary of locally bound variables.  If boundvars.ignore_external_functions is set to False, the first two calls which show x and y bound would also show the variable boundvars.  If it is set to True, then all values which are functions not defined in the <strong>main</strong>  module are excluded from the output dictionary.  The latest code can be downloaded below.  Installation is as simple as:</p>
+<p>$ wget <a href="http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz" target="_blank" rel="external">http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz</a><br>$ tar -xvf boundvars.tar.gz<br>$ cd boundvars<br>$ sudo python setup.py install</p>
+<p>Its not big enough to warrant a project at a code hosting service so its just provided here.  If you know of any way that this module could be improved (or avoided by some cool function I don’t know about) please, let me know!</p>
+<p><a href="http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz" target="_blank" rel="external">boundvars.tar.gz</a> (version 0.1)</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:11.323Z"><a href="/2015/10/02/thermal-bridging-in-a-ceb-dual-wall-with-cavity-insulation-and-buttresses/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/thermal-bridging-in-a-ceb-dual-wall-with-cavity-insulation-and-buttresses/"> Thermal Bridging in a CEB Dual Wall with Cavity Insulation and Buttresses </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Wall systems made of two CEB walls with cavity insulation lead to unusual (to other wall systems) thermal bridging problems.</p>
+<p>Say you have two walls made of 4” wide block forming a 12” insulation cavity. CEBs have r-value of 0.25 while insulation have an r-value of 2.7. The total r-value is roughly 34.4 which is great:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.25</span>*<span class="number">4</span><span class="string">" + 2.7*12"</span> + <span class="number">0.25</span>*<span class="number">4</span><span class="string">" =&gt; 34.4</span></span><br></pre></td></tr></table></figure>
+<p>Suppose that every 4 blocks, you place a block lengthwise to add some micro-buttresses which give extra strength to the wall. According to the typical linear r-value method, you would do a weighted average of the two different situations:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span><span class="string">" of insulation: 0.25*4"</span> + <span class="number">2.7</span>*<span class="number">12</span><span class="string">" + 0.25*4"</span> =&gt; <span class="number">34.4</span></span><br><span class="line"><span class="number">4</span><span class="string">" of insulation: 0.25*12"</span> + <span class="number">2.7</span>*<span class="number">4</span><span class="string">" + 0.25*4"</span> =&gt; <span class="number">14.8</span></span><br><span class="line">weighted average (<span class="number">24</span><span class="string">" of 12"</span> thick insulation <span class="keyword">for</span> every <span class="number">4</span><span class="string">" of 4"</span> thick insulation):</span><br><span class="line">    (<span class="number">34.4</span>*<span class="number">24</span><span class="string">" + 14.8*4"</span>)/<span class="number">28</span><span class="string">" =&gt; 31.6</span></span><br></pre></td></tr></table></figure>
+<p>This predicts only a small 8.1% decrease in average r-value resulting in 8.8% of additional heat loss. Not bad given the huge amount of extra strength the micro-buttresses add.</p>
+<p><img src="/images/wall.png" alt="http://dwiel.net/wp-content/uploads/2013/03/wall.png"></p>
+<h2 id="Therm">Therm</h2><p>I’ve modeled this wall system in THERM, and due to the conductivity of the CEB blocks the heat loss is actually much worse. A rough reading of the renderings THERM provides predicts roughly 50% more heat loss with the buttresses than without. This is because heat travels so well through the CEBs. In areas near to the 4” insulation gap, heat will collect over a large area of the CEB wall, funnel into the 4” thermal bridge and then spread out along the outside wall.</p>
+<p>In the diagrams below, you can see the top half of the wall which has no buttresses, and the wall section below which does. The color indicates heat flow in BTU/hr*ft^2. High numbers are bad. I’ve set up the scale of the left diagram so that any white section indicates that the heat loss is more than 20% higher than it would be without the buttresses. This is most of the wall. In the second diagram you can see that large sections of the wall are loosing heat at 2.5x the rate that they would without the buttresses.</p>
+<p><img src="/images/wall-20p.png" alt="http://dwiel.net/wp-content/uploads/2013/03/wall-20p.png"> <img src="/images/wall250p.png" alt="http://dwiel.net/wp-content/uploads/2013/03/wall250p.png"></p>
+<h2 id="Conclusion">Conclusion</h2><p>Adding buttresses can help with the strength of the wall, but detrimentally effect the insulating value of your cavity.</p>
+<h2 id="The_Flip_Side">The Flip Side</h2><p>On the other hand, CEBs high conductivity makes them great at quickly absorbing and evenly distributing heat throughout the house that is gained through passive solar design. They act as great heat sinks in the winter and cool sinks in the summer.</p>
+<p><a href="http://dwiel.net/files/CEB-Bridge-ose.THM" target="_blank" rel="external">Here</a> is the THERM model used in the above examples</p>
+<p>Note to OSE Microhouse designers: I haven’t run this example with your proposed 2” thermal breaks, but I imagine that they will loose heat at least twice as fast as a linear analysis might predict.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:10.299Z"><a href="/2015/10/02/ruby-rescue-error-message-example/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/ruby-rescue-error-message-example/"> ruby rescue error message example </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">raise</span> <span class="string">"this is an error message"</span></span><br><span class="line">rescue <span class="keyword">Exception</span> =&gt; <span class="keyword">e</span></span><br><span class="line">  # prints <span class="string">"this is an error message"</span></span><br><span class="line">  puts <span class="keyword">e</span>.message</span><br><span class="line">  # <span class="keyword">or</span> <span class="keyword">if</span> you want the entire <span class="keyword">error</span> message <span class="keyword">with</span> stack <span class="keyword">trace</span> <span class="keyword">and</span> all:</span><br><span class="line">  puts <span class="string">"failed sending weekly power usage to house: #&#123;$!&#125;"</span></span><br><span class="line"><span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:51.927Z"><a href="/2015/10/02/single-instance-application-with-command-line-interface/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/single-instance-application-with-command-line-interface/"> Single Instance Application with command line interface </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I wanted a python gtk application to open a new window on its first execution and then have subsequent executions send their command line arguments to the initial application rather than starting a new one.  Here is the template which provides that functionality:</p>
+<p>download <a href="http://dwiel.net/files/singleinstanceapp.py" target="_blank" rel="external">singleinstanceapp.py</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="string">"""</span><br><span class="line">This will only spawn one gtk application at a time.  If this command is executed </span><br><span class="line">while an instance is already running, the command line arguments are sent to the</span><br><span class="line">already running application.</span><br><span class="line">"""</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> pygtk</span><br><span class="line">pygtk.require(<span class="string">'2.0'</span>)</span><br><span class="line"><span class="keyword">import</span> gtk</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> SocketServer</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadedTCPRequestHandler</span><span class="params">(SocketServer.BaseRequestHandler)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(self)</span>:</span></span><br><span class="line">		data = self.request.recv(<span class="number">1024</span>)</span><br><span class="line">		cur_thread = threading.currentThread()</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># do something with the request:</span></span><br><span class="line">		self.server.app.label.set_label(data)</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># could instead of the length of the input, could return error codes, more</span></span><br><span class="line">		<span class="comment"># information (if the request was a query), etc.  Using a length function</span></span><br><span class="line">		<span class="comment"># as a simple example</span></span><br><span class="line">		response = <span class="string">'string length: %d'</span> % len(data)</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">print</span> <span class="string">'responding to'</span>,data,<span class="string">'with'</span>,response</span><br><span class="line">		self.request.send(response)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadedTCPServer</span><span class="params">(SocketServer.ThreadingMixIn, SocketServer.TCPServer)</span>:</span></span><br><span class="line">	stopped = <span class="keyword">False</span></span><br><span class="line">	allow_reuse_address = <span class="keyword">True</span></span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">serve_forever</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">while</span> <span class="keyword">not</span> self.stopped:</span><br><span class="line">			self.handle_request()</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">force_stop</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.server_close()</span><br><span class="line">		self.stopped = <span class="keyword">True</span></span><br><span class="line">		self.create_dummy_request()</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">create_dummy_request</span><span class="params">(self)</span>:</span></span><br><span class="line">		client(self.server_address[<span class="number">0</span>], self.server_address[<span class="number">1</span>], <span class="string">'last message for you'</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">client</span><span class="params">(ip, port, message)</span>:</span></span><br><span class="line">	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">	sock.connect((ip, port))</span><br><span class="line">	sock.send(message)</span><br><span class="line">	response = sock.recv(<span class="number">1024</span>)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Received: %s"</span> % response</span><br><span class="line">	sock.close()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_server</span><span class="params">(host, port)</span>:</span></span><br><span class="line"> </span><br><span class="line">	server = ThreadedTCPServer((host, port), ThreadedTCPRequestHandler)</span><br><span class="line">	ip, port = server.server_address</span><br><span class="line"> </span><br><span class="line">	<span class="comment"># Start a thread with the server -- that thread will then start one</span></span><br><span class="line">	<span class="comment"># more thread for each request</span></span><br><span class="line">	server_thread = threading.Thread(target=server.serve_forever)</span><br><span class="line">	<span class="comment"># Exit the server thread when the main thread terminates</span></span><br><span class="line">	server_thread.setDaemon(<span class="keyword">True</span>)</span><br><span class="line">	server_thread.start()</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> server</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleInstanceApp</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">destroy</span><span class="params">(self, widget, data=None)</span>:</span></span><br><span class="line">		self.server.force_stop()</span><br><span class="line">		gtk.main_quit()</span><br><span class="line">		<span class="comment">#exit(1) # I'm sorry but mozembed is making a huge pain in my ass</span></span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, server)</span>:</span></span><br><span class="line">		self.server = server</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># create a new window</span></span><br><span class="line">		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)</span><br><span class="line">		self.window.set_default_size(<span class="number">300</span>,<span class="number">30</span>)</span><br><span class="line">		self.window.connect(<span class="string">"destroy"</span>, self.destroy)</span><br><span class="line"> </span><br><span class="line">		self.label = gtk.Label(<span class="string">"hello world"</span>)</span><br><span class="line">		self.window.add(self.label)</span><br><span class="line"> </span><br><span class="line">		self.window.show_all()</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># and the window</span></span><br><span class="line">		self.window.show()</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(self)</span>:</span></span><br><span class="line">		gtk.gdk.threads_init()</span><br><span class="line">		gtk.main()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">	<span class="comment"># pick some high port number here.  Should probably put this into a file </span></span><br><span class="line">	<span class="comment"># somewhere.</span></span><br><span class="line">	HOST, PORT = <span class="string">"localhost"</span>, <span class="number">50010</span></span><br><span class="line"> </span><br><span class="line">	server = <span class="keyword">None</span></span><br><span class="line">	<span class="keyword">try</span> :</span><br><span class="line">		client(HOST, PORT, <span class="string">' '</span>.join(sys.argv))</span><br><span class="line">		<span class="keyword">print</span> <span class="string">'an insance was already open'</span></span><br><span class="line">	<span class="keyword">except</span> socket.error :</span><br><span class="line">		exceptionType, exceptionValue, exceptionTraceback = sys.exc_info()</span><br><span class="line">		<span class="keyword">if</span> exceptionValue[<span class="number">0</span>] == <span class="number">111</span> :</span><br><span class="line">			<span class="keyword">print</span> <span class="string">'this is the first instance'</span></span><br><span class="line">			server = start_server(HOST, PORT)</span><br><span class="line">		<span class="keyword">else</span> :</span><br><span class="line">			<span class="comment"># don't actually know what happened ...</span></span><br><span class="line">			<span class="keyword">raise</span></span><br><span class="line"> </span><br><span class="line">		app = SingleInstanceApp(server)</span><br><span class="line">		server.app = app</span><br><span class="line">		app.main()</span><br></pre></td></tr></table></figure>
+<p>The first execution of this script starts an asynchronous server on a predetermined port.  This port is checked each time the script is run to see if another instance has already been started.  If it has, the command line arguments are sent to the existing instance which can react to them however you want.</p>
+<p>download <a href="http://dwiel.net/files/singleinstanceapp.py" target="_blank" rel="external">singleinstanceapp.py</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:51.479Z"><a href="/2015/10/02/jquery--greasemonkey/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/jquery--greasemonkey/"> JQuery + Greasemonkey </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Had to look around to figure out how to include jquery in greasemonkey.  Should have just guessed this first; Just use the @require, and your standard jquery document ready code.  Heres my template anyway.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name           JQuery Template</span></span><br><span class="line"><span class="comment">// @author         Zach Dwiel</span></span><br><span class="line"><span class="comment">// @description    Provide a basic template for using jquery in greasemonkey</span></span><br><span class="line"><span class="comment">// @include        *://*</span></span><br><span class="line"><span class="comment">// @require        http://code.jquery.com/jquery-latest.js</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"> </span><br><span class="line">$(<span class="built_in">document</span>).ready( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your jquery code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:51.379Z"><a href="/2015/10/02/service-error-when-starting-mongodb/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/service-error-when-starting-mongodb/"> service error when starting mongodb </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I was trying to start mongodb just now and couldn’t understand why it wasn’t working.  Turns out I needed to be sudo - not the most clear error message …</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">$ service mongodb <span class="operator"><span class="keyword">start</span></span><br><span class="line"><span class="keyword">start</span>: Rejected send message, <span class="number">1</span> <span class="keyword">matched</span> <span class="keyword">rules</span>;</span> type="method_call", sender=":1.11</span><br><span class="line">212" (uid=1000 pid=1360 comm="<span class="operator"><span class="keyword">start</span>) <span class="keyword">interface</span>=<span class="string">"com.ubuntu.Upstart0_6.Job"</span> membe</span><br><span class="line">r=<span class="string">"Start"</span> <span class="keyword">error</span> <span class="keyword">name</span>=<span class="string">"(unset)"</span> requested_reply=<span class="number">0</span> destination=<span class="string">"com.ubuntu.Upstart</span><br><span class="line">"</span> (uid=<span class="number">0</span> pid=<span class="number">1</span> comm=<span class="string">"/sbin/init"</span>))</span><br><span class="line">$ sudo service mongodb <span class="keyword">start</span></span><br><span class="line">mongodb <span class="keyword">start</span>/running, process <span class="number">1326</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:51.239Z"><a href="/2015/10/02/python-onexit/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/python-onexit/"> python onexit </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Was looking for python’s equivalent to onexit and found <a href="http://docs.python.org/2/library/atexit.html" target="_blank" rel="external">atexit</a>:</p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> atexit</span><br><span class="line">atexit.register(<span class="keyword">function</span><span class="number">_</span>that<span class="number">_</span>will<span class="number">_</span>be<span class="number">_</span>called<span class="number">_</span>before<span class="number">_</span><span class="keyword">this</span><span class="number">_p</span>rogram<span class="number">_</span>exits)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:51.163Z"><a href="/2015/10/02/python-memcache-is-thread-safe/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/python-memcache-is-thread-safe/"> python-memcache is thread safe </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>python-memcache is a thread safe library.  In memcache.py, which is the single source file, you’ll find:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># Only exists in Python 2.4+</span></span><br><span class="line">    <span class="keyword">from</span> threading <span class="keyword">import</span> local</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span>  add the pure-python local implementation</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">local</span><span class="params">(object)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span><span class="params">(local)</span>:</span></span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+<p>Which means that all data accessed through self.variable_name have values which are thread specific (as long as you are running python version 2.4 or higher.)  Very cool.  Before I looked at the code, I wrote some multi-threaded tests to check and see if anything fishy would happen.  I’d say looking at the code is a better solution.</p>
+<p>more details <a href="http://docs.python.org/library/threading.html#threading.local" target="_blank" rel="external">threading.local</a></p>
+
       
     </div>
     <footer>
@@ -120,6 +413,8 @@
 <nav id="pagination">
   
   
+    <a href="/page/2/" class="alignright next">Next</a>
+  
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
@@ -133,6 +428,55 @@
   
 
   
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Axpress/">Axpress</a><small>2</small></li>
+  
+    <li><a href="/tags/Bug-Fix/">Bug Fix</a><small>4</small></li>
+  
+    <li><a href="/tags/CEB-Press/">CEB Press</a><small>6</small></li>
+  
+    <li><a href="/tags/Code/">Code</a><small>16</small></li>
+  
+    <li><a href="/tags/Data-Exploration/">Data Exploration</a><small>1</small></li>
+  
+    <li><a href="/tags/FYI/">FYI</a><small>9</small></li>
+  
+    <li><a href="/tags/Family/">Family</a><small>1</small></li>
+  
+    <li><a href="/tags/Food/">Food</a><small>2</small></li>
+  
+    <li><a href="/tags/Foundation/">Foundation</a><small>3</small></li>
+  
+    <li><a href="/tags/How-to/">How to</a><small>6</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/Music/">Music</a><small>2</small></li>
+  
+    <li><a href="/tags/Our-House/">Our House</a><small>12</small></li>
+  
+    <li><a href="/tags/Politics/">Politics</a><small>4</small></li>
+  
+    <li><a href="/tags/Reflection/">Reflection</a><small>2</small></li>
+  
+    <li><a href="/tags/Script/">Script</a><small>2</small></li>
+  
+    <li><a href="/tags/Uncategorized/">Uncategorized</a><small>7</small></li>
+  
+    <li><a href="/tags/Welcome/">Welcome</a><small>1</small></li>
+  
+    <li><a href="/tags/Windows/">Windows</a><small>3</small></li>
+  
+    <li><a href="/tags/a/">a</a><small>0</small></li>
+  
+    <li><a href="/tags/b/">b</a><small>0</small></li>
+  
+  </ul>
+</div>
+
 </aside>
     <div class="clearfix"></div>
   </div>

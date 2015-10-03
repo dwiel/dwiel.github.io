@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | Zach Dwiel</title>
+  <meta name="author" content="Zach Dwiel">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Zach Dwiel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Zach Dwiel" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Zach Dwiel</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:51.155Z"><a href="/2015/10/02/python-random-timezone/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/python-random-timezone/"> python random timezone </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="preprocessor"><span class="keyword">import</span> random</span></span><br><span class="line"><span class="preprocessor"><span class="keyword">import</span> pytz</span></span><br><span class="line"> </span><br><span class="line">pytz.timezone(random.choice(pytz.all_timezones))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:50.935Z"><a href="/2015/10/02/rails-headers/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/rails-headers/"> Rails Headers </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>You can access header values from rails from the request.env hash.  request.env contains a lot of other non HTTP header values.  The header name is a bit transformed too:</p>
+<ul>
+<li>prepended with HTTP_</li>
+<li>converted to uppercase</li>
+<li>dashes converted to undersocres</li>
+<li>… more?</li>
+</ul>
+<p>Example:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">curl -H <span class="string">'x-custom-value: foo'</span> <span class="string">http:</span><span class="comment">//example.com/</span></span><br></pre></td></tr></table></figure>
+<p>can be accessed in rails with:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">request<span class="class">.env</span>[<span class="string">'HTTP_X_CUSTOM_VALUE'</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:50.919Z"><a href="/2015/10/02/mysqldb-typeerror-d-format-a-number-is-required-not-str/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/mysqldb-typeerror-d-format-a-number-is-required-not-str/"> MySQLdb: TypeError: %d format: a number is required, not str </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I was getting this error message from MySQLdb:</p>
+<p>TypeError: %d format: a number is required, not str</p>
+<p>The error message was the result of this code:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">assert <span class="built_in">type</span>(gateway_id) == <span class="keyword">int</span></span><br><span class="line">sql = <span class="string">""</span><span class="string">"</span><br><span class="line"></span>  SELECT meter_id </span><br><span class="line">  FROM mtus </span><br><span class="line">  WHERE gateway_id = %<span class="keyword">d</span> </span><br><span class="line">    AND name = <span class="string">'%s'</span> <span class="string">""</span><span class="string">"</span><br><span class="line"></span>conn = mysql_connect()</span><br><span class="line"><span class="built_in">cursor</span> = conn.<span class="built_in">cursor</span>()</span><br><span class="line"><span class="built_in">cursor</span>.<span class="keyword">execute</span>(sql, (gateway_id, name))</span><br><span class="line"><span class="keyword">ret</span> = <span class="built_in">cursor</span>.fetchone()</span><br><span class="line"><span class="built_in">cursor</span>.<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+<p>It turns out, execute converts all the arguments to SQL literal values. <a href="http://mysql-python.sourceforge.net/MySQLdb.html#some-examples" target="_blank" rel="external">reference</a> All %Xs should be %s and there shouldn’t be any quotes around them. MySQLdb takes care of the string escaping too.</p>
+<h2 id="Other_Causes:">Other Causes:</h2><p>For those of you arriving here from a search and are not having problems with MySQL, the reason for this error is that a string was passed into a format where a number was expected:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># throws the TypeError:</span></span><br><span class="line"><span class="keyword">message</span> = <span class="string">"%d seconds until done"</span> % <span class="string">"three"</span></span><br><span class="line"><span class="comment"># works:</span></span><br><span class="line"><span class="keyword">message</span> = <span class="string">"%d seconds until done"</span> % <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:50.911Z"><a href="/2015/10/02/python-parsing-the-output-of-datetimeisoformat/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/python-parsing-the-output-of-datetimeisoformat/"> python: parsing the output of datetime.isoformat() </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I couldn’t find this explicitly anywhere, so here it is.  A function to parse a string which was generated by datetime.isoformat()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_iso_datetime</span><span class="params">(str)</span> :</span></span><br><span class="line">  <span class="comment"># parse a datetime generated by datetime.isoformat()</span></span><br><span class="line">  <span class="keyword">try</span> :</span><br><span class="line">    <span class="keyword">return</span> datetime.datetime.strptime(str, <span class="string">"%Y-%m-%dT%H:%M:%S"</span>)</span><br><span class="line">  <span class="keyword">except</span> ValueError :</span><br><span class="line">    <span class="keyword">return</span> datetime.datetime.strptime(str, <span class="string">"%Y-%m-%dT%H:%M:%S.%f"</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># and a simple test case</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span> :</span></span><br><span class="line">  d = datetime.datetime.now()</span><br><span class="line">  <span class="keyword">assert</span> parse_iso_datetime(d.isoformat()) == d</span><br><span class="line">  d = datetime.datetime.now().replace(microsecond = <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">assert</span> parse_iso_datetime(d.isoformat()) == d</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:53:50.839Z"><a href="/2015/10/02/webpy-error-no-socket-could-be-created/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/webpy-error-no-socket-could-be-created/"> web.py: error: No socket could be created </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>This error message most often occurrs when trying to run web.py on an invalid address and port.  An example of an invalid address would be  example.net, instead of a proper ip address like 98.228.37.242.</p>
+<h2 id="Other_Causes:">Other Causes:</h2><p>Was just trying to get a simple web.py test running:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line"> </span><br><span class="line">urls = (</span><br><span class="line">  <span class="string">'/x'</span>, <span class="string">'X'</span>,</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> :</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span> :</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'x'</span></span><br><span class="line"> </span><br><span class="line">app = web.application(urls, globals())</span><br><span class="line">app.run()</span><br></pre></td></tr></table></figure>
+<p>but I kept getting the error:</p>
+<p> error: No socket could be created </p>
+<p>The problem was that due to the way web.py loading works, you need to have the creation and running of the app only occur if this is the main entry point of the program.  Otherwise, the class loader in web.py will reload this file again later, and wind up spawning a new server when its intent was simply to load a class:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</span><br><span class="line">  app = web.<span class="function"><span class="title">application</span><span class="params">(urls, globals()</span></span>)</span><br><span class="line">  app.<span class="function"><span class="title">run</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:50:31.755Z"><a href="/2015/10/02/swarms/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/swarms/"> Swarms </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>So I’ve been experimenting with generating swarms and was able to get some basic code working pretty quickly thanks to some <a href="http://nehe.gamedev.net/data/articles/article.asp?article=06" target="_blank" rel="external">Particle Systems</a> example code on <a href="http://nehe.gamedev.net/" target="_blank" rel="external">NeHe</a>.  Here are some of my first steps:</p>
+<p><object height="300" width="400"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4022251&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"><embed allowfullscreen="true" allowscriptaccess="always" height="300" src="http://player.vimeo.com/video/47486225" type="application/x-shockwave-flash" width="400"></object><a href="http://vimeo.com/4022251" target="_blank" rel="external">First Swarm</a></p>
+<p><object height="300" width="400"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4022667&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"><embed allowfullscreen="true" allowscriptaccess="always" height="300" src="http://player.vimeo.com/video/47486225" type="application/x-shockwave-flash" width="400"></object><a href="http://vimeo.com/4022667" target="_blank" rel="external">Swarm #2</a></p>
+<p>I think the next step is going to be to get multiple swarms each operating on different rules in the same space interacting.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:48:45.751Z"><a href="/2015/10/02/window-building-musing/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/window-building-musing/"> Window Building Musing </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>On the one hand I don’t want to deal with the time and complexity of building windows, on the other and, especially on the south wall, I like the idea of being able to build them all our selves and make them fit well …</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:48:45.703Z"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>The code I had that caused this problem looked like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>If this were a normal call to foo, the error instead would be:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
+<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>Even this would be ok:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:48:45.411Z"><a href="/2015/10/02/retrospective-on-concrete-foundation/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/retrospective-on-concrete-foundation/"> Retrospective on Concrete Foundation </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>One large pollutant in our house design is in the foundation. We ended up pouring around 13 yards of concrete due to the large elevation change from North to South. If the site was more flat, we could have used far less.  13 yards of concrete comes out to about 10 cubic meters and a similar carbon footprint to 2 months worth of electricity use of an average US household [1,2,3] or a bit more than a years worth of electricity for a very efficient house like we are hoping to achieve. That is a pretty significant source of pollutant.</p>
+<p>We could have used less concrete if we had steped our foundation down with the slope of the building site and put 2 or 3 levels on our first floor, as our neighbor Danny is planning to do. We could have also chosen a more flat building site, or used a different construction method which used piers instead of a solid foundation around the perimeter. On the plus side, using a rubble trench foundation instead of a slab (as most homes are built these days) saved meant we used 3 times less concrete than that method would have required.</p>
+<p>Admittedly CO2 emissions aren’t the only thing poluting the atmospehere so a comparison between electricity and concrete curing isn’t really fair. Coal emits lots of other nasty things and cement used in concrete can too, depending on the purity of the ore in use.  It is difficult to find hard data about the pollutants from each and they differ from plant to plant.</p>
+<p>This has made me want to do a carbon footprint analysis of our entire house to see how it all compares. I’ve already done it with some things … to be continued</p>
+<p>See Also: <a href="http://dwiel.net/blog/carbon-footprint-of-plastic/" target="_blank" rel="external">The Carbon Footprint of Plastic</a></p>
+<p>Conversions:</p>
+<p>cubic foot of concrete &rarr; 9.56 kg co2 &rarr; 25.8 kwhr &rarr; 88000 BTU of electric heat<br>coal co2 emissions: 0.37 kg / kwhr</p>
+<p>[1] <a href="http://co2cc.wordpress.com/2010/07/20/293/" target="_blank" rel="external">http://co2cc.wordpress.com/2010/07/20/293/</a><br>[2] <a href="http://sustainableenergytoday.blogspot.com/2010/01/carbon-footprint-of-electricity.html" target="_blank" rel="external">http://sustainableenergytoday.blogspot.com/2010/01/carbon-footprint-of-electricity.html</a><br>[3] <a href="http://answers.yahoo.com/question/index?qid=20080712133952AAbDuUs" target="_blank" rel="external">http://answers.yahoo.com/question/index?qid=20080712133952AAbDuUs</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:48:45.371Z"><a href="/2015/10/02/emergence/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/emergence/"> Emergence </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>simple rules that ants follow create emergant behavior which is the ant colony</p>
+<p>simple rules that people follow create emergant behavior which is the society and culture</p>
+<p>simple rules that the universe follows creates emergant behavior which is ???</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/3/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:dwiel.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Axpress/">Axpress</a><small>2</small></li>
+  
+    <li><a href="/tags/Bug-Fix/">Bug Fix</a><small>4</small></li>
+  
+    <li><a href="/tags/CEB-Press/">CEB Press</a><small>6</small></li>
+  
+    <li><a href="/tags/Code/">Code</a><small>16</small></li>
+  
+    <li><a href="/tags/Data-Exploration/">Data Exploration</a><small>1</small></li>
+  
+    <li><a href="/tags/FYI/">FYI</a><small>9</small></li>
+  
+    <li><a href="/tags/Family/">Family</a><small>1</small></li>
+  
+    <li><a href="/tags/Food/">Food</a><small>2</small></li>
+  
+    <li><a href="/tags/Foundation/">Foundation</a><small>3</small></li>
+  
+    <li><a href="/tags/How-to/">How to</a><small>6</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/Music/">Music</a><small>2</small></li>
+  
+    <li><a href="/tags/Our-House/">Our House</a><small>12</small></li>
+  
+    <li><a href="/tags/Politics/">Politics</a><small>4</small></li>
+  
+    <li><a href="/tags/Reflection/">Reflection</a><small>2</small></li>
+  
+    <li><a href="/tags/Script/">Script</a><small>2</small></li>
+  
+    <li><a href="/tags/Uncategorized/">Uncategorized</a><small>7</small></li>
+  
+    <li><a href="/tags/Welcome/">Welcome</a><small>1</small></li>
+  
+    <li><a href="/tags/Windows/">Windows</a><small>3</small></li>
+  
+    <li><a href="/tags/a/">a</a><small>0</small></li>
+  
+    <li><a href="/tags/b/">b</a><small>0</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Zach Dwiel
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
