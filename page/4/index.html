@@ -49,6 +49,49 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.415Z"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/"> TP-Link TL-WN722N on Ubuntu 10.04 </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Note: according <a href="http://ricardolopes.net/blog/tutorial-my-perfect-linux-setup-with-fedora-15-lovelock/" title="this guy" target="_blank" rel="external">this guy</a> this set of steps also works for Fedora 15.</p>
+<p>I had a lot of trouble getting this card to work.  Here is how I finally got it.</p>
+<p>I am running 2.6.32-30-generic-pae #59-Ubuntu SMP<br>running “lsusb” shows the following line for my device: 0cf3:9271 Atheros Communications, Inc.</p>
+<p>I tried a bunch of different compat-wireless versions and <a href="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.38/compat-wireless-2.6.38.2-2.tar.bz2" target="_blank" rel="external">this one</a> finally did it.  At the time, it was the latest stable release.  The daily snapshots were causing kernel panics … Download it, decompress it and build it:</p>
+<p>$ tar xvf compat-wireless-2.6.38.2-2.tar.bz2<br>$ cd compat-wireless-2.6.38.2-2<br>$ ./scripts/driver-select ath9k_htc<br>$ sudo make<br>$ sudo make install</p>
+<p>I had to download version 1.2 of htc_9271.fw the firmware from <a href="http://wireless.kernel.org/download/htc_fw/" target="_blank" rel="external">here</a> and copied the file to /lib/firmware.</p>
+<p>I was getting wlan%d instead of something reasonable like wlan0. Running sudo ifconfig wlan%d showed me the mac address which I could use to add an entry to /etc/udev/rules.d/70-persistent-net.rules.  Heres the entry I added: (note that the browser adds newlines here, but you should add just two lines: one for the comment, and one for the rule)</p>
+<h1 id="USB_device_0x0cf3:0x9271_(usb)">USB device 0x0cf3:0x9271 (usb)</h1><p>SUBSYSTEM==”net”, ACTION==”add”, DRIVERS==”?<em>“, ATTR{address}==”54:e6:fc:94:91:35”, ATTR{dev_id}==”0x0”, ATTR{type}==”1”, KERNEL==”wlan</em>“, NAME=”wlan2”</p>
+<p>reload the drivers by running:</p>
+<p>sudo modprobe ath9k_htc</p>
+<p>Now plug in the device.  There were a lot of other steps that I followed while trying to get this to work, so I may have left something out.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:52.403Z"><a href="/2015/10/02/picloud-simulation-oserror-errno-13-permission-denied/">2015-10-02</a></time>
       
       
@@ -368,42 +411,6 @@
       
         <p>Feeling down about doing what you love?</p>
 <p>watch <a href="http://www.ted.com/index.php/talks/elizabeth_gilbert_on_genius.html" target="_blank" rel="external">this</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.171Z"><a href="/2015/10/02/mongorestore-error-root-directory-must-be-a-dump-of-a-single-collection-when-specifying-a-collection-name-with-collection/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/mongorestore-error-root-directory-must-be-a-dump-of-a-single-collection-when-specifying-a-collection-name-with-collection/"> mongorestore: ERROR: root directory must be a dump of a single collection when specifying a collection name with --collection </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>mongorestore wants the specific collection’s filename rather than the entire database’s dump folder:</p>
-<style>span, strong { font-family: courier, monospace; }</style>
-
-<p><em>dwiel@dwiel$</em> mongodump -d db -c variables -o ../backups/1<br>connected to: 127.0.0.1<br>DATABASE: db     to     ../backups/1/db<br>        db.variables to ../backups/1/db/variables.bson<br>                3 objects<br><em>dwiel@dwiel$</em> mongorestore -d db -c variables –drop ../backups/1<br>ERROR: root directory must be a dump of a single collection<br>       when specifying a collection name with –collection<br>usage: ……..<br><em>dwiel@dwiel$</em> mongorestore -d db -c variables –drop ../backups/1/db/variables.bson<br>connected to: 127.0.0.1<br>../backups/1/db/variables.bson<br>        going into namespace [db.variables]<br>        dropping<br>        3 objects</p>
 
       
     </div>
