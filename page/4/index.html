@@ -49,19 +49,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.443Z"><a href="/2015/10/02/window-sill-insulation-plug/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.403Z"><a href="/2015/10/02/picloud-simulation-oserror-errno-13-permission-denied/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/window-sill-insulation-plug/"> Window Sill Insulation Plug </a></h1>
+    <h1 class="title"><a href="/2015/10/02/picloud-simulation-oserror-errno-13-permission-denied/"> PiCloud Simulation: OSError: [errno 13] permission denied </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Awesome idea for later:</p>
-<p>Cast a 3” or larger <a href="http://www.nmri.go.jp/eng/khirata/metalwork/basic/bolt/index_e.html" target="_blank" rel="external">tap</a> to cut large threads into window sill. Make same size threaded wooden plug that can screw in tightly. Remove plug to check on insulation in the sill.  Alternatively, could hold a wooden block in place that makes a perfect fit in a square hole and use embedded magnets to pull it out.</p>
-<p>This can all be done later though.  We could start by leaving it sealed up and drilling/cutting a hole in it later to check on things.</p>
+        <p>I tried running a PiCloud simulation on Ubuntu 10.04 on linode and got the following error:</p>
+<p>OSError: [errno 13] permission denied</p>
+<p>I found the solution <a href="http://stackoverflow.com/questions/2009278/python-multiprocessing-permission-denied/2009505#2009505" target="_blank" rel="external">here</a>:</p>
+<p>add the following line to your fstab and reboot:</p>
+<p>none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0</p>
+<p>If you don’t want to reboot, a temporary fix might be:</p>
+<p>sudo chgrp $GROUP /dev/shm<br>sudo chmod g+w /dev/shm</p>
+<p>That last part might not be the best way to do it, but it worked for me.</p>
 
       
     </div>
@@ -84,21 +89,34 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.395Z"><a href="/2015/10/02/sound-absorbing-qualities-of-a-ceb-wall/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.375Z"><a href="/2015/10/02/ubuntu-1104-on-thinkpad-t420s/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/sound-absorbing-qualities-of-a-ceb-wall/"> Sound Absorbing Qualities of a CEB Wall </a></h1>
+    <h1 class="title"><a href="/2015/10/02/ubuntu-1104-on-thinkpad-t420s/"> Ubuntu 11.04 on Thinkpad T420s </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Sound absorption is measured in decibels where the higher the number, the greater a silencing effect the material has. I looked around for the sound absorption numbers on a few materials and found these:</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Plastered Straw Bale     | 20 inches            | [<span class="link_label">59.8 db</span>](<span class="link_url">http://www.acoustics.org/press/130th/lay03.html</span>)</span><br><span class="line">CEB Wall                 | 15 inches            | [<span class="link_label">56 db</span>](<span class="link_url">http://www.oskam-vf.com/CEBS_living_building_material.html</span>)</span><br><span class="line">CEB Wall                 | 10 inches            | [<span class="link_label">56 db</span>](<span class="link_url">http://www.use-it.co.za/Compresses_Earth_Building_System_(signed</span>).pdf)</span><br><span class="line">CEB Wall                 | 16 inches            | [<span class="link_label">45 db</span>](<span class="link_url">http://www.scribd.com/doc/85198443/2009-11-02-MaterialConcept-CompressedEarthBlock</span>)</span><br><span class="line">Plastered Concrete block | 7 inches             | [<span class="link_label">53.3 db</span>](<span class="link_url">http://www.acoustics.org/press/130th/lay03.html</span>)</span><br><span class="line">Insulated Glass          | 1/2 inch             | [<span class="link_label">28 db</span>](<span class="link_url">http://www.cardinalcorp.com/wp-content/uploads/pdf/tsb/ig/IG09_05-08.pdf</span>)</span><br><span class="line">Glass in General         | 1/8 inch - 7/16 inch | [<span class="link_label">22 - 35 db</span>](<span class="link_url">http://portal.hud.gov/hudportal/documents/huddoc?id=DOC_16417.pdf</span>)</span><br><span class="line">Doors                    | ---                  | [<span class="link_label">28 - 34 db</span>](<span class="link_url">http://portal.hud.gov/hudportal/documents/huddoc?id=DOC_16417.pdf</span>)</span><br><span class="line">Rice Hulls               | ---                  | ???</span><br></pre></td></tr></table></figure>
-<p>There are some good more wall and material types along with their ratings on the <a href="http://en.wikipedia.org/wiki/Sound_transmission_class" target="_blank" rel="external">Sound Transmission Class</a> wikipedia page.  For reference, at 50 db, “very loud sounds such as musical instruments or a stereo can be faintly heard; 99% of population not annoyed” and at 60 db, “superior soundproofing; most sounds inaudible”.</p>
-<p>It seems that with both straw bale and CEB walls will provide significant sound proofing and that the weakest link is likely going to be in the windows and doors.</p>
-<p>This is how people who are really picky about sound proofing do it: <a href="http://en.wikipedia.org/wiki/Anechoic_chamber" target="_blank" rel="external"><img src="/images/rf_anechoic_chamber.jpg" alt="None"></a>.</p>
+        <p>Just bought <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16834246117" title="this" target="_blank" rel="external">this</a> thinkpad 420s.  The first thing I did when I got it was install Ubuntu 11.04 on it.  Most everything worked on first install, including things which many people seemed to have problems with on the forums.</p>
+<h3>Working:</h3>
+
+<ul>
+<li>Displays work fine with 3d effects and everything (dual monitor with and without docking station) (Intel HD Graphics 3000)</li>
+<li>Built in speakers and headphone jack both work</li>
+<li>Built-in mic and web-cam both work - I used skype and google hangouts and both worked flawlessly.</li>
+<li>wireless worked with my open network connection (I haven’t yet tried it on secure networks)</li>
+<li>Bay battery seems to work.</li>
+</ul>
+<h3>Not Working:</h3>
+
+<ul>
+<li>Audio output on docking station</li>
+<li>Dual Displays sometimes reset to showing the same image on both rather than two seperate displays.  This has always been fixed by reseting the settings in the Monitor configuration page.</li>
+</ul>
+<p>I am impressed with how flawless the install was.  I was dreading it because last time I did this on my last laptop 4 years ago, I spent a few hours getting everything in working order.  So far I have not yet had to do any custom installation.  Everything that I needed working, worked out of the box!</p>
+<p>Let me know if you want me to test anything out and I’ll try if I can.</p>
 
       
     </div>
@@ -121,18 +139,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.383Z"><a href="/2015/10/02/what-species-of-wood-should-be-used-for-bond-beams-lintels-gringo-blocks-etc-when-building-a-ceb-wall-if-i-dont-want-to-treat-the-wood-with-chemicals/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.367Z"><a href="/2015/10/02/service-error-when-starting-mongodb/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/what-species-of-wood-should-be-used-for-bond-beams-lintels-gringo-blocks-etc-when-building-a-ceb-wall-if-i-dont-want-to-treat-the-wood-with-chemicals/"> What species of wood should be used for bond beams, lintels, gringo blocks, etc. when building a CEB wall, if I don&#39;t want to treat the wood with chemicals? </a></h1>
+    <h1 class="title"><a href="/2015/10/02/service-error-when-starting-mongodb/"> service error when starting mongodb </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>It appears no to matter much, but around here (Bloomington, Indiana) the most common rot resistant woods are Black Locust, White Oak and Cedar. I might just wind up using poplar because it is easy to source and cheap. Especially for the wood parts that aren’t in direct contact with the CEBs. Not sure if black Locust everywhere that touches the CEBs is overkill …</p>
-<p>Tip seems to think that poplar should be fine, especially if it is coated with pine tar in places it touches the CEBs.</p>
+        <p>I was trying to start mongodb just now and couldn’t understand why it wasn’t working.  Turns out I needed to be sudo - not the most clear error message …</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">$ service mongodb <span class="operator"><span class="keyword">start</span></span><br><span class="line"><span class="keyword">start</span>: Rejected send message, <span class="number">1</span> <span class="keyword">matched</span> <span class="keyword">rules</span>;</span> type="method_call", sender=":1.11</span><br><span class="line">212" (uid=1000 pid=1360 comm="<span class="operator"><span class="keyword">start</span>) <span class="keyword">interface</span>=<span class="string">"com.ubuntu.Upstart0_6.Job"</span> membe</span><br><span class="line">r=<span class="string">"Start"</span> <span class="keyword">error</span> <span class="keyword">name</span>=<span class="string">"(unset)"</span> requested_reply=<span class="number">0</span> destination=<span class="string">"com.ubuntu.Upstart</span><br><span class="line">"</span> (uid=<span class="number">0</span> pid=<span class="number">1</span> comm=<span class="string">"/sbin/init"</span>))</span><br><span class="line">$ sudo service mongodb <span class="keyword">start</span></span><br><span class="line">mongodb <span class="keyword">start</span>/running, process <span class="number">1326</span></span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -155,18 +173,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.371Z"><a href="/2015/10/02/ceb-wheelbarrow/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.359Z"><a href="/2015/10/02/apparmor-file-locks-mysql-and-innodb/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/ceb-wheelbarrow/"> CEB Wheelbarrow </a></h1>
+    <h1 class="title"><a href="/2015/10/02/apparmor-file-locks-mysql-and-innodb/"> Apparmor, file locks, MySQL and Innodb </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>We have multiple wheelbarrows for moving blocks from the <a href="http://dwiel.net/blog/ceb-press-slide" target="_blank" rel="external">slide</a> to the <a href="http://dwiel.net/blog/ceb-tarping" target="_blank" rel="external">pallets</a> where we store them, but this one is the easiest and lightest. The bucket of a standard wheel barrow was removed and these pieces of wood were screwed on in its place. I’m not sure it would be worth removing the bucket from an otherwise functioning wheelbarrow, but this one is definitely easier to use than the others.</p>
-<p><a href="http://dwiel.net/wp-content/uploads/2013/08/IMG_20130813_175059.jpg" target="_blank" rel="external"></a></p>
+        <p>In my syslogs I was getting this:<br>Oct 10 23:48:51 dwiel-srv kernel: [  141.664049] type=1503 audit(1349927331.203:107):  operation=”file_lock” pid=2192 parent=1 profile=”/usr/sbin/mysqld” requested_mask=”k::” denied_mask=”k::” fsuid=113 ouid=113 name=”/home/mysql/ibdata1”</p>
+<p>It turns out that the problem was that the problem was because in /etc/apparmor.d/usr.sbin.mysqld I had the lines:<br>/home/mysql/ rw,<br>  /home/mysql/** rw,</p>
+<p>instead of the lines:<br>/home/mysql/ rw,<br>  /home/mysql/** rwk,</p>
+<p>Note the k at the end of the second line which enables mysqld to make file locks</p>
 
       
     </div>
@@ -189,19 +209,31 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.359Z"><a href="/2015/10/02/w/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.255Z"><a href="/2015/10/02/howto-replace-a-screen-invertor-on-a-dell-inspiron-1520/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/w/"> w </a></h1>
+    <h1 class="title"><a href="/2015/10/02/howto-replace-a-screen-invertor-on-a-dell-inspiron-1520/"> Howto Replace a Screen Invertor on a Dell Inspiron 1520 </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Just remembered that I hadn’t published this script that I use fairly often which centers the currently active window on the screen using wmctrl (requires the patch provided)</p>
-<p><a href="http://dwiel.net/wp-content/uploads/2008/11/wmctrl.diffs" target="_blank" rel="external">wmctrl-patch</a></p>
-<p><a href="http://dwiel.net/wp-content/uploads/2008/11/center_active_window.py" target="_blank" rel="external">center_active_window.py</a></p>
+        <p>I have a Dell Inspiron 1520 which started to get a whining noise right under the DELL logo below the screen right in the middle.  It would change pitch depending on how bright the screen was set at.  I replaced the inverter which cost me $15 on ebay.  The process was fairly simple but I took more things apart and made things generally more difficult on myself than I needed.  Here is the most simple way to repair your inverter on a Dell 1520 Inspiron laptop.</p>
+<ul>
+<li><b>Remove the plate covering the power button and numlock/capslock keys.</b>  This can be done by twisting a screwdriver under the little slot on the top right hand side of the cover.</li>
+<li><b>Remove the frame around the screen.</b> Do this by removing the 6 little pads and and stickers covering the screws to remove the frame from the screen.  There is one in each of the corners and two near the center/top.  Unscrew these screws.  To remove the screen cover frame you will need to twist and pry a little bit near the hinges.  Don’t be afraid it does require some force.<br>Once it is removed it should look like this:</li>
+</ul>
+<p><a href="http://dwiel.net/files/InvertorReplace/IMG_0005.sm.JPG" target="_blank" rel="external"><img src="/images/IMG_0005.tiny.JPG" alt="Screen with frame removed"></a></p>
+<ul>
+<li><p>With the frame off, <b>remove the screws holding the screen to the lid.</b>  There are some that screw down from the top and other that screw into the side of the screen, just look around.  Next, remove a couple screws holding the microphone/webcam board above the very top of the screen.  This will allow you to safely move the entire screen and get to the inverter.  Once you have done this, you can open your laptop lid all of the way so it is almost flat and move the screen and webcam board so they are flat on the keyboard.  It should look like this:<br><a href="http://dwiel.net/files/InvertorReplace/IMG_0008.sm.JPG" target="_blank" rel="external"><img src="/images/IMG_0008.tiny.JPG" alt="Screen and camera on keyboard"></a></p>
+</li>
+<li><p><b>Replace the Inverter</b>.  At this point you should be able to easily get to the inverter which is between the hinges below the screen.  There are two cables to unplug.  One has a blue ribbon to pull on and the other a white connector to pull out.</p>
+</li>
+<li>Once you’ve switched them out, put everything back together and you’re done.</li>
+</ul>
+<p>It took me a long time to realize that if I removed the screws to the microphone/webcam board it would move with the screen which led to lots of problems trying to get to the inverter while the screen was still attached to the lid.  That is really the only trick.</p>
+<p>Good luck!</p>
 
       
     </div>
@@ -224,20 +256,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.087Z"><a href="/2015/10/02/refresh/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.235Z"><a href="/2015/10/02/python-onexit/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/refresh/"> Refresh </a></h1>
+    <h1 class="title"><a href="/2015/10/02/python-onexit/"> python onexit </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>It was great to take a night off and relax with Shaina and Tulsi tonight. I feel like I’m winding up my rubber band of motivation more and more every minute I spend time with them. It’s hard not to keep thinking about it, but I think some subconscious slow thinking will probably do us all good.</p>
-<p>I’m very excited to start posting more regular updates on our house design.  Especially how certain design decisions were made, and all of the reasoning behind them. Good pictures of each step will be great to have. If anyone is going to be building houses with the CEB Press in the future, it would be nice if they didn’t have to figure out all of the same things that we did.</p>
-<p>Perhaps a better format for all of this would be a wiki, rather than a blog or a blog that I edit like a wiki perhaps …</p>
-<p>Adding pictures to the site should be easy. Its not quite there yet, though I guess it kinda is …</p>
+        <p>Was looking for python’s equivalent to onexit and found <a href="http://docs.python.org/2/library/atexit.html" target="_blank" rel="external">atexit</a>:</p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> atexit</span><br><span class="line">atexit.register(<span class="keyword">function</span><span class="number">_</span>that<span class="number">_</span>will<span class="number">_</span>be<span class="number">_</span>called<span class="number">_</span>before<span class="number">_</span><span class="keyword">this</span><span class="number">_p</span>rogram<span class="number">_</span>exits)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -260,17 +290,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.791Z"><a href="/2015/10/02/obama-spam/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.223Z"><a href="/2015/10/02/the-psychology-of-the-blue-man-group/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/obama-spam/"> Obama spam </a></h1>
+    <h1 class="title"><a href="/2015/10/02/the-psychology-of-the-blue-man-group/"> The psychology of the Blue Man Group </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I keep getting emails asking to please visit this website and vote for Obama, or sign up to this Obama facebook group.  I like Obama and I plan on voting for him, I really do.  I like showing my support for him and letting anyone who is interested know what I think.  However, I could spend every hour of the day joining Obama facebook groups and voting for him in various polls.  This is not a productive use of my time.  I want to publish the fact that I support Obama, and be done with it.  Let this be the informal declaration.  I hope to have a framework which would allow people to make declarations of this type, which could then be read and understood by computers, and then analyzed and viewed by anyone and everyone who is interested.  There could even be a facebook/myspace app. <em>sigh</em> Say it once, have it published, and moveon.</p>
+        <p>There is a great <a href="http://www.edge.org/documents/archive/edge262.html#4" title="video" target="_blank" rel="external">video</a> over at edge about how talking about old age makes people walk slower and asking people to nod yes or no while demoing headphones influences their opinions on the headphones’ quality.  I think the <a href="http://www.youtube.com/watch?v=VgS-4stj8fQ" target="_blank" rel="external">Blue Man Group</a> was ahead of their time.</p>
 
       
     </div>
@@ -293,20 +323,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.755Z"><a href="/2015/10/02/oyster-mushrooms/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.183Z"><a href="/2015/10/02/passwordless-login-for-ssh-not-working/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/oyster-mushrooms/"> Oyster Mushrooms </a></h1>
+    <h1 class="title"><a href="/2015/10/02/passwordless-login-for-ssh-not-working/"> Passwordless login for SSH not working </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>So I’ve been reading a <a href="http://www.worldcat.org/isbn/1580085792" target="_blank" rel="external">book</a> by Paul Stamets who has given one of <a href="http://www.google.com/url?sa=t&amp;source=web&amp;ct=res&amp;cd=1&amp;url=http%3A%2F%2Fwww.ted.com%2Findex.php%2Ftalks%2Fpaul_stamets_on_6_ways_mushrooms_can_save_the_world.html&amp;ei=8tcqSZqBHMTH-QbM0tWVAg&amp;usg=AFQjCNEOR_dvq60CMHQ3B669Yt863SPUgQ&amp;sig2=ILCUQ-CGu7sNkhoDy0Bpng" target="_blank" rel="external">the best TED talks</a> I’ve ever seen, and I watched a lot of them.  The book is fantasy meets scifi meets reality; I’m really enjoying it.  I’m currently reading one of the chapters covering medicinal uses of mushrooms and am really amazed.  One small study of 30 people found that oyster mushrooms could reduce LDL (bad) cholesterol by 30%.  There are 37 results for ‘pleurotus ostreatus cholesterol’ on <a href="http://www.ncbi.nlm.nih.gov/pubmed/" target="_blank" rel="external">pubmed</a> (sorry they don’t allow linking to searches).  Many are on animals like rats and rabbits which seem to support the study sited by the book.  It seems to be a fairly well researched phenomenon.</p>
-<p>This begs the question: Is there a reason why doctors do not prescribe oyster mushrooms?  Is there a reason why they don’t at least suggest them?  You can even find them freeze-dried, powered and capsulized so you can get the placebo effect of eating pills if thats what you need.  All of the information I was able to dig up as a layman was supportive of the idea that they helped lower LDL cholesterol.</p>
-<p>So I talked to a friend of mine Elizabeth who knows a bit more about the medical industry than I do (she’s recieved grant money to do medical imaging research on mice).  Her basic response was that no pharmeseutical corperation is going to fund this kind of research.  Mostly since they couldn’t patent a mushroom as common as the oyster which doesn’t even need extracting or processing to become medically useful.  I was hoping for a less synical response, but alas, it was the best one I could find.  Anyone else have any ideas about this?</p>
-<p>My next thought (a fairly predictable one if you know me at all) is how we could get around this limitation through distributed cooperation rather than concentrated power and money.  What kind of experiments could we perform by having thousands of people assist from home with.  Could they try eating oyster mushrooms and looking for a change in cholesterol level?  What kind of procedures in a lab would be hard to reproduce and which would be easier?  I understand that this kind of experiment or data mining, wouldn’t be of the same rigorous type as one performed by scientists in a lab, but could we not still learn a great deal about it?  How would a system which allowed for these kinds of experiments operate?  Does this already exist?</p>
+        <p>I have not been able to login to my system with passwordless SSH for some time now and finally figured out the problem.  I had to change the permissions of my home directory to disallow writing by everyone.  I knew that ~/.ssh and the files in it required specific permissions to be set, but I hadn’t heard about the home directory having similar requirements.</p>
 
       
     </div>
@@ -329,18 +356,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.751Z"><a href="/2015/10/02/net-neutrality/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.179Z"><a href="/2015/10/02/doing-what-you-love/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/net-neutrality/"> Net Neutrality </a></h1>
+    <h1 class="title"><a href="/2015/10/02/doing-what-you-love/"> Doing what you Love </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Net Neutrality is not just about innovation, free speech and democracy, it is about keeping the newly forming synapses of our collective mind free from corruptible power structures.</p>
-<p>god damn this is important.</p>
+        <p>Feeling down about doing what you love?</p>
+<p>watch <a href="http://www.ted.com/index.php/talks/elizabeth_gilbert_on_genius.html" target="_blank" rel="external">this</a></p>
 
       
     </div>
@@ -363,20 +390,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.739Z"><a href="/2015/10/02/tip-ceb-blocks-zipties/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.171Z"><a href="/2015/10/02/mongorestore-error-root-directory-must-be-a-dump-of-a-single-collection-when-specifying-a-collection-name-with-collection/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/tip-ceb-blocks-zipties/"> Tip, CEB Blocks, Zipties </a></h1>
+    <h1 class="title"><a href="/2015/10/02/mongorestore-error-root-directory-must-be-a-dump-of-a-single-collection-when-specifying-a-collection-name-with-collection/"> mongorestore: ERROR: root directory must be a dump of a single collection when specifying a collection name with --collection </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I had a great meeting with <a href="http://dwiel.net/tip" target="_blank" rel="external">Tip</a>, a nice day out in town and then pressed a few more bricks. One of the best parts of the meeting with Tip was his change of mind in the difficulty of building our own windows and doors. This was one of the last jobs that he didn’t think we’d be able to do, and I feel confident now that we can do it, and that we can get exactly what we want by doing it that way.</p>
-<p>Also got some other questions answered by Tip, though it seems like there are always a million more. It seems like we are starting to gain the confidence in ourselves to not have to ask Tip about each and every detail.</p>
-<p>We pressed some bricks with added lime &amp; sand, just lime and just sand. They definitely feel much stronger and solid. Will be interesting to see how they dry. There were some bricks that were made from some pretty big sized aggregate that turned out pretty bad, but the others are looking pretty good.</p>
-<p>Also got a switch installed to control the shaker motor which seems to be doing its job pretty well.  We added some zipties and carboard to the hydraulic cables in an effort to reduce rubbing so that they last longer. It was a little tricky, mostly because the line to the primary cylinder isn’t long enough and so is pretty taught and inflexible.  This made it hard to ziptie it in a way that would prevent it from rubbing.</p>
+        <p>mongorestore wants the specific collection’s filename rather than the entire database’s dump folder:</p>
+<style>span, strong { font-family: courier, monospace; }</style>
+
+<p><em>dwiel@dwiel$</em> mongodump -d db -c variables -o ../backups/1<br>connected to: 127.0.0.1<br>DATABASE: db     to     ../backups/1/db<br>        db.variables to ../backups/1/db/variables.bson<br>                3 objects<br><em>dwiel@dwiel$</em> mongorestore -d db -c variables –drop ../backups/1<br>ERROR: root directory must be a dump of a single collection<br>       when specifying a collection name with –collection<br>usage: ……..<br><em>dwiel@dwiel$</em> mongorestore -d db -c variables –drop ../backups/1/db/variables.bson<br>connected to: 127.0.0.1<br>../backups/1/db/variables.bson<br>        going into namespace [db.variables]<br>        dropping<br>        3 objects</p>
 
       
     </div>
@@ -455,10 +482,6 @@
     <li><a href="/tags/Welcome/">Welcome</a><small>1</small></li>
   
     <li><a href="/tags/Windows/">Windows</a><small>3</small></li>
-  
-    <li><a href="/tags/a/">a</a><small>0</small></li>
-  
-    <li><a href="/tags/b/">b</a><small>0</small></li>
   
   </ul>
 </div>

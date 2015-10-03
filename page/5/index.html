@@ -49,19 +49,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.675Z"><a href="/2015/10/02/ceb-press-hydraulic-pressure-switch/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.159Z"><a href="/2015/10/02/python-memcache-is-thread-safe/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/ceb-press-hydraulic-pressure-switch/"> CEB Press Hydraulic Pressure Switch </a></h1>
+    <h1 class="title"><a href="/2015/10/02/python-memcache-is-thread-safe/"> python-memcache is thread safe </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Just spent an hour or two looking for low cost pressure switches to use on the CEB Press.  I would like to add them as a way to add reliable sensing of end cylinder stopping points.  This avoids the need for external sensors to determine when to stop primary and secondary movements.  I will still need sensors to know when the primary cylinder should stop growing the compression chamber as well as one to know when the secondary cylinder should stop for a compression stage.  However, with just 2 sensors instead of 6, it should be a fair bit simpler to use physical switches instead of the unreliable hall effect sensors.</p>
-<p>The sensor I found to use is <a href="http://ecatalog.gemssensors.com/ecatalog/pressure-switches/en/209667" title="this one" target="_blank" rel="external">this one</a>.  It is $32 adjustable from 1000-3000 psi and rated for maximum 6000 psi overload.</p>
-<p>There is one at the surplus center <a href="https://www.surpluscenter.com/item.asp?item=9-6278&amp;catname=hydraulic" title="here" target="_blank" rel="external">here</a>, but the one they sent me was used and broken, there is no datasheet that exactly matches what they sell and there are only 3 left in stock which means that they aren’t going to be able to be used by many more people.  I’d rather find a solution that can be easily replicated.</p>
+        <p>python-memcache is a thread safe library.  In memcache.py, which is the single source file, you’ll find:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># Only exists in Python 2.4+</span></span><br><span class="line">    <span class="keyword">from</span> threading <span class="keyword">import</span> local</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span>  add the pure-python local implementation</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">local</span><span class="params">(object)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span><span class="params">(local)</span>:</span></span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+<p>Which means that all data accessed through self.variable_name have values which are thread specific (as long as you are running python version 2.4 or higher.)  Very cool.  Before I looked at the code, I wrote some multi-threaded tests to check and see if anything fishy would happen.  I’d say looking at the code is a better solution.</p>
+<p>more details <a href="http://docs.python.org/library/threading.html#threading.local" target="_blank" rel="external">threading.local</a></p>
 
       
     </div>
@@ -84,40 +85,231 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.667Z"><a href="/2015/10/02/simple-cheap-easily-adjustable-domestic-hot-water-and-radiant-floor-system/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.151Z"><a href="/2015/10/02/python-random-timezone/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/simple-cheap-easily-adjustable-domestic-hot-water-and-radiant-floor-system/"> Simple, Cheap, Easily Adjustable Domestic Hot Water and Radiant Floor System </a></h1>
+    <h1 class="title"><a href="/2015/10/02/python-random-timezone/"> python random timezone </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Here are the design requirements I used when searching for a home and hot water heating system:</p>
+        <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="preprocessor"><span class="keyword">import</span> random</span></span><br><span class="line"><span class="preprocessor"><span class="keyword">import</span> pytz</span></span><br><span class="line"> </span><br><span class="line">pytz.timezone(random.choice(pytz.all_timezones))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.111Z"><a href="/2015/10/02/wx-1b-4200jwlau-datasheet/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/wx-1b-4200jwlau-datasheet/"> WX-1B-4200J/WLAU Datasheet </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Spent a while looking for the datasheet for Nason’s WX-1B-4200J/WLAU.  Here it is: <a href="http://www.nasonptc.com/pdfs/Switches_Catalog.pdf#page=15" target="_blank" rel="external">pdf</a>, see page 15.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.091Z"><a href="/2015/10/02/first-look-at-the-foundation/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/first-look-at-the-foundation/"> First Look at the Foundation </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I just went out to see the newly poured foundation, which was great. Shaina was worried that it wasn’t the right size, and there was some confusion earlier due to Tip’s drawing.  It indicated that the foundation should be 23’ 6” long instead of 27’ long. 23’ 6” is the correct <em>interior</em> length, but it was marked on the drawing as the <em>exterior</em> length. I measured the finished foundation and everything was the right size. The only reason we caught this was because my dad and I had staked out the corners of the foundation earlier using the correct dimensions, and the guys pouring the foundation noticed and asked about the discrepancy.  I did find out that the sewer pipe was placed inside the west wall instead of the east wall. Not good. Its sticking up right where the door is supposed to go … not sure what to do about it yet, waiting to hear back from Tip …</p>
+<p><a href="http://dwiel.net/wp-content/uploads/2012/08/DSCF1703.jpg" target="_blank" rel="external"><img src="/images/DSCF1703-1024x768.jpg" alt=""></a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.023Z"><a href="/2015/10/02/growing-couscous/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/growing-couscous/"> Growing Couscous </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Couscous is not grown.  <a href="http://en.wikipedia.org/wiki/Couscous#Couscous_from_semolina_.28wheat.29" target="_blank" rel="external">Couscous is made of wheat</a>, and traditionally rolled by hand for days before being sun dried for months.  doh</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.995Z"><a href="/2015/10/02/clustering-items-by-tag/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/clustering-items-by-tag/"> Clustering items by tag </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I write notes in axpress, my still private web front end to a triple store.  The notes have a body and a set of tags.  Most notes are thoughts about problems I encounter while programming, explanations of design decisions.  They have come in handy as a reference a few times, but the information in them is often hard to find, even with tags.  I also find writing tags tedious.  I’ve decided to look through the various set of tagged items, my notes and my bookmarks to start, to see what kind of patterns I can find.</p>
+<p>I used <a href="http://www.graphviz.org/" title="graphviz" target="_blank" rel="external">graphviz</a> to get a quick visualization of the relationships between each tag.  Each tag is a node.  Each node is labeled by the tag name and the number of notes it appears in.  The closer two nodes, the more often they occurred in the same notes.  Only tags which were connected to more than 1 other tag were included in the visualization to reduce the complexity.</p>
+<p>From here, some basic patterns can be seen.some basic subgraphs can be seen.  “trade”, “local” and “books” all stem from “economy” only.  “economy” is probably a good tag to classify that group of notes where “trade”, “local” and “books” are sub tags.  A similar pattern can be seen coming from the express tag (which is the old name of this project).  Coming from it are some tags which I don’t seem to note any more.</p>
+<p>Only visualizing pairs of tags which occurred more than 3 times, show which (common) tags are used with which other (common) tags, but not how often.  It is interesting to see which tags are independent of others.  “axpress” and “express” do not occur together often.  It might be possible to use this type of graph to find a set of tags which partition the entire set of notes efficiently.  This, hopefully small, set of tags could be used as a starting point for drilling down to find a note you are looking for.</p>
+<p>For this next graph I wanted to see how ‘thick’ the connections between each node was.  That is, from “axpress” how many links are there to “case”?  How many to “design”?  Are there any tags which occur with nearly every instance of “axpress” or are they uniformly distributed?  The darker a node is, the more occurences of that tag there are (color corresponds linearly to number in the label).  The color on the end of each link correspond to the relative number of connections represented by that link.  For example coming from “code” is a dark green node to “axpress” and a lighter cyan to “case”.  This is because there are twice as many connections from “code” to “axpress” as to “case”.  From most tags, it seems that there is a relatively uniform number of connections to each other tag.</p>
+<p>This set is rather limited, so I am considering a few different next steps.  I could use the text of the note in a similar kind of analysis - increasing the number of tags, leaving the number of tagged items alone.  Or I could use data from delicious (either my own, or a small set of users) to increase the number of tagged items while leacing the number of tags relatively small.  What would you like to see done next?  Something else entirely?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.943Z"><a href="/2015/10/02/ruby-rescue-error-message-example/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/ruby-rescue-error-message-example/"> ruby rescue error message example </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">raise</span> <span class="string">"this is an error message"</span></span><br><span class="line">rescue <span class="keyword">Exception</span> =&gt; <span class="keyword">e</span></span><br><span class="line">  # prints <span class="string">"this is an error message"</span></span><br><span class="line">  puts <span class="keyword">e</span>.message</span><br><span class="line">  # <span class="keyword">or</span> <span class="keyword">if</span> you want the entire <span class="keyword">error</span> message <span class="keyword">with</span> stack <span class="keyword">trace</span> <span class="keyword">and</span> all:</span><br><span class="line">  puts <span class="string">"failed sending weekly power usage to house: #&#123;$!&#125;"</span></span><br><span class="line"><span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.935Z"><a href="/2015/10/02/rails-headers/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/rails-headers/"> Rails Headers </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>You can access header values from rails from the request.env hash.  request.env contains a lot of other non HTTP header values.  The header name is a bit transformed too:</p>
 <ul>
-<li>cheap</li>
-<li>simple</li>
-<li>passable by building department (Indiana code follows IBC)</li>
-<li>low co2/pollutant emissions</li>
-<li>expandable to include, but not require solar collectors</li>
-<li>provide domestic hot water</li>
-<li>provide 100% of backup heat (when the sun isn’t shining) via radiant floors for 700 square foot, highly insulated passive solar house</li>
+<li>prepended with HTTP_</li>
+<li>converted to uppercase</li>
+<li>dashes converted to undersocres</li>
+<li>… more?</li>
 </ul>
-<h1 id="Electricity">Electricity</h1><p>There are two primary ways to heat water with electricity. One is with a heating element which is how almost all residential hot water systems work, and the other is with a heat pump. Heat pumps can be 2 - 3 times more efficient, but are more complicated, expensive, and are most efficient when it is hot out - exactly when a solar hot water system would be better. Resistive heat is how most electric hot water heaters work. On <a href="http://greenecon.net/how-to-measure-fuel-efficiency-energy-costs-and-carbon-emissions-for-home-heating/energy_economics.html" target="_blank" rel="external">this</a> table, this kind of heat is both the most expensive and emits the most co2 out of all options. Though, this comparison doesn’t take into account that all other forms of heat require that you vent some of your warm conditioned air to the outside, see Natural Gas below. It also doesn’t take into account other issues such as local air quality (with wood), pollution and non-co2 environmental effects such as <a href="http://www.dangersoffracking.com/" target="_blank" rel="external">fraking</a> and <a href="http://www1.ucsc.edu/currents/02-03/01-06/mercury.html" target="_blank" rel="external">mercury rain</a>. On the other hand, it is quite simple to set up a space or baseboard heater, and if you don’t need much heat from it, it may be easier to go with that than to put a bunch of thought into a more complex system.  Instant electric water heaters are simple to integrate into a simple radiant floor system.</p>
-<p>If you don’t actually want hot water all the time and you are only installing an automatic hot water system to meet code and don’t intend to use it, electric hot water has one of the lowest up front costs, at around $210 (installed) for an instant hot water heater and $250 (installed) for a smallish 40 gallon tank heater. For the tank heater you will need a 50A 240V breaker which is $10 and some 8-3 wire to your box (15’ is $30). An instant hot water tank will require a larger breaker and larger wire about $10 more expensive. Depending on the other appliances in your house, this could require a larger panel or service to your house, which could quickly add more cost.</p>
-<h1 id="Wood">Wood</h1><p>Purchasing wood costs about the same as gas <a href="http://www.builditsolar.com/References/Calculators/Fuels/FuelCompare.htm" target="_blank" rel="external">2</a>. Obviously, growing your own is also an option. I would be interested to see how much space and how many nutrients are required to grow enough wood to heat a home. I was hoping to be able to use a heat exchanger around the fire to provide hot water when the sun isn’t shining, but code requires that we have hot water available at all times, and so this is not an option. They also disallow all forms of DIY water heating … you must use only UL listed appliances. Even if code isn’t an issue, another down side is that we couldn’t use it to get hot water in the spring summer and fall without heating the house at the same time. In the summer, a fairly simple solar hot water collector should suffice for hot water, but it gets a little harder in the spring and fall.</p>
-<p>Another down side to the wood stove, is up front cost. On craigslist I’ve found stoves for $300 or so, then at least another $400 for chimney, cap, roof connection, etc. In addition, cheap wood stoves on craigslist tend to be much larger than we need for our house, and very inefficient. We are building in a fairly high density area (30 adults / acre) and with everyone using this kind of heat, air quality would suffer very quickly. Stoves with a gasification step tend to have very low emissions and high efficiency. An efficient stove properly sized for our small house would be $800 instead of $300. Here are some small wood stove options:</p>
-<ul>
-<li>$300 + shipping - <a href="http://www.fatscostoves.com/" target="_blank" rel="external">http://www.fatscostoves.com/</a> (unknown if it has a gasifier or is efficient)</li>
-<li>$1000 + shipping - <a href="http://www.jotul.com/en-US/wwwjotulus/Main-menu/Products/Wood/Wood-stoves/Jotul-F-602-CB/" target="_blank" rel="external">http://www.jotul.com/en-US/wwwjotulus/Main-menu/Products/Wood/Wood-stoves/Jotul-F-602-CB/</a></li>
-<li>$1100 + shipping - <a href="http://www.marinestove.com/sardineinfo.htm" target="_blank" rel="external">http://www.marinestove.com/sardineinfo.htm</a></li>
-</ul>
-<p>Another option for wood is to build a rocket mass heater. (unless code requires UL listed appliances like it does here) These can be very efficient, low emissions and built by hand using materials that cost less than $100 total. They are quite large, so they should be taken into account when designing a space. It is cheap, but requires you heat your house if you want hot water, which isn’t always wanted. This kind of system could wind up being ideal if you have the time and space for one as well as the flexibility to try it out for a year in combination with a solar hot water system and try to balance them out so that your solar collectors heat the water in all of the times that you don’t want to start a fire inside. I look forward to experimenting with this type of system.</p>
-<h1 id="Solar">Solar</h1><p>A good solar hot water system is either quite expensive - typically starting at $1000 or will require a bit more time researching DIY systems. I think that in the future, I would like to do this research or spend this money, but right now, I have other priorities. This is the reason for the design requirement above of a system which doesn’t require, but could easily be altered to take advantage of solar hot water.  We are already incorporating passive solar heating ideas into our house, so heating with solar hot water doesn’t make much sense.  The only time we will need extra heat is when the sun isn’t shining.</p>
-<h1 id="Propane">Propane</h1><p>Propane is very similar to natural gas.  It doesn’t require a gas line, which can be helpful. The fuel tends to be 40% more expensive than natural gas and emits 20-30% more CO2 <a href="http://greenecon.net/how-to-measure-fuel-efficiency-energy-costs-and-carbon-emissions-for-home-heating/energy_economics.html" target="_blank" rel="external">1</a>. One of the other disadvantages of propane is that it is a bit harder to find cheap large used propane water heaters around here.</p>
-<h1 id="Natural_Gas">Natural Gas</h1><p>In a small house like ours, a typical hot water heater is about the right size to use for heating water for a radiant floor heat system. On a very cold day with no sun, our house will need about 130,000 BTU per day <a href="https://docs.google.com/spreadsheet/ccc?key=0ArbuNNdbkAsRdFFVWFo1eFB2TFhCNTJmZjVSRUloR1E#gid=0" target="_blank" rel="external">3</a>. A <a href="http://www.menards.com/main/water-heaters/residential/richmond-40-gal-natural-gas-6-year-tall-water-heater/p-200203-c-8690.htm" target="_blank" rel="external">typical hot water heater</a> is rated for 36,000 BTU per hour or 864,000 BTU per day, which is more than enough to heat our house on a very cold day. It may also be possible to use a <a href="http://www.amazon.com/Excel-Natural-Ventfree-tankless-heater/dp/B002ATWR8W/ref=sr_1_17?s=kitchen-bath&amp;ie=UTF8&amp;qid=1357439485&amp;sr=1-17&amp;keywords=gas+tankless" target="_blank" rel="external">very small instant hot water heater</a>. One problem with a natural gas heater is that it requires fresh air to burn and so most furnaces and hot water heaters suck warm inside air past the flame and then vent it outside. Not only do you lose warm inside air, sucking air through the heater causes cold air to be pulled in through cracks near windows and doors, which are already colder than the rest of the house. The vents for a small house tend to be around the same size as the vents for a large one, and so the effect is proportionately greater. That said, some small gas space heaters can be ventless and cheap ($120), but there are too many horror stories for me, especially in a well sealed house. People <a href="http://www.dukefire.com/articles/article/3941815/60120.htm" target="_blank" rel="external">complain</a> about high carbon monoxide levels, lots of condensation which wind up on the windows and rotting the wood, health problems, etc. There are some gas heaters which are direct vent, which means they suck outside air to burn and then vent the exhaust, but they are more expensive ($400) and of unknown efficiency. <a href="http://www.northerntool.com/shop/tools/product_200362087_200362087" target="_blank" rel="external">This heater</a> could be a good option if there is already a gas line to the house.</p>
-<h1 id="Conclusion">Conclusion</h1><p>We are building two houses this year. In our house we will heat with electric instant hot water through a radiant floor and in the rental, we will use a wood stove. Both will likely use electric hot water tanks (for code, with DIY solar hot water and wood heat exchangers soon to follow).</p>
+<p>Example:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">curl -H <span class="string">'x-custom-value: foo'</span> <span class="string">http:</span><span class="comment">//example.com/</span></span><br></pre></td></tr></table></figure>
+<p>can be accessed in rails with:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">request<span class="class">.env</span>[<span class="string">'HTTP_X_CUSTOM_VALUE'</span>]</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -140,17 +332,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.663Z"><a href="/2015/10/02/acceptable-gap-size-in-concrete-forms/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.923Z"><a href="/2015/10/02/mysqldb-typeerror-d-format-a-number-is-required-not-str/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/acceptable-gap-size-in-concrete-forms/"> Acceptable Gap Size in Concrete Forms </a></h1>
+    <h1 class="title"><a href="/2015/10/02/mysqldb-typeerror-d-format-a-number-is-required-not-str/"> MySQLdb: TypeError: %d format: a number is required, not str </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>We had some gaps between boards that were 1/8” that were not a problem, but I would not go much bigger than that.  The aggregate is what determines how big an acceptable gap might be.  The aggregate we used was typical for a footer, and some of the bigger pieces were maybe an inch in one dimension.</p>
+        <p>I was getting this error message from MySQLdb:</p>
+<p>TypeError: %d format: a number is required, not str</p>
+<p>The error message was the result of this code:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">assert <span class="built_in">type</span>(gateway_id) == <span class="keyword">int</span></span><br><span class="line">sql = <span class="string">""</span><span class="string">"</span><br><span class="line"></span>  SELECT meter_id </span><br><span class="line">  FROM mtus </span><br><span class="line">  WHERE gateway_id = %<span class="keyword">d</span> </span><br><span class="line">    AND name = <span class="string">'%s'</span> <span class="string">""</span><span class="string">"</span><br><span class="line"></span>conn = mysql_connect()</span><br><span class="line"><span class="built_in">cursor</span> = conn.<span class="built_in">cursor</span>()</span><br><span class="line"><span class="built_in">cursor</span>.<span class="keyword">execute</span>(sql, (gateway_id, name))</span><br><span class="line"><span class="keyword">ret</span> = <span class="built_in">cursor</span>.fetchone()</span><br><span class="line"><span class="built_in">cursor</span>.<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+<p>It turns out, execute converts all the arguments to SQL literal values. <a href="http://mysql-python.sourceforge.net/MySQLdb.html#some-examples" target="_blank" rel="external">reference</a> All %Xs should be %s and there shouldn’t be any quotes around them. MySQLdb takes care of the string escaping too.</p>
+<h2 id="Other_Causes:">Other Causes:</h2><p>For those of you arriving here from a search and are not having problems with MySQL, the reason for this error is that a string was passed into a format where a number was expected:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># throws the TypeError:</span></span><br><span class="line"><span class="keyword">message</span> = <span class="string">"%d seconds until done"</span> % <span class="string">"three"</span></span><br><span class="line"><span class="comment"># works:</span></span><br><span class="line"><span class="keyword">message</span> = <span class="string">"%d seconds until done"</span> % <span class="number">3</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -173,267 +371,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.647Z"><a href="/2015/10/02/ceb-tarping/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.911Z"><a href="/2015/10/02/python-parsing-the-output-of-datetimeisoformat/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/ceb-tarping/"> CEB Tarping </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>We have been making CEBs one weekend and then laying them over the next few weekends, which means we needed a way to safely store them. We stack them on pallets and then cover them with tarps and metal roofing. Our tarps are old and have some small holes, and if that hole happens to be at a gap in the blocks, a valley will form that collects and drips large amount of water to the blocks below. The metal roofing protects against the rain and the tarps ensure that the blocks dry slowly, which is good for their strength.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.627Z"><a href="/2015/10/02/controlling-samples-by-spitting-them/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/controlling-samples-by-spitting-them/"> Controlling Samples by Spitting Them </a></h1>
+    <h1 class="title"><a href="/2015/10/02/python-parsing-the-output-of-datetimeisoformat/"> python: parsing the output of datetime.isoformat() </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Last night, Nate and I were able to sucessfully and intuitively control up to 3 or 4 individual drums based on different sounds vocalized into a mic. The bass drum would play when ‘oooh’ was sung, a snare when ‘eee’ was sung and a cymbal when ‘aaah’ was sung.  There are still some kinks in the system, but as a proof of concept, it works fairly well.  The mapping between input sound and MIDI event are learned in real time so you are not restricted to different vowel sounds.  The 3 distinguishing sounds could have just as easily been a clap, growl and whistle.  The code: <a href="http://code.google.com/p/fftknn/" target="_blank" rel="external">fftknn</a>.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.471Z"><a href="/2015/10/02/howto-install-pyclutter-082-on-ubuntu/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/howto-install-pyclutter-082-on-ubuntu/"> Howto install pyclutter 0.8.2 on Ubuntu </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Ubuntu 8.04 has pyclutter 0.6.2 in the repositories while the current stable version is 0.8.2.  Here is how I installed pyclutter 0.8.2 with all of the extra available libraries (gtk, gst, cairo):</p>
-<p>download:</p>
-<ul>
-<li><a href="http://www.clutter-project.org/sources/pyclutter/0.8/pyclutter-0.8.2.tar.bz2" target="_blank" rel="external">pyclutter-0.8.2</a></li>
-<li><a href="http://www.clutter-project.org/sources/clutter/0.8/clutter-0.8.4.tar.bz2" target="_blank" rel="external">clutter-0.8.4</a></li>
-<li><a href="http://www.clutter-project.org/sources/clutter-gst/0.8/clutter-gst-0.8.0.tar.bz2" target="_blank" rel="external">clutter-gst-0.8.0</a></li>
-<li><a href="http://www.clutter-project.org/sources/clutter-cairo/0.8/clutter-cairo-0.8.2.tar.bz2" target="_blank" rel="external">clutter-cairo-0.8.2</a></li>
-<li><a href="http://www.clutter-project.org/sources/clutter-gtk/0.8/clutter-gtk-0.8.2.tar.bz2" target="_blank" rel="external">clutter-gtk-0.8.2</a></li>
-</ul>
-<p>also make sure you have <em>python-cairo-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev</em> installed.  There may be more required, but these were the only ones I didn’t already have installed.</p>
-<p>For some reason I had to configure all of these libraries with –prefix /usr to get pycluster to see all of them.</p>
-<p>Also, configure pycluster with –enable-docs if you want any documentation.</p>
-<p>have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.443Z"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/"> MySQL Permission Errors After Moving Datadir </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I wanted to make space on my root partition and so moved my mysql data dir to /home/mysql in /etc/mysql/my.conf and received the following errors:</p>
-<p>dwiel@dwiel:~$ sudo mysqld<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Note] Plugin ‘FEDERATED’ is disabled.<br>mysqld: Can’t find file: ‘./mysql/plugin.frm’ (errno: 13)<br>091111 20:39:16 [ERROR] Can’t open the mysql.plugin table. Please run mysql_upgrade to create it.<br>091111 20:39:16  InnoDB: Operating system error number 13 in a file operation.<br>InnoDB: The error means mysqld does not have the access rights to<br>InnoDB: the directory.<br>InnoDB: File name ./ibdata1<br>InnoDB: File operation call: ‘open’.<br>InnoDB: Cannot continue operation.</p>
-<p>The problem was with apparmor.  It was restricting mysql from reading and writing to /home/mysql.  To correct this I edited the file /etc/apparmor.d/usr.sbin.mysqld and added:</p>
-<p>/home/mysql r,<br>/home/mysql** rwk,</p>
-<p>to the end of the file.  Then restarted apparmor:</p>
-<p>sudo /etc/init.d/apparmor restart</p>
-<p>and then restarted apache with no problem</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.419Z"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/"> TP-Link TL-WN722N on Ubuntu 10.04 </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Note: according <a href="http://ricardolopes.net/blog/tutorial-my-perfect-linux-setup-with-fedora-15-lovelock/" title="this guy" target="_blank" rel="external">this guy</a> this set of steps also works for Fedora 15.</p>
-<p>I had a lot of trouble getting this card to work.  Here is how I finally got it.</p>
-<p>I am running 2.6.32-30-generic-pae #59-Ubuntu SMP<br>running “lsusb” shows the following line for my device: 0cf3:9271 Atheros Communications, Inc.</p>
-<p>I tried a bunch of different compat-wireless versions and <a href="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.38/compat-wireless-2.6.38.2-2.tar.bz2" target="_blank" rel="external">this one</a> finally did it.  At the time, it was the latest stable release.  The daily snapshots were causing kernel panics … Download it, decompress it and build it:</p>
-<p>$ tar xvf compat-wireless-2.6.38.2-2.tar.bz2<br>$ cd compat-wireless-2.6.38.2-2<br>$ ./scripts/driver-select ath9k_htc<br>$ sudo make<br>$ sudo make install</p>
-<p>I had to download version 1.2 of htc_9271.fw the firmware from <a href="http://wireless.kernel.org/download/htc_fw/" target="_blank" rel="external">here</a> and copied the file to /lib/firmware.</p>
-<p>I was getting wlan%d instead of something reasonable like wlan0. Running sudo ifconfig wlan%d showed me the mac address which I could use to add an entry to /etc/udev/rules.d/70-persistent-net.rules.  Heres the entry I added: (note that the browser adds newlines here, but you should add just two lines: one for the comment, and one for the rule)</p>
-<h1 id="USB_device_0x0cf3:0x9271_(usb)">USB device 0x0cf3:0x9271 (usb)</h1><p>SUBSYSTEM==”net”, ACTION==”add”, DRIVERS==”?<em>“, ATTR{address}==”54:e6:fc:94:91:35”, ATTR{dev_id}==”0x0”, ATTR{type}==”1”, KERNEL==”wlan</em>“, NAME=”wlan2”</p>
-<p>reload the drivers by running:</p>
-<p>sudo modprobe ath9k_htc</p>
-<p>Now plug in the device.  There were a lot of other steps that I followed while trying to get this to work, so I may have left something out.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.411Z"><a href="/2015/10/02/picloud-simulation-oserror-errno-13-permission-denied/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/picloud-simulation-oserror-errno-13-permission-denied/"> PiCloud Simulation: OSError: [errno 13] permission denied </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I tried running a PiCloud simulation on Ubuntu 10.04 on linode and got the following error:</p>
-<p>OSError: [errno 13] permission denied</p>
-<p>I found the solution <a href="http://stackoverflow.com/questions/2009278/python-multiprocessing-permission-denied/2009505#2009505" target="_blank" rel="external">here</a>:</p>
-<p>add the following line to your fstab and reboot:</p>
-<p>none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0</p>
-<p>If you don’t want to reboot, a temporary fix might be:</p>
-<p>sudo chgrp $GROUP /dev/shm<br>sudo chmod g+w /dev/shm</p>
-<p>That last part might not be the best way to do it, but it worked for me.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.399Z"><a href="/2015/10/02/ubuntu-1104-on-thinkpad-t420s/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/ubuntu-1104-on-thinkpad-t420s/"> Ubuntu 11.04 on Thinkpad T420s </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Just bought <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16834246117" title="this" target="_blank" rel="external">this</a> thinkpad 420s.  The first thing I did when I got it was install Ubuntu 11.04 on it.  Most everything worked on first install, including things which many people seemed to have problems with on the forums.</p>
-<h3>Working:</h3>
-
-<ul>
-<li>Displays work fine with 3d effects and everything (dual monitor with and without docking station) (Intel HD Graphics 3000)</li>
-<li>Built in speakers and headphone jack both work</li>
-<li>Built-in mic and web-cam both work - I used skype and google hangouts and both worked flawlessly.</li>
-<li>wireless worked with my open network connection (I haven’t yet tried it on secure networks)</li>
-<li>Bay battery seems to work.</li>
-</ul>
-<h3>Not Working:</h3>
-
-<ul>
-<li>Audio output on docking station</li>
-<li>Dual Displays sometimes reset to showing the same image on both rather than two seperate displays.  This has always been fixed by reseting the settings in the Monitor configuration page.</li>
-</ul>
-<p>I am impressed with how flawless the install was.  I was dreading it because last time I did this on my last laptop 4 years ago, I spent a few hours getting everything in working order.  So far I have not yet had to do any custom installation.  Everything that I needed working, worked out of the box!</p>
-<p>Let me know if you want me to test anything out and I’ll try if I can.</p>
+        <p>I couldn’t find this explicitly anywhere, so here it is.  A function to parse a string which was generated by datetime.isoformat()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_iso_datetime</span><span class="params">(str)</span> :</span></span><br><span class="line">  <span class="comment"># parse a datetime generated by datetime.isoformat()</span></span><br><span class="line">  <span class="keyword">try</span> :</span><br><span class="line">    <span class="keyword">return</span> datetime.datetime.strptime(str, <span class="string">"%Y-%m-%dT%H:%M:%S"</span>)</span><br><span class="line">  <span class="keyword">except</span> ValueError :</span><br><span class="line">    <span class="keyword">return</span> datetime.datetime.strptime(str, <span class="string">"%Y-%m-%dT%H:%M:%S.%f"</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># and a simple test case</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span> :</span></span><br><span class="line">  d = datetime.datetime.now()</span><br><span class="line">  <span class="keyword">assert</span> parse_iso_datetime(d.isoformat()) == d</span><br><span class="line">  d = datetime.datetime.now().replace(microsecond = <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">assert</span> parse_iso_datetime(d.isoformat()) == d</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -512,10 +461,6 @@
     <li><a href="/tags/Welcome/">Welcome</a><small>1</small></li>
   
     <li><a href="/tags/Windows/">Windows</a><small>3</small></li>
-  
-    <li><a href="/tags/a/">a</a><small>0</small></li>
-  
-    <li><a href="/tags/b/">b</a><small>0</small></li>
   
   </ul>
 </div>

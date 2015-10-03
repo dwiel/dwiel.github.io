@@ -49,7 +49,73 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:45.299Z"><a href="/2015/10/02/ceb-press-slide/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.559Z"><a href="/2015/10/02/acceptable-gap-size-in-concrete-forms/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/acceptable-gap-size-in-concrete-forms/"> Acceptable Gap Size in Concrete Forms </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>We had some gaps between boards that were 1/8” that were not a problem, but I would not go much bigger than that.  The aggregate is what determines how big an acceptable gap might be.  The aggregate we used was typical for a footer, and some of the bigger pieces were maybe an inch in one dimension.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.543Z"><a href="/2015/10/02/ceb-tarping/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/ceb-tarping/"> CEB Tarping </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>We have been making CEBs one weekend and then laying them over the next few weekends, which means we needed a way to safely store them. We stack them on pallets and then cover them with tarps and metal roofing. Our tarps are old and have some small holes, and if that hole happens to be at a gap in the blocks, a valley will form that collects and drips large amount of water to the blocks below. The metal roofing protects against the rain and the tarps ensure that the blocks dry slowly, which is good for their strength.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.539Z"><a href="/2015/10/02/ceb-press-slide/">2015-10-02</a></time>
       
       
   
@@ -84,20 +150,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:45.127Z"><a href="/2015/10/02/apparmor-file-locks-mysql-and-innodb/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.535Z"><a href="/2015/10/02/controlling-samples-by-spitting-them/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/apparmor-file-locks-mysql-and-innodb/"> Apparmor, file locks, MySQL and Innodb </a></h1>
+    <h1 class="title"><a href="/2015/10/02/controlling-samples-by-spitting-them/"> Controlling Samples by Spitting Them </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>In my syslogs I was getting this:<br>Oct 10 23:48:51 dwiel-srv kernel: [  141.664049] type=1503 audit(1349927331.203:107):  operation=”file_lock” pid=2192 parent=1 profile=”/usr/sbin/mysqld” requested_mask=”k::” denied_mask=”k::” fsuid=113 ouid=113 name=”/home/mysql/ibdata1”</p>
-<p>It turns out that the problem was that the problem was because in /etc/apparmor.d/usr.sbin.mysqld I had the lines:<br>/home/mysql/ rw,<br>  /home/mysql/** rw,</p>
-<p>instead of the lines:<br>/home/mysql/ rw,<br>  /home/mysql/** rwk,</p>
-<p>Note the k at the end of the second line which enables mysqld to make file locks</p>
+        <p>Last night, Nate and I were able to sucessfully and intuitively control up to 3 or 4 individual drums based on different sounds vocalized into a mic. The bass drum would play when ‘oooh’ was sung, a snare when ‘eee’ was sung and a cymbal when ‘aaah’ was sung.  There are still some kinks in the system, but as a proof of concept, it works fairly well.  The mapping between input sound and MIDI event are learned in real time so you are not restricted to different vowel sounds.  The 3 distinguishing sounds could have just as easily been a clap, growl and whistle.  The code: <a href="http://code.google.com/p/fftknn/" target="_blank" rel="external">fftknn</a>.</p>
 
       
     </div>
@@ -120,17 +183,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:44.879Z"><a href="/2015/10/02/wx-1b-4200jwlau-datasheet/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.503Z"><a href="/2015/10/02/swarms/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/wx-1b-4200jwlau-datasheet/"> WX-1B-4200J/WLAU Datasheet </a></h1>
+    <h1 class="title"><a href="/2015/10/02/swarms/"> Swarms </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Spent a while looking for the datasheet for Nason’s WX-1B-4200J/WLAU.  Here it is: <a href="http://www.nasonptc.com/pdfs/Switches_Catalog.pdf#page=15" target="_blank" rel="external">pdf</a>, see page 15.</p>
+        <p>So I’ve been experimenting with generating swarms and was able to get some basic code working pretty quickly thanks to some <a href="http://nehe.gamedev.net/data/articles/article.asp?article=06" target="_blank" rel="external">Particle Systems</a> example code on <a href="http://nehe.gamedev.net/" target="_blank" rel="external">NeHe</a>.  Here are some of my first steps:</p>
+<p><object height="300" width="400"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4022251&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"><embed allowfullscreen="true" allowscriptaccess="always" height="300" src="http://player.vimeo.com/video/47486225" type="application/x-shockwave-flash" width="400"></object><a href="http://vimeo.com/4022251" target="_blank" rel="external">First Swarm</a></p>
+<p><object height="300" width="400"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4022667&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"><embed allowfullscreen="true" allowscriptaccess="always" height="300" src="http://player.vimeo.com/video/47486225" type="application/x-shockwave-flash" width="400"></object><a href="http://vimeo.com/4022667" target="_blank" rel="external">Swarm #2</a></p>
+<p>I think the next step is going to be to get multiple swarms each operating on different rules in the same space interacting.</p>
 
       
     </div>
@@ -153,17 +219,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:44.787Z"><a href="/2015/10/02/growing-couscous/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.471Z"><a href="/2015/10/02/jquery--greasemonkey/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/growing-couscous/"> Growing Couscous </a></h1>
+    <h1 class="title"><a href="/2015/10/02/jquery--greasemonkey/"> JQuery + Greasemonkey </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Couscous is not grown.  <a href="http://en.wikipedia.org/wiki/Couscous#Couscous_from_semolina_.28wheat.29" target="_blank" rel="external">Couscous is made of wheat</a>, and traditionally rolled by hand for days before being sun dried for months.  doh</p>
+        <p>Had to look around to figure out how to include jquery in greasemonkey.  Should have just guessed this first; Just use the @require, and your standard jquery document ready code.  Heres my template anyway.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name           JQuery Template</span></span><br><span class="line"><span class="comment">// @author         Zach Dwiel</span></span><br><span class="line"><span class="comment">// @description    Provide a basic template for using jquery in greasemonkey</span></span><br><span class="line"><span class="comment">// @include        *://*</span></span><br><span class="line"><span class="comment">// @require        http://code.jquery.com/jquery-latest.js</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"> </span><br><span class="line">$(<span class="built_in">document</span>).ready( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your jquery code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -186,22 +253,29 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:44.763Z"><a href="/2015/10/02/clustering-items-by-tag/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.463Z"><a href="/2015/10/02/howto-install-pyclutter-082-on-ubuntu/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/clustering-items-by-tag/"> Clustering items by tag </a></h1>
+    <h1 class="title"><a href="/2015/10/02/howto-install-pyclutter-082-on-ubuntu/"> Howto install pyclutter 0.8.2 on Ubuntu </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I write notes in axpress, my still private web front end to a triple store.  The notes have a body and a set of tags.  Most notes are thoughts about problems I encounter while programming, explanations of design decisions.  They have come in handy as a reference a few times, but the information in them is often hard to find, even with tags.  I also find writing tags tedious.  I’ve decided to look through the various set of tagged items, my notes and my bookmarks to start, to see what kind of patterns I can find.</p>
-<p>I used <a href="http://www.graphviz.org/" title="graphviz" target="_blank" rel="external">graphviz</a> to get a quick visualization of the relationships between each tag.  Each tag is a node.  Each node is labeled by the tag name and the number of notes it appears in.  The closer two nodes, the more often they occurred in the same notes.  Only tags which were connected to more than 1 other tag were included in the visualization to reduce the complexity.</p>
-<p>From here, some basic patterns can be seen.some basic subgraphs can be seen.  “trade”, “local” and “books” all stem from “economy” only.  “economy” is probably a good tag to classify that group of notes where “trade”, “local” and “books” are sub tags.  A similar pattern can be seen coming from the express tag (which is the old name of this project).  Coming from it are some tags which I don’t seem to note any more.</p>
-<p>Only visualizing pairs of tags which occurred more than 3 times, show which (common) tags are used with which other (common) tags, but not how often.  It is interesting to see which tags are independent of others.  “axpress” and “express” do not occur together often.  It might be possible to use this type of graph to find a set of tags which partition the entire set of notes efficiently.  This, hopefully small, set of tags could be used as a starting point for drilling down to find a note you are looking for.</p>
-<p>For this next graph I wanted to see how ‘thick’ the connections between each node was.  That is, from “axpress” how many links are there to “case”?  How many to “design”?  Are there any tags which occur with nearly every instance of “axpress” or are they uniformly distributed?  The darker a node is, the more occurences of that tag there are (color corresponds linearly to number in the label).  The color on the end of each link correspond to the relative number of connections represented by that link.  For example coming from “code” is a dark green node to “axpress” and a lighter cyan to “case”.  This is because there are twice as many connections from “code” to “axpress” as to “case”.  From most tags, it seems that there is a relatively uniform number of connections to each other tag.</p>
-<p>This set is rather limited, so I am considering a few different next steps.  I could use the text of the note in a similar kind of analysis - increasing the number of tags, leaving the number of tagged items alone.  Or I could use data from delicious (either my own, or a small set of users) to increase the number of tagged items while leacing the number of tags relatively small.  What would you like to see done next?  Something else entirely?</p>
+        <p>Ubuntu 8.04 has pyclutter 0.6.2 in the repositories while the current stable version is 0.8.2.  Here is how I installed pyclutter 0.8.2 with all of the extra available libraries (gtk, gst, cairo):</p>
+<p>download:</p>
+<ul>
+<li><a href="http://www.clutter-project.org/sources/pyclutter/0.8/pyclutter-0.8.2.tar.bz2" target="_blank" rel="external">pyclutter-0.8.2</a></li>
+<li><a href="http://www.clutter-project.org/sources/clutter/0.8/clutter-0.8.4.tar.bz2" target="_blank" rel="external">clutter-0.8.4</a></li>
+<li><a href="http://www.clutter-project.org/sources/clutter-gst/0.8/clutter-gst-0.8.0.tar.bz2" target="_blank" rel="external">clutter-gst-0.8.0</a></li>
+<li><a href="http://www.clutter-project.org/sources/clutter-cairo/0.8/clutter-cairo-0.8.2.tar.bz2" target="_blank" rel="external">clutter-cairo-0.8.2</a></li>
+<li><a href="http://www.clutter-project.org/sources/clutter-gtk/0.8/clutter-gtk-0.8.2.tar.bz2" target="_blank" rel="external">clutter-gtk-0.8.2</a></li>
+</ul>
+<p>also make sure you have <em>python-cairo-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev</em> installed.  There may be more required, but these were the only ones I didn’t already have installed.</p>
+<p>For some reason I had to configure all of these libraries with –prefix /usr to get pycluster to see all of them.</p>
+<p>Also, configure pycluster with –enable-docs if you want any documentation.</p>
+<p>have fun!</p>
 
       
     </div>
@@ -224,29 +298,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:44.575Z"><a href="/2015/10/02/raspberry-pi-timelapse-camera/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.447Z"><a href="/2015/10/02/build-tolua-files-with-makefile/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/raspberry-pi-timelapse-camera/"> Raspberry Pi Timelapse Camera </a></h1>
+    <h1 class="title"><a href="/2015/10/02/build-tolua-files-with-makefile/"> Build tolua++ files with makefile </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Some steps I took to build my Raspberry Pi Timelapse camera:</p>
-<p>Power</p>
-<p>The location of the timelapse camera puts it about 400 feet from the nearest building with electricity, so I figured it might make sense to put it on solar power and a battery, but it turns out to be prohibitively expensive.  Even by piecing together a system myself from panels on ebay, car batteries, a home made controller, etc, it was still going to wind up costing at least $400.  400 feet of 12/2 cable is only around $120.  Also, in a year or two, the electricity run will be shortened by a new power service installed near by.  So for power, I am just going to run some cable from the house.  There will be some voltage drop, but that shouldn’t be a problem, it won’t be much.</p>
-<p>Enclosure</p>
-<p>I spent a long time trying to figure out what kind of enclosure I should build or use to hold everything.  I wanted something that I could open and close relatively easily (in case I needed to repair it).  Turns out the easiest thing to use was a 8” x 8” x 4” junction box I found in the electrical section of a hardware store.  It is much bigger than I needed, but it was the smallest I could find that would fit the raspberry pi with a cable sticking out both the USB port and the power port, which comes out to about 8”.</p>
-<p>Camera</p>
-<p>The camera I am using is a Nikon S3000.  I made sure that it was in the <a href="http://gphoto.org/proj/libgphoto2/support.php" target="_blank" rel="external">list of cameras supported by gphoto2</a>.  Unfortunately, I wasn’t able to use the build of gphoto2 that is in the debian package manager because it is too old, so I downloaded and built the latest versions of libgphoto2 and gphoto2 from source.</p>
-<p>Code</p>
-<p>I wrote a basic python script which will take pictures every 5 minutes.  But then, for some reason on the raspberrypi, I’ve been having trouble controlling the camera.  Every few commands I send to the camera, the usb connection fails.  I have to issue a usbreset to get it back working, so I added some code to do that automatically before running every command.  Also added some code to only take pictures during the day (in Bloomington, Indiana) which uses a nifty library which will give sunrise and sunset times for any day given a latitude and longitude.</p>
-<p>All code is open source and available <a href="https://github.com/dwiel/gphoto2-timelapse" target="_blank" rel="external">here</a>.</p>
-<p>Mounting:</p>
-<p>I’ve mounted the camera to a small piece of scrap plywood and the plywood to a tree, with the camera facing both of the building sites that we are working on this year</p>
-<p>What is the one feature you see as missing?</p>
+        <p>Here is how you can have your makefile build your tolua++ .cpp and .h files for you.  It should work for plain tolua also.</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TOLUA = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_<span class="variable">%.</span>cpp tolua_<span class="variable">%.</span>h : <span class="variable">%.</span>pkg</span><br><span class="line">	<span class="variable">$(</span>TOLUA) -o <span class="variable">$(</span><span class="variable">@:</span><span class="variable">%.</span>h=<span class="variable">%.</span>cpp) -H <span class="variable">$(</span><span class="variable">@:</span><span class="variable">%.</span>cpp=<span class="variable">%.</span>h) <span class="variable">$&lt;</span></span><br></pre></td></tr></table></figure>
+<p>this will generate tolua_file.cpp and tolua_file.h files from corresponding file.pkg files anytime they the .cpp or .h file is depended on somewhere else in the file.  In my case I just added tolua_file.o to my list of objects.  Here is the full makefile for the project which required this - for reference:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># LINUX</span></span><br><span class="line"><span class="constant">LIBLUA</span>=lua5.<span class="number">1</span></span><br><span class="line"><span class="comment"># MAC OSX</span></span><br><span class="line"><span class="comment">#LIBLUA=lua</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># LDFLAGS=-arch x86_64</span></span><br><span class="line"><span class="constant">OBJS</span> = swarm.o group.o scene.o vmath.o tolua_group.o tolua_swarm.o tolua_vmath.o</span><br><span class="line"><span class="constant">CXX</span> = g++</span><br><span class="line"><span class="constant">CXXFLAGS</span> = -<span class="constant">Wall</span> -c -<span class="constant">O2</span> <span class="string">`sdl-config --cflags`</span></span><br><span class="line"><span class="constant">LDFLAGS</span> = -<span class="constant">Wall</span> <span class="string">`sdl-config --libs`</span></span><br><span class="line"><span class="constant">INCLUDES</span> = -<span class="constant">I</span>./<span class="keyword">include</span> -<span class="constant">I</span>/usr/<span class="keyword">include</span>/lua5.<span class="number">1</span> -<span class="constant">I</span>/opt/local/<span class="keyword">include</span></span><br><span class="line"><span class="constant">LIBS</span> = -<span class="constant">L</span>./<span class="class"><span class="keyword">lib</span> -<span class="title">lANN</span> -<span class="title">lGL</span> -<span class="title">lGLU</span> -<span class="title">llo</span> -<span class="title">ltolua</span>++5.1 -<span class="title">l</span>$(<span class="title">LIBLUA</span>)</span></span><br><span class="line"><span class="constant">TOLUA</span> = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_%.cpp tolua_%.h <span class="symbol">:</span> %.pkg</span><br><span class="line">	<span class="variable">$(</span><span class="constant">TOLUA</span>) -o <span class="variable">$(</span>@<span class="symbol">:%</span>.h=%.cpp) -<span class="constant">H</span> <span class="variable">$(</span>@<span class="symbol">:%</span>.cpp=%.h) <span class="variable">$&lt;</span></span><br><span class="line"> </span><br><span class="line">%.<span class="symbol">o:</span> %.cpp</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">INCLUDES</span>) <span class="variable">$(</span><span class="constant">CXXFLAGS</span>) -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># the executable</span></span><br><span class="line"><span class="symbol">swarm:</span> <span class="variable">$(</span><span class="constant">OBJS</span>)</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">LDFLAGS</span>) -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(</span><span class="constant">LIBS</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="http://github.com/dwiel/swarm/raw/8716451c8b9844bbf9ec8e7f9649aca0b622c752/makefile" target="_blank" rel="external">download</a></p>
 
       
     </div>
@@ -269,17 +335,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:48:44.031Z"><a href="/2015/10/02/welcome/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.435Z"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/welcome/"> Welcome </a></h1>
+    <h1 class="title"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/"> MySQL Permission Errors After Moving Datadir </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Hello, this is where I post content that I want to share.  Most of it is simple information about programming problems I’ve run into.  Hopefully there will be more posts about the house that I’m building on the land that we’re buying with a new cooperative we’re starting in Bloomington Indiana!</p>
+        <p>I wanted to make space on my root partition and so moved my mysql data dir to /home/mysql in /etc/mysql/my.conf and received the following errors:</p>
+<p>dwiel@dwiel:~$ sudo mysqld<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Note] Plugin ‘FEDERATED’ is disabled.<br>mysqld: Can’t find file: ‘./mysql/plugin.frm’ (errno: 13)<br>091111 20:39:16 [ERROR] Can’t open the mysql.plugin table. Please run mysql_upgrade to create it.<br>091111 20:39:16  InnoDB: Operating system error number 13 in a file operation.<br>InnoDB: The error means mysqld does not have the access rights to<br>InnoDB: the directory.<br>InnoDB: File name ./ibdata1<br>InnoDB: File operation call: ‘open’.<br>InnoDB: Cannot continue operation.</p>
+<p>The problem was with apparmor.  It was restricting mysql from reading and writing to /home/mysql.  To correct this I edited the file /etc/apparmor.d/usr.sbin.mysqld and added:</p>
+<p>/home/mysql r,<br>/home/mysql** rwk,</p>
+<p>to the end of the file.  Then restarted apparmor:</p>
+<p>sudo /etc/init.d/apparmor restart</p>
+<p>and then restarted apache with no problem</p>
 
       
     </div>
@@ -302,96 +374,27 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:43:41.439Z"><a href="/2015/10/02/screwing-and-nailing-into-ceb-blocks/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.415Z"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/screwing-and-nailing-into-ceb-blocks/"> Screwing and Nailing Into CEB Blocks </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><iframe frameborder="0" height="300" src="http://player.vimeo.com/video/48222645" width="400"></iframe><br>I’ve been weary of screwing and nailing into CEB blocks for a long time, but have had no good evidence to support my worries.  I was pretty surprised by how well they grip the block and am not as worried about hurting them as I used to.  I was able to lift the block using two screws which means they were each holding around 15 pounds.  I am still a bit weary of attaching anything very heavy like shelves, cabinets or counter tops to them, but I’m thinking that hanging mirrors, pictures, etc should be fine.  More experimenting to come.  Any experiments you would like me to try?</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:43:39.455Z"><a href="/2015/10/02/ceb-press-first-bricks/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/ceb-press-first-bricks/"> CEB Press First Bricks </a></h1>
+    <h1 class="title"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/"> TP-Link TL-WN722N on Ubuntu 10.04 </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><iframe frameborder="0" height="300" src="http://player.vimeo.com/video/47486225" width="400"></iframe><br>We’ve made 15 bricks with our <a href="http://opensourceecology.org/wiki/CEB_Press" target="_blank" rel="external">CEB Press</a> so far. We’ve tried a few different mixes:</p>
-<p>first layer clay soil only<br>first layer clay soil only with 2 quarts water per 5 gallons of soil<br>subsoil clay</p>
-<p>Note that we’ve been in a pretty serious drought lately, so the soil is all very dry. The subsoil was more moist than the first layer of clay. The subsoil started about 2 ft down and was more red in color than the first layer.</p>
-<p>All of the bricks have minor cracks in them, though the ones with added water are worst, as are the ones which were dried in the sun. One of the first layer clay only bricks was dropped from increasingly higher distances until it broke in half at a 5ft fall after 2 days of curing. It appeared to be more dry on the outside surface than on the inside, which leads me to believe<br>that it would have been even stronger had it cured for longer.</p>
-<p>The shaker motor was tested and seems to shake the machine quite well. Still need to work on the controller board to get all solenoids operable and automatic.</p>
-<p>I looked into buying a <a href="http://opensourceecology.org/wiki/Power_Cube" target="_blank" rel="external">Power Cube</a> for the work party, but it doesn’t seem like it will be able to be manufactured in time. On the other hand, we may get away with renting only one tractor which will both till and load soil into the CEB hopper. That leaves Danny’s parents’ tracktor to power the CEB press. However, the CEB press could benefit from faster gpm flow as the tractor we have is only 14 gpm compared to the rental units which can do 30 gpm. This would speed up brick making by about 2x. If we have many people out to help, this could significantly improve the efficiency of the operation, and may be worth the extra cost. On days when the CEB Press was not the bottleneck, Danny’s parents’ tractor could be used to power the CEB.  The efficiency of construction with CEB blocks seems to be reliant on how to make sure that every step in chain from digging soil out of the ground to setting into the wall is happening at the same pace.  If one step is slow, it will slow down all of the rest.</p>
-<p>It would be nice to have a power source for the CEB in general, so we don’t always have to bring danny’s tractor down in order to use it. If someone else around town wanted to use the CEB press, then it would be much easier to loan them the press and power cube, but not danny’s tractor. They could also be instructed to rent machine X from the rental place … 5x 1 week rentals = cost of power cube</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:28.467Z"><a href="/2015/10/02/automatic-windows/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/automatic-windows/"> Automatic Windows </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Today I spent some time looking into automatic windows. Could windows be automatically be opened when the indoor and outdoor temperatures are at the right place? There are some windows we plan to put in the lofted area that will be too high to easily reach. These could also benefit from automatic window opening.</p>
-<p>It seems that most solutions are pretty expensive. The cheapest/easiest solution seems to be using linear actuators. There are also <a href="http://rollertrol.com/store/en/71-window-openers" target="_blank" rel="external">window openers</a> specifically made for this, but they tend to be even more expensive ($170) .</p>
-<p>It seems that a lot of cost could be saved if regular DC motors could be fashioned to be used instead of pricey linear actuators. The actuators don’t get much cheaper than <a href="http://www.robotshop.com/firgelli-automation-9-stroke-150lb-force-linear-actuator.html" target="_blank" rel="external">$110</a>. DC motors would require more complex arrangement with chain or string and likely one for opening and one for closing the windows. These could probably be done, but would require quite a bit of experimentation first. It would cost significantly less, probably closer to $75 complete instead of $150 complete. These could be added later to double hung windows. One problem with these is that they can’t lock the window closed, also if the window is opened manually, the string will get messed up. Some kind of geared belt system might work better, but that gets way more complex …</p>
-<p>One down side to the linear actuators is that due to the large cylinder, they might not be easy to fit in between a window and its screen. They make sense for casement windows and awning windows, but are more difficult for double hung windows. We have the benefit of 2’ deep walls, so it should be relatively easy to install a large 12” linear actuator in between our awning windows and their screen.</p>
-<p>I also found <a href="http://www.window-openers.com/plug/_in/_electric_opener.html" target="_blank" rel="external">these</a> that seem to be reasonably priced and could fit in a much smaller space (it is 7 cm wide). They run on 24V. The actuator itself costs just around $100 + UK VAT? + shipping. They also come with lots of options for building a system with their accessories (power supply, remotes, etc.) One problem with these is that they are much less powerful than the general purpose linear actuators and only extend to 15cm (5.9 inches). You could mount them closer to the hinge to make the 5.9 inch opening act like more but I wouldn’t be confident that they would be strong enough to open the window with that kind of leverage.</p>
-<p>One thing to consider before building, is that we might be able to run any necessary wiring through the walls, which I think would be preferable. Especially for above greenhouse windows. Another possibility is for double hung windows to have linear actuator built up into the wall, like in a lintel or something … The problem is that if we want the window to open 30 inches, there needs to be a 30 inch actuator inside …</p>
-<p>Yet another possibility is making the linear actuators themselves out of a DC motor or servomotor. There are <a href="https://www.google.com/search?q=diy+linear+actuator" target="_blank" rel="external">lots of designs</a>, and they are really quite simple. The hardest part would be calculating the size of motor necessary to get the amount of force desired.</p>
-<p>After all of this, I’ve decided that automatic windows are definitely not worth it at this point.  I will still need to come up with a method for opening the windows that will be too high to open in a typical fashion, but will likely just use a simple manual pulley or push bar system.  To be determined …</p>
+        <p>Note: according <a href="http://ricardolopes.net/blog/tutorial-my-perfect-linux-setup-with-fedora-15-lovelock/" title="this guy" target="_blank" rel="external">this guy</a> this set of steps also works for Fedora 15.</p>
+<p>I had a lot of trouble getting this card to work.  Here is how I finally got it.</p>
+<p>I am running 2.6.32-30-generic-pae #59-Ubuntu SMP<br>running “lsusb” shows the following line for my device: 0cf3:9271 Atheros Communications, Inc.</p>
+<p>I tried a bunch of different compat-wireless versions and <a href="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.38/compat-wireless-2.6.38.2-2.tar.bz2" target="_blank" rel="external">this one</a> finally did it.  At the time, it was the latest stable release.  The daily snapshots were causing kernel panics … Download it, decompress it and build it:</p>
+<p>$ tar xvf compat-wireless-2.6.38.2-2.tar.bz2<br>$ cd compat-wireless-2.6.38.2-2<br>$ ./scripts/driver-select ath9k_htc<br>$ sudo make<br>$ sudo make install</p>
+<p>I had to download version 1.2 of htc_9271.fw the firmware from <a href="http://wireless.kernel.org/download/htc_fw/" target="_blank" rel="external">here</a> and copied the file to /lib/firmware.</p>
+<p>I was getting wlan%d instead of something reasonable like wlan0. Running sudo ifconfig wlan%d showed me the mac address which I could use to add an entry to /etc/udev/rules.d/70-persistent-net.rules.  Heres the entry I added: (note that the browser adds newlines here, but you should add just two lines: one for the comment, and one for the rule)</p>
+<h1 id="USB_device_0x0cf3:0x9271_(usb)">USB device 0x0cf3:0x9271 (usb)</h1><p>SUBSYSTEM==”net”, ACTION==”add”, DRIVERS==”?<em>“, ATTR{address}==”54:e6:fc:94:91:35”, ATTR{dev_id}==”0x0”, ATTR{type}==”1”, KERNEL==”wlan</em>“, NAME=”wlan2”</p>
+<p>reload the drivers by running:</p>
+<p>sudo modprobe ath9k_htc</p>
+<p>Now plug in the device.  There were a lot of other steps that I followed while trying to get this to work, so I may have left something out.</p>
 
       
     </div>
@@ -470,10 +473,6 @@
     <li><a href="/tags/Welcome/">Welcome</a><small>1</small></li>
   
     <li><a href="/tags/Windows/">Windows</a><small>3</small></li>
-  
-    <li><a href="/tags/a/">a</a><small>0</small></li>
-  
-    <li><a href="/tags/b/">b</a><small>0</small></li>
   
   </ul>
 </div>

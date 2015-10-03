@@ -49,31 +49,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.143Z"><a href="/2015/10/02/howto-replace-a-screen-invertor-on-a-dell-inspiron-1520/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.835Z"><a href="/2015/10/02/webpy-error-no-socket-could-be-created/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/howto-replace-a-screen-invertor-on-a-dell-inspiron-1520/"> Howto Replace a Screen Invertor on a Dell Inspiron 1520 </a></h1>
+    <h1 class="title"><a href="/2015/10/02/webpy-error-no-socket-could-be-created/"> web.py: error: No socket could be created </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I have a Dell Inspiron 1520 which started to get a whining noise right under the DELL logo below the screen right in the middle.  It would change pitch depending on how bright the screen was set at.  I replaced the inverter which cost me $15 on ebay.  The process was fairly simple but I took more things apart and made things generally more difficult on myself than I needed.  Here is the most simple way to repair your inverter on a Dell 1520 Inspiron laptop.</p>
-<ul>
-<li><b>Remove the plate covering the power button and numlock/capslock keys.</b>  This can be done by twisting a screwdriver under the little slot on the top right hand side of the cover.</li>
-<li><b>Remove the frame around the screen.</b> Do this by removing the 6 little pads and and stickers covering the screws to remove the frame from the screen.  There is one in each of the corners and two near the center/top.  Unscrew these screws.  To remove the screen cover frame you will need to twist and pry a little bit near the hinges.  Don’t be afraid it does require some force.<br>Once it is removed it should look like this:</li>
-</ul>
-<p><a href="http://dwiel.net/files/InvertorReplace/IMG_0005.sm.JPG" target="_blank" rel="external"><img src="/images/IMG_0005.tiny.JPG" alt="Screen with frame removed"></a></p>
-<ul>
-<li><p>With the frame off, <b>remove the screws holding the screen to the lid.</b>  There are some that screw down from the top and other that screw into the side of the screen, just look around.  Next, remove a couple screws holding the microphone/webcam board above the very top of the screen.  This will allow you to safely move the entire screen and get to the inverter.  Once you have done this, you can open your laptop lid all of the way so it is almost flat and move the screen and webcam board so they are flat on the keyboard.  It should look like this:<br><a href="http://dwiel.net/files/InvertorReplace/IMG_0008.sm.JPG" target="_blank" rel="external"><img src="/images/IMG_0008.tiny.JPG" alt="Screen and camera on keyboard"></a></p>
-</li>
-<li><p><b>Replace the Inverter</b>.  At this point you should be able to easily get to the inverter which is between the hinges below the screen.  There are two cables to unplug.  One has a blue ribbon to pull on and the other a white connector to pull out.</p>
-</li>
-<li>Once you’ve switched them out, put everything back together and you’re done.</li>
-</ul>
-<p>It took me a long time to realize that if I removed the screws to the microphone/webcam board it would move with the screen which led to lots of problems trying to get to the inverter while the screen was still attached to the lid.  That is really the only trick.</p>
-<p>Good luck!</p>
+        <p>This error message most often occurrs when trying to run web.py on an invalid address and port.  An example of an invalid address would be  example.net, instead of a proper ip address like 98.228.37.242.</p>
+<h2 id="Other_Causes:">Other Causes:</h2><p>Was just trying to get a simple web.py test running:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line"> </span><br><span class="line">urls = (</span><br><span class="line">  <span class="string">'/x'</span>, <span class="string">'X'</span>,</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> :</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span> :</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'x'</span></span><br><span class="line"> </span><br><span class="line">app = web.application(urls, globals())</span><br><span class="line">app.run()</span><br></pre></td></tr></table></figure>
+<p>but I kept getting the error:</p>
+<p> error: No socket could be created </p>
+<p>The problem was that due to the way web.py loading works, you need to have the creation and running of the app only occur if this is the main entry point of the program.  Otherwise, the class loader in web.py will reload this file again later, and wind up spawning a new server when its intent was simply to load a class:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</span><br><span class="line">  app = web.<span class="function"><span class="title">application</span><span class="params">(urls, globals()</span></span>)</span><br><span class="line">  app.<span class="function"><span class="title">run</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -96,17 +88,29 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:27.103Z"><a href="/2015/10/02/the-psychology-of-the-blue-man-group/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.799Z"><a href="/2015/10/02/raspberry-pi-timelapse-camera/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/the-psychology-of-the-blue-man-group/"> The psychology of the Blue Man Group </a></h1>
+    <h1 class="title"><a href="/2015/10/02/raspberry-pi-timelapse-camera/"> Raspberry Pi Timelapse Camera </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>There is a great <a href="http://www.edge.org/documents/archive/edge262.html#4" title="video" target="_blank" rel="external">video</a> over at edge about how talking about old age makes people walk slower and asking people to nod yes or no while demoing headphones influences their opinions on the headphones’ quality.  I think the <a href="http://www.youtube.com/watch?v=VgS-4stj8fQ" target="_blank" rel="external">Blue Man Group</a> was ahead of their time.</p>
+        <p>Some steps I took to build my Raspberry Pi Timelapse camera:</p>
+<p>Power</p>
+<p>The location of the timelapse camera puts it about 400 feet from the nearest building with electricity, so I figured it might make sense to put it on solar power and a battery, but it turns out to be prohibitively expensive.  Even by piecing together a system myself from panels on ebay, car batteries, a home made controller, etc, it was still going to wind up costing at least $400.  400 feet of 12/2 cable is only around $120.  Also, in a year or two, the electricity run will be shortened by a new power service installed near by.  So for power, I am just going to run some cable from the house.  There will be some voltage drop, but that shouldn’t be a problem, it won’t be much.</p>
+<p>Enclosure</p>
+<p>I spent a long time trying to figure out what kind of enclosure I should build or use to hold everything.  I wanted something that I could open and close relatively easily (in case I needed to repair it).  Turns out the easiest thing to use was a 8” x 8” x 4” junction box I found in the electrical section of a hardware store.  It is much bigger than I needed, but it was the smallest I could find that would fit the raspberry pi with a cable sticking out both the USB port and the power port, which comes out to about 8”.</p>
+<p>Camera</p>
+<p>The camera I am using is a Nikon S3000.  I made sure that it was in the <a href="http://gphoto.org/proj/libgphoto2/support.php" target="_blank" rel="external">list of cameras supported by gphoto2</a>.  Unfortunately, I wasn’t able to use the build of gphoto2 that is in the debian package manager because it is too old, so I downloaded and built the latest versions of libgphoto2 and gphoto2 from source.</p>
+<p>Code</p>
+<p>I wrote a basic python script which will take pictures every 5 minutes.  But then, for some reason on the raspberrypi, I’ve been having trouble controlling the camera.  Every few commands I send to the camera, the usb connection fails.  I have to issue a usbreset to get it back working, so I added some code to do that automatically before running every command.  Also added some code to only take pictures during the day (in Bloomington, Indiana) which uses a nifty library which will give sunrise and sunset times for any day given a latitude and longitude.</p>
+<p>All code is open source and available <a href="https://github.com/dwiel/gphoto2-timelapse" target="_blank" rel="external">here</a>.</p>
+<p>Mounting:</p>
+<p>I’ve mounted the camera to a small piece of scrap plywood and the plywood to a tree, with the camera facing both of the building sites that we are working on this year</p>
+<p>What is the one feature you see as missing?</p>
 
       
     </div>
@@ -129,17 +133,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:26.975Z"><a href="/2015/10/02/passwordless-login-for-ssh-not-working/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.791Z"><a href="/2015/10/02/ceb-press-first-bricks/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/passwordless-login-for-ssh-not-working/"> Passwordless login for SSH not working </a></h1>
+    <h1 class="title"><a href="/2015/10/02/ceb-press-first-bricks/"> CEB Press First Bricks </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I have not been able to login to my system with passwordless SSH for some time now and finally figured out the problem.  I had to change the permissions of my home directory to disallow writing by everyone.  I knew that ~/.ssh and the files in it required specific permissions to be set, but I hadn’t heard about the home directory having similar requirements.</p>
+        <p><iframe frameborder="0" height="300" src="http://player.vimeo.com/video/47486225" width="400"></iframe><br>We’ve made 15 bricks with our <a href="http://opensourceecology.org/wiki/CEB_Press" target="_blank" rel="external">CEB Press</a> so far. We’ve tried a few different mixes:</p>
+<p>first layer clay soil only<br>first layer clay soil only with 2 quarts water per 5 gallons of soil<br>subsoil clay</p>
+<p>Note that we’ve been in a pretty serious drought lately, so the soil is all very dry. The subsoil was more moist than the first layer of clay. The subsoil started about 2 ft down and was more red in color than the first layer.</p>
+<p>All of the bricks have minor cracks in them, though the ones with added water are worst, as are the ones which were dried in the sun. One of the first layer clay only bricks was dropped from increasingly higher distances until it broke in half at a 5ft fall after 2 days of curing. It appeared to be more dry on the outside surface than on the inside, which leads me to believe<br>that it would have been even stronger had it cured for longer.</p>
+<p>The shaker motor was tested and seems to shake the machine quite well. Still need to work on the controller board to get all solenoids operable and automatic.</p>
+<p>I looked into buying a <a href="http://opensourceecology.org/wiki/Power_Cube" target="_blank" rel="external">Power Cube</a> for the work party, but it doesn’t seem like it will be able to be manufactured in time. On the other hand, we may get away with renting only one tractor which will both till and load soil into the CEB hopper. That leaves Danny’s parents’ tracktor to power the CEB press. However, the CEB press could benefit from faster gpm flow as the tractor we have is only 14 gpm compared to the rental units which can do 30 gpm. This would speed up brick making by about 2x. If we have many people out to help, this could significantly improve the efficiency of the operation, and may be worth the extra cost. On days when the CEB Press was not the bottleneck, Danny’s parents’ tractor could be used to power the CEB.  The efficiency of construction with CEB blocks seems to be reliant on how to make sure that every step in chain from digging soil out of the ground to setting into the wall is happening at the same pace.  If one step is slow, it will slow down all of the rest.</p>
+<p>It would be nice to have a power source for the CEB in general, so we don’t always have to bring danny’s tractor down in order to use it. If someone else around town wanted to use the CEB press, then it would be much easier to loan them the press and power cube, but not danny’s tractor. They could also be instructed to rent machine X from the rental place … 5x 1 week rentals = cost of power cube</p>
 
       
     </div>
@@ -162,75 +172,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:26.975Z"><a href="/2015/10/02/doing-what-you-love/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/doing-what-you-love/"> Doing what you Love </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Feeling down about doing what you love?</p>
-<p>watch <a href="http://www.ted.com/index.php/talks/elizabeth_gilbert_on_genius.html" target="_blank" rel="external">this</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:26.887Z"><a href="/2015/10/02/first-look-at-the-foundation/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/first-look-at-the-foundation/"> First Look at the Foundation </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I just went out to see the newly poured foundation, which was great. Shaina was worried that it wasn’t the right size, and there was some confusion earlier due to Tip’s drawing.  It indicated that the foundation should be 23’ 6” long instead of 27’ long. 23’ 6” is the correct <em>interior</em> length, but it was marked on the drawing as the <em>exterior</em> length. I measured the finished foundation and everything was the right size. The only reason we caught this was because my dad and I had staked out the corners of the foundation earlier using the correct dimensions, and the guys pouring the foundation noticed and asked about the discrepancy.  I did find out that the sewer pipe was placed inside the west wall instead of the east wall. Not good. Its sticking up right where the door is supposed to go … not sure what to do about it yet, waiting to hear back from Tip …</p>
-<p><a href="http://dwiel.net/wp-content/uploads/2012/08/DSCF1703.jpg" target="_blank" rel="external"><img src="/images/DSCF1703-1024x768.jpg" alt=""></a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:26.203Z"><a href="/2015/10/02/ceb-wall-weep-holes/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.739Z"><a href="/2015/10/02/ceb-wall-weep-holes/">2015-10-02</a></time>
       
       
   
@@ -265,7 +207,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:26.167Z"><a href="/2015/10/02/importerror-no-module-named-controllersindex/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.711Z"><a href="/2015/10/02/importerror-no-module-named-controllersindex/">2015-10-02</a></time>
       
       
   
@@ -299,7 +241,44 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:41:25.855Z"><a href="/2015/10/02/hello-world/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.615Z"><a href="/2015/10/02/introducing-quiqi/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/introducing-quiqi/"> Introducing Quiqi </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://quiqi.org/" target="_blank" rel="external">Quiqi</a> is a <a href="http://userscripts.org/scripts/show/63868" target="_blank" rel="external">greasemonkey script</a> and firefox plugin which shows you quick answers to your search queries inline and unobtrusively in Google searches. Quick answers are provided by users, editable by anyone.</p>
+<p>Some example answers (so far mostly answers to programming questions):</p>
+<p>ruby string to int -&gt; str.to_i<br>apt-get ab -&gt; apt-get install apache2-utils<br>jquery checkbox status -&gt; .is(\’:checked\’)<br>js string to int -&gt; parseInt(str)<br>usb 2 speed -&gt; 480Mbps<br>javascript array copy -&gt; new_copy = original.slice()<br>php referrer -&gt; $_SERVER[‘HTTP_REFERER’]<br>water couscous -&gt; 1 1/2:1 water to couscous<br>when to plant thyme -&gt; outside: 2 weeks after average last frost or when soil is &ge; 70&deg; inside: 8 weeks before last frost<br>error: &lsquo;memcpy&rsquo; was not declared in this scope -&gt; #include </p>
+<p>And an example screen shot.  Notice how the answer isn’t provided in the excerpted content.</p>
+<p><img src="/images/1.png" alt="Example 1"></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.507Z"><a href="/2015/10/02/hello-world/">2015-10-02</a></time>
       
       
   
@@ -332,20 +311,55 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:20:41.323Z"><a href="/2015/10/02/mongorestore-error-root-directory-must-be-a-dump-of-a-single-collection-when-specifying-a-collection-name-with-collection/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:51.455Z"><a href="/2015/10/02/list-of-bound-variables-in-python-excluding-variables-from-modules/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/mongorestore-error-root-directory-must-be-a-dump-of-a-single-collection-when-specifying-a-collection-name-with-collection/"> mongorestore: ERROR: root directory must be a dump of a single collection when specifying a collection name with --collection </a></h1>
+    <h1 class="title"><a href="/2015/10/02/list-of-bound-variables-in-python-excluding-variables-from-modules/"> List of bound variables in Python (excluding variables from modules) </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>mongorestore wants the specific collection’s filename rather than the entire database’s dump folder:</p>
-<style>span, strong { font-family: courier, monospace; }</style>
+        <p>I’ve heard multiple people ask for a way to see a list of locally bound variables in python.  It would be especially useful for use in the interactive prompt.  They like the interface that matlab gave them and this is one of the features they miss the most.  I’m not sure what the best way to accomplish this is, but I’ve coded together one solution.  Here is an example use case:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">from</span> boundvars <span class="keyword">import</span> boundvars</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span> :</span></span><br><span class="line">         a = <span class="number">1</span></span><br><span class="line">         b = <span class="number">2</span></span><br><span class="line">         <span class="keyword">assert</span> boundvars(vars()) == &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line">         <span class="keyword">import</span> urllib</span><br><span class="line">         <span class="keyword">assert</span> boundvars(vars()) == &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line"> </span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">boundvars(vars())</span><br><span class="line">= &#123;<span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'test'</span>: &lt;function test at <span class="number">0x0000</span>&gt;&#125;</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> *</span><br><span class="line">boundvars(vars())</span><br><span class="line">= &#123;<span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'test'</span> : &lt;function test at <span class="number">0x0000</span>&gt;&#125;</span><br><span class="line"> </span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<p>As you can see, boundvars is called with vars() as a parameter which then returns a dictionary of locally bound variables.  If boundvars.ignore_external_functions is set to False, the first two calls which show x and y bound would also show the variable boundvars.  If it is set to True, then all values which are functions not defined in the <strong>main</strong>  module are excluded from the output dictionary.  The latest code can be downloaded below.  Installation is as simple as:</p>
+<p>$ wget <a href="http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz" target="_blank" rel="external">http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz</a><br>$ tar -xvf boundvars.tar.gz<br>$ cd boundvars<br>$ sudo python setup.py install</p>
+<p>Its not big enough to warrant a project at a code hosting service so its just provided here.  If you know of any way that this module could be improved (or avoided by some cool function I don’t know about) please, let me know!</p>
+<p><a href="http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz" target="_blank" rel="external">boundvars.tar.gz</a> (version 0.1)</p>
 
-<p><em>dwiel@dwiel$</em> mongodump -d db -c variables -o ../backups/1<br>connected to: 127.0.0.1<br>DATABASE: db     to     ../backups/1/db<br>        db.variables to ../backups/1/db/variables.bson<br>                3 objects<br><em>dwiel@dwiel$</em> mongorestore -d db -c variables –drop ../backups/1<br>ERROR: root directory must be a dump of a single collection<br>       when specifying a collection name with –collection<br>usage: ……..<br><em>dwiel@dwiel$</em> mongorestore -d db -c variables –drop ../backups/1/db/variables.bson<br>connected to: 127.0.0.1<br>../backups/1/db/variables.bson<br>        going into namespace [db.variables]<br>        dropping<br>        3 objects</p>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.243Z"><a href="/2015/10/02/welcome/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/welcome/"> Welcome </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Hello, this is where I post content that I want to share.  Most of it is simple information about programming problems I’ve run into.  Hopefully there will be more posts about the house that I’m building on the land that we’re buying with a new cooperative we’re starting in Bloomington Indiana!</p>
 
       
     </div>
@@ -422,10 +436,6 @@
     <li><a href="/tags/Welcome/">Welcome</a><small>1</small></li>
   
     <li><a href="/tags/Windows/">Windows</a><small>3</small></li>
-  
-    <li><a href="/tags/a/">a</a><small>0</small></li>
-  
-    <li><a href="/tags/b/">b</a><small>0</small></li>
   
   </ul>
 </div>
