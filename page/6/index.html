@@ -49,6 +49,45 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.923Z"><a href="/2015/10/02/mysqldb-typeerror-d-format-a-number-is-required-not-str/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/mysqldb-typeerror-d-format-a-number-is-required-not-str/"> MySQLdb: TypeError: %d format: a number is required, not str </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I was getting this error message from MySQLdb:</p>
+<p>TypeError: %d format: a number is required, not str</p>
+<p>The error message was the result of this code:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">assert <span class="built_in">type</span>(gateway_id) == <span class="keyword">int</span></span><br><span class="line">sql = <span class="string">""</span><span class="string">"</span><br><span class="line"></span>  SELECT meter_id </span><br><span class="line">  FROM mtus </span><br><span class="line">  WHERE gateway_id = %<span class="keyword">d</span> </span><br><span class="line">    AND name = <span class="string">'%s'</span> <span class="string">""</span><span class="string">"</span><br><span class="line"></span>conn = mysql_connect()</span><br><span class="line"><span class="built_in">cursor</span> = conn.<span class="built_in">cursor</span>()</span><br><span class="line"><span class="built_in">cursor</span>.<span class="keyword">execute</span>(sql, (gateway_id, name))</span><br><span class="line"><span class="keyword">ret</span> = <span class="built_in">cursor</span>.fetchone()</span><br><span class="line"><span class="built_in">cursor</span>.<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+<p>It turns out, execute converts all the arguments to SQL literal values. <a href="http://mysql-python.sourceforge.net/MySQLdb.html#some-examples" target="_blank" rel="external">reference</a> All %Xs should be %s and there shouldn’t be any quotes around them. MySQLdb takes care of the string escaping too.</p>
+<h2 id="Other_Causes:">Other Causes:</h2><p>For those of you arriving here from a search and are not having problems with MySQL, the reason for this error is that a string was passed into a format where a number was expected:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># throws the TypeError:</span></span><br><span class="line"><span class="keyword">message</span> = <span class="string">"%d seconds until done"</span> % <span class="string">"three"</span></span><br><span class="line"><span class="comment"># works:</span></span><br><span class="line"><span class="keyword">message</span> = <span class="string">"%d seconds until done"</span> % <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:51.911Z"><a href="/2015/10/02/python-parsing-the-output-of-datetimeisoformat/">2015-10-02</a></time>
       
       
@@ -377,44 +416,13 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:51.243Z"><a href="/2015/10/02/welcome/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/welcome/"> Welcome </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Hello, this is where I post content that I want to share.  Most of it is simple information about programming problems I’ve run into.  Hopefully there will be more posts about the house that I’m building on the land that we’re buying with a new cooperative we’re starting in Bloomington Indiana!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
     <a href="/page/5/" class="alignleft prev">Prev</a>
   
+  
+    <a href="/page/7/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div></div>

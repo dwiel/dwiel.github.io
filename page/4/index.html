@@ -49,6 +49,45 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.435Z"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/"> MySQL Permission Errors After Moving Datadir </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I wanted to make space on my root partition and so moved my mysql data dir to /home/mysql in /etc/mysql/my.conf and received the following errors:</p>
+<p>dwiel@dwiel:~$ sudo mysqld<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Note] Plugin ‘FEDERATED’ is disabled.<br>mysqld: Can’t find file: ‘./mysql/plugin.frm’ (errno: 13)<br>091111 20:39:16 [ERROR] Can’t open the mysql.plugin table. Please run mysql_upgrade to create it.<br>091111 20:39:16  InnoDB: Operating system error number 13 in a file operation.<br>InnoDB: The error means mysqld does not have the access rights to<br>InnoDB: the directory.<br>InnoDB: File name ./ibdata1<br>InnoDB: File operation call: ‘open’.<br>InnoDB: Cannot continue operation.</p>
+<p>The problem was with apparmor.  It was restricting mysql from reading and writing to /home/mysql.  To correct this I edited the file /etc/apparmor.d/usr.sbin.mysqld and added:</p>
+<p>/home/mysql r,<br>/home/mysql** rwk,</p>
+<p>to the end of the file.  Then restarted apparmor:</p>
+<p>sudo /etc/init.d/apparmor restart</p>
+<p>and then restarted apache with no problem</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:52.415Z"><a href="/2015/10/02/tp-link-tl-wn722n-on-ubuntu-1004/">2015-10-02</a></time>
       
       
@@ -377,40 +416,6 @@
     <div class="entry">
       
         <p>I have not been able to login to my system with passwordless SSH for some time now and finally figured out the problem.  I had to change the permissions of my home directory to disallow writing by everyone.  I knew that ~/.ssh and the files in it required specific permissions to be set, but I hadn’t heard about the home directory having similar requirements.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.179Z"><a href="/2015/10/02/doing-what-you-love/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/doing-what-you-love/"> Doing what you Love </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Feeling down about doing what you love?</p>
-<p>watch <a href="http://www.ted.com/index.php/talks/elizabeth_gilbert_on_genius.html" target="_blank" rel="external">this</a></p>
 
       
     </div>

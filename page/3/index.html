@@ -49,6 +49,41 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.571Z"><a href="/2015/10/02/ceb-press-hydraulic-pressure-switch/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/ceb-press-hydraulic-pressure-switch/"> CEB Press Hydraulic Pressure Switch </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Just spent an hour or two looking for low cost pressure switches to use on the CEB Press.  I would like to add them as a way to add reliable sensing of end cylinder stopping points.  This avoids the need for external sensors to determine when to stop primary and secondary movements.  I will still need sensors to know when the primary cylinder should stop growing the compression chamber as well as one to know when the secondary cylinder should stop for a compression stage.  However, with just 2 sensors instead of 6, it should be a fair bit simpler to use physical switches instead of the unreliable hall effect sensors.</p>
+<p>The sensor I found to use is <a href="http://ecatalog.gemssensors.com/ecatalog/pressure-switches/en/209667" title="this one" target="_blank" rel="external">this one</a>.  It is $32 adjustable from 1000-3000 psi and rated for maximum 6000 psi overload.</p>
+<p>There is one at the surplus center <a href="https://www.surpluscenter.com/item.asp?item=9-6278&amp;catname=hydraulic" title="here" target="_blank" rel="external">here</a>, but the one they sent me was used and broken, there is no datasheet that exactly matches what they sell and there are only 3 left in stock which means that they aren’t going to be able to be used by many more people.  I’d rather find a solution that can be easily replicated.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:52.563Z"><a href="/2015/10/02/simple-cheap-easily-adjustable-domestic-hot-water-and-radiant-floor-system/">2015-10-02</a></time>
       
       
@@ -369,45 +404,6 @@
 <p>this will generate tolua_file.cpp and tolua_file.h files from corresponding file.pkg files anytime they the .cpp or .h file is depended on somewhere else in the file.  In my case I just added tolua_file.o to my list of objects.  Here is the full makefile for the project which required this - for reference:</p>
 <figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># LINUX</span></span><br><span class="line"><span class="constant">LIBLUA</span>=lua5.<span class="number">1</span></span><br><span class="line"><span class="comment"># MAC OSX</span></span><br><span class="line"><span class="comment">#LIBLUA=lua</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># LDFLAGS=-arch x86_64</span></span><br><span class="line"><span class="constant">OBJS</span> = swarm.o group.o scene.o vmath.o tolua_group.o tolua_swarm.o tolua_vmath.o</span><br><span class="line"><span class="constant">CXX</span> = g++</span><br><span class="line"><span class="constant">CXXFLAGS</span> = -<span class="constant">Wall</span> -c -<span class="constant">O2</span> <span class="string">`sdl-config --cflags`</span></span><br><span class="line"><span class="constant">LDFLAGS</span> = -<span class="constant">Wall</span> <span class="string">`sdl-config --libs`</span></span><br><span class="line"><span class="constant">INCLUDES</span> = -<span class="constant">I</span>./<span class="keyword">include</span> -<span class="constant">I</span>/usr/<span class="keyword">include</span>/lua5.<span class="number">1</span> -<span class="constant">I</span>/opt/local/<span class="keyword">include</span></span><br><span class="line"><span class="constant">LIBS</span> = -<span class="constant">L</span>./<span class="class"><span class="keyword">lib</span> -<span class="title">lANN</span> -<span class="title">lGL</span> -<span class="title">lGLU</span> -<span class="title">llo</span> -<span class="title">ltolua</span>++5.1 -<span class="title">l</span>$(<span class="title">LIBLUA</span>)</span></span><br><span class="line"><span class="constant">TOLUA</span> = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_%.cpp tolua_%.h <span class="symbol">:</span> %.pkg</span><br><span class="line">	<span class="variable">$(</span><span class="constant">TOLUA</span>) -o <span class="variable">$(</span>@<span class="symbol">:%</span>.h=%.cpp) -<span class="constant">H</span> <span class="variable">$(</span>@<span class="symbol">:%</span>.cpp=%.h) <span class="variable">$&lt;</span></span><br><span class="line"> </span><br><span class="line">%.<span class="symbol">o:</span> %.cpp</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">INCLUDES</span>) <span class="variable">$(</span><span class="constant">CXXFLAGS</span>) -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># the executable</span></span><br><span class="line"><span class="symbol">swarm:</span> <span class="variable">$(</span><span class="constant">OBJS</span>)</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">LDFLAGS</span>) -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(</span><span class="constant">LIBS</span>)</span><br></pre></td></tr></table></figure>
 <p><a href="http://github.com/dwiel/swarm/raw/8716451c8b9844bbf9ec8e7f9649aca0b622c752/makefile" target="_blank" rel="external">download</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.435Z"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/mysql-permission-errors-after-moving-datadir/"> MySQL Permission Errors After Moving Datadir </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I wanted to make space on my root partition and so moved my mysql data dir to /home/mysql in /etc/mysql/my.conf and received the following errors:</p>
-<p>dwiel@dwiel:~$ sudo mysqld<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Warning] Can’t create test file /home/mysql/dwiel.lower-test<br>091111 20:39:16 [Note] Plugin ‘FEDERATED’ is disabled.<br>mysqld: Can’t find file: ‘./mysql/plugin.frm’ (errno: 13)<br>091111 20:39:16 [ERROR] Can’t open the mysql.plugin table. Please run mysql_upgrade to create it.<br>091111 20:39:16  InnoDB: Operating system error number 13 in a file operation.<br>InnoDB: The error means mysqld does not have the access rights to<br>InnoDB: the directory.<br>InnoDB: File name ./ibdata1<br>InnoDB: File operation call: ‘open’.<br>InnoDB: Cannot continue operation.</p>
-<p>The problem was with apparmor.  It was restricting mysql from reading and writing to /home/mysql.  To correct this I edited the file /etc/apparmor.d/usr.sbin.mysqld and added:</p>
-<p>/home/mysql r,<br>/home/mysql** rwk,</p>
-<p>to the end of the file.  Then restarted apparmor:</p>
-<p>sudo /etc/init.d/apparmor restart</p>
-<p>and then restarted apache with no problem</p>
 
       
     </div>
