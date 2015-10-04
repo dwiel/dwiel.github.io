@@ -49,6 +49,41 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.615Z"><a href="/2015/10/02/emergence/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/emergence/"> Emergence </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>simple rules that ants follow create emergant behavior which is the ant colony</p>
+<p>simple rules that people follow create emergant behavior which is the society and culture</p>
+<p>simple rules that the universe follows creates emergant behavior which is ???</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:52.611Z"><a href="/2015/10/02/tip-ceb-blocks-zipties/">2015-10-02</a></time>
       
       
@@ -383,43 +418,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.447Z"><a href="/2015/10/02/build-tolua-files-with-makefile/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/build-tolua-files-with-makefile/"> Build tolua++ files with makefile </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Here is how you can have your makefile build your tolua++ .cpp and .h files for you.  It should work for plain tolua also.</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TOLUA = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_<span class="variable">%.</span>cpp tolua_<span class="variable">%.</span>h : <span class="variable">%.</span>pkg</span><br><span class="line">	<span class="variable">$(</span>TOLUA) -o <span class="variable">$(</span><span class="variable">@:</span><span class="variable">%.</span>h=<span class="variable">%.</span>cpp) -H <span class="variable">$(</span><span class="variable">@:</span><span class="variable">%.</span>cpp=<span class="variable">%.</span>h) <span class="variable">$&lt;</span></span><br></pre></td></tr></table></figure>
-<p>this will generate tolua_file.cpp and tolua_file.h files from corresponding file.pkg files anytime they the .cpp or .h file is depended on somewhere else in the file.  In my case I just added tolua_file.o to my list of objects.  Here is the full makefile for the project which required this - for reference:</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># LINUX</span></span><br><span class="line"><span class="constant">LIBLUA</span>=lua5.<span class="number">1</span></span><br><span class="line"><span class="comment"># MAC OSX</span></span><br><span class="line"><span class="comment">#LIBLUA=lua</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># LDFLAGS=-arch x86_64</span></span><br><span class="line"><span class="constant">OBJS</span> = swarm.o group.o scene.o vmath.o tolua_group.o tolua_swarm.o tolua_vmath.o</span><br><span class="line"><span class="constant">CXX</span> = g++</span><br><span class="line"><span class="constant">CXXFLAGS</span> = -<span class="constant">Wall</span> -c -<span class="constant">O2</span> <span class="string">`sdl-config --cflags`</span></span><br><span class="line"><span class="constant">LDFLAGS</span> = -<span class="constant">Wall</span> <span class="string">`sdl-config --libs`</span></span><br><span class="line"><span class="constant">INCLUDES</span> = -<span class="constant">I</span>./<span class="keyword">include</span> -<span class="constant">I</span>/usr/<span class="keyword">include</span>/lua5.<span class="number">1</span> -<span class="constant">I</span>/opt/local/<span class="keyword">include</span></span><br><span class="line"><span class="constant">LIBS</span> = -<span class="constant">L</span>./<span class="class"><span class="keyword">lib</span> -<span class="title">lANN</span> -<span class="title">lGL</span> -<span class="title">lGLU</span> -<span class="title">llo</span> -<span class="title">ltolua</span>++5.1 -<span class="title">l</span>$(<span class="title">LIBLUA</span>)</span></span><br><span class="line"><span class="constant">TOLUA</span> = tolua++<span class="number">5.1</span></span><br><span class="line"> </span><br><span class="line">tolua_%.cpp tolua_%.h <span class="symbol">:</span> %.pkg</span><br><span class="line">	<span class="variable">$(</span><span class="constant">TOLUA</span>) -o <span class="variable">$(</span>@<span class="symbol">:%</span>.h=%.cpp) -<span class="constant">H</span> <span class="variable">$(</span>@<span class="symbol">:%</span>.cpp=%.h) <span class="variable">$&lt;</span></span><br><span class="line"> </span><br><span class="line">%.<span class="symbol">o:</span> %.cpp</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">INCLUDES</span>) <span class="variable">$(</span><span class="constant">CXXFLAGS</span>) -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># the executable</span></span><br><span class="line"><span class="symbol">swarm:</span> <span class="variable">$(</span><span class="constant">OBJS</span>)</span><br><span class="line">	<span class="variable">$(</span><span class="constant">CXX</span>) <span class="variable">$(</span><span class="constant">LDFLAGS</span>) -o <span class="variable">$@</span> <span class="variable">$^</span> <span class="variable">$(</span><span class="constant">LIBS</span>)</span><br></pre></td></tr></table></figure>
-<p><a href="http://github.com/dwiel/swarm/raw/8716451c8b9844bbf9ec8e7f9649aca0b622c752/makefile" target="_blank" rel="external">download</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -469,7 +467,7 @@
   
     <li><a href="/tags/Music/">Music</a><small>2</small></li>
   
-    <li><a href="/tags/Our-House/">Our House</a><small>12</small></li>
+    <li><a href="/tags/Our-House/">Our House</a><small>13</small></li>
   
     <li><a href="/tags/Politics/">Politics</a><small>4</small></li>
   

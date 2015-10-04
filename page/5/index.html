@@ -49,6 +49,39 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:52.183Z"><a href="/2015/10/02/passwordless-login-for-ssh-not-working/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/passwordless-login-for-ssh-not-working/"> Passwordless login for SSH not working </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I have not been able to login to my system with passwordless SSH for some time now and finally figured out the problem.  I had to change the permissions of my home directory to disallow writing by everyone.  I knew that ~/.ssh and the files in it required specific permissions to be set, but I hadn’t heard about the home directory having similar requirements.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:52.179Z"><a href="/2015/10/02/doing-what-you-love/">2015-10-02</a></time>
       
       
@@ -353,49 +386,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:51.935Z"><a href="/2015/10/02/rails-headers/">2015-10-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/10/02/rails-headers/"> Rails Headers </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>You can access header values from rails from the request.env hash.  request.env contains a lot of other non HTTP header values.  The header name is a bit transformed too:</p>
-<ul>
-<li>prepended with HTTP_</li>
-<li>converted to uppercase</li>
-<li>dashes converted to undersocres</li>
-<li>… more?</li>
-</ul>
-<p>Example:</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">curl -H <span class="string">'x-custom-value: foo'</span> <span class="string">http:</span><span class="comment">//example.com/</span></span><br></pre></td></tr></table></figure>
-<p>can be accessed in rails with:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">request<span class="class">.env</span>[<span class="string">'HTTP_X_CUSTOM_VALUE'</span>]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -445,7 +435,7 @@
   
     <li><a href="/tags/Music/">Music</a><small>2</small></li>
   
-    <li><a href="/tags/Our-House/">Our House</a><small>12</small></li>
+    <li><a href="/tags/Our-House/">Our House</a><small>13</small></li>
   
     <li><a href="/tags/Politics/">Politics</a><small>4</small></li>
   

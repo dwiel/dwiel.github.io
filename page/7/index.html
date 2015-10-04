@@ -49,6 +49,44 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-10-03T03:56:51.455Z"><a href="/2015/10/02/list-of-bound-variables-in-python-excluding-variables-from-modules/">2015-10-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/10/02/list-of-bound-variables-in-python-excluding-variables-from-modules/"> List of bound variables in Python (excluding variables from modules) </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I’ve heard multiple people ask for a way to see a list of locally bound variables in python.  It would be especially useful for use in the interactive prompt.  They like the interface that matlab gave them and this is one of the features they miss the most.  I’m not sure what the best way to accomplish this is, but I’ve coded together one solution.  Here is an example use case:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">from</span> boundvars <span class="keyword">import</span> boundvars</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span> :</span></span><br><span class="line">         a = <span class="number">1</span></span><br><span class="line">         b = <span class="number">2</span></span><br><span class="line">         <span class="keyword">assert</span> boundvars(vars()) == &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line">         <span class="keyword">import</span> urllib</span><br><span class="line">         <span class="keyword">assert</span> boundvars(vars()) == &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line"> </span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">boundvars(vars())</span><br><span class="line">= &#123;<span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'test'</span>: &lt;function test at <span class="number">0x0000</span>&gt;&#125;</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> *</span><br><span class="line">boundvars(vars())</span><br><span class="line">= &#123;<span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'test'</span> : &lt;function test at <span class="number">0x0000</span>&gt;&#125;</span><br><span class="line"> </span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<p>As you can see, boundvars is called with vars() as a parameter which then returns a dictionary of locally bound variables.  If boundvars.ignore_external_functions is set to False, the first two calls which show x and y bound would also show the variable boundvars.  If it is set to True, then all values which are functions not defined in the <strong>main</strong>  module are excluded from the output dictionary.  The latest code can be downloaded below.  Installation is as simple as:</p>
+<p>$ wget <a href="http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz" target="_blank" rel="external">http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz</a><br>$ tar -xvf boundvars.tar.gz<br>$ cd boundvars<br>$ sudo python setup.py install</p>
+<p>Its not big enough to warrant a project at a code hosting service so its just provided here.  If you know of any way that this module could be improved (or avoided by some cool function I don’t know about) please, let me know!</p>
+<p><a href="http://dwiel.net/wp-content/uploads/2008/10/boundvars.tar.gz" target="_blank" rel="external">boundvars.tar.gz</a> (version 0.1)</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-10-03T03:56:51.243Z"><a href="/2015/10/02/welcome/">2015-10-02</a></time>
       
       
@@ -123,7 +161,7 @@
   
     <li><a href="/tags/Music/">Music</a><small>2</small></li>
   
-    <li><a href="/tags/Our-House/">Our House</a><small>12</small></li>
+    <li><a href="/tags/Our-House/">Our House</a><small>13</small></li>
   
     <li><a href="/tags/Politics/">Politics</a><small>4</small></li>
   
