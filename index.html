@@ -49,18 +49,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-04T01:03:04.989Z"><a href="/blog/first-look-at-the-foundation/">2015-10-03</a></time>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2013-01-01</a></time>
       
       
   
-    <h1 class="title"><a href="/blog/first-look-at-the-foundation/"> First Look at the Foundation </a></h1>
+    <h1 class="title"><a href="/blog/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I just went out to see the newly poured foundation, which was great. Shaina was worried that it wasn’t the right size, and there was some confusion earlier due to Tip’s drawing.  It indicated that the foundation should be 23’ 6” long instead of 27’ long. 23’ 6” is the correct <em>interior</em> length, but it was marked on the drawing as the <em>exterior</em> length. I measured the finished foundation and everything was the right size. The only reason we caught this was because my dad and I had staked out the corners of the foundation earlier using the correct dimensions, and the guys pouring the foundation noticed and asked about the discrepancy.  I did find out that the sewer pipe was placed inside the west wall instead of the east wall. Not good. Its sticking up right where the door is supposed to go … not sure what to do about it yet, waiting to hear back from Tip …</p>
-<p><img src="/images/DSCF1703-1024x768.jpg" alt=""></p>
+        <p>The code I had that caused this problem looked like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>If this were a normal call to foo, the error instead would be:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
+<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>Even this would be ok:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -83,19 +89,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-04T01:02:15.661Z"><a href="/blog/ceb-press-slide/">2015-10-03</a></time>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/wx-1b-4200jwlau-datasheet/">2013-01-01</a></time>
       
       
   
-    <h1 class="title"><a href="/blog/ceb-press-slide/"> CEB Press Slide </a></h1>
+    <h1 class="title"><a href="/blog/wx-1b-4200jwlau-datasheet/"> WX-1B-4200J/WLAU Datasheet </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I couldn’t find any cheap conveyors around here that had rollers that were close enough together to work for the CEBs. I found and bought one conveyor, but the rollers are too far apart, and so the blocks bounce around rather than roll smoothly. Instead of spending a hundreds or thousands of dollars for a new conveyor, we built this slide with a large 2x12, some 2x2s and some stainless steel flashing, and it has been working well:</p>
-<p><a href="/images/IMG_20130813_175114.jpg"></a></p>
-<p>Concrete blocks, CEBs and wood hold the slide up at the right height. A heavy block is placed at the end of the slide to keep it from getting pushed away from press when it gets full. We had a few accidents where the whole slide fell over when it got really full and we didn’t have a weight at the end.</p>
+        <p>Spent a while looking for the datasheet for Nason’s WX-1B-4200J/WLAU.  Here it is: <a href="http://www.nasonptc.com/pdfs/Switches_Catalog.pdf#page=15" target="_blank" rel="external">pdf</a>, see page 15.</p>
 
       
     </div>
@@ -118,24 +122,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-04T01:01:25.533Z"><a href="/blog/retrospective-on-concrete-foundation/">2015-10-03</a></time>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/window-sill-insulation-plug/">2013-01-01</a></time>
       
       
   
-    <h1 class="title"><a href="/blog/retrospective-on-concrete-foundation/"> Retrospective on Concrete Foundation </a></h1>
+    <h1 class="title"><a href="/blog/window-sill-insulation-plug/"> Window Sill Insulation Plug </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>One large pollutant in our house design is in the foundation. We ended up pouring around 13 yards of concrete due to the large elevation change from North to South. If the site was more flat, we could have used far less.  13 yards of concrete comes out to about 10 cubic meters and a similar carbon footprint to 2 months worth of electricity use of an average US household [1,2,3] or a bit more than a years worth of electricity for a very efficient house like we are hoping to achieve. That is a pretty significant source of pollutant.</p>
-<p>We could have used less concrete if we had steped our foundation down with the slope of the building site and put 2 or 3 levels on our first floor, as our neighbor Danny is planning to do. We could have also chosen a more flat building site, or used a different construction method which used piers instead of a solid foundation around the perimeter. On the plus side, using a rubble trench foundation instead of a slab (as most homes are built these days) saved meant we used 3 times less concrete than that method would have required.</p>
-<p>Admittedly CO2 emissions aren’t the only thing poluting the atmospehere so a comparison between electricity and concrete curing isn’t really fair. Coal emits lots of other nasty things and cement used in concrete can too, depending on the purity of the ore in use.  It is difficult to find hard data about the pollutants from each and they differ from plant to plant.</p>
-<p>This has made me want to do a carbon footprint analysis of our entire house to see how it all compares. I’ve already done it with some things … to be continued</p>
-<p>See Also: <a href="/carbon-footprint-of-plastic/">The Carbon Footprint of Plastic</a></p>
-<p>Conversions:</p>
-<p>cubic foot of concrete &rarr; 9.56 kg co2 &rarr; 25.8 kwhr &rarr; 88000 BTU of electric heat<br>coal co2 emissions: 0.37 kg / kwhr</p>
-<p>[1] <a href="http://co2cc.wordpress.com/2010/07/20/293/" target="_blank" rel="external">http://co2cc.wordpress.com/2010/07/20/293/</a><br>[2] <a href="http://sustainableenergytoday.blogspot.com/2010/01/carbon-footprint-of-electricity.html" target="_blank" rel="external">http://sustainableenergytoday.blogspot.com/2010/01/carbon-footprint-of-electricity.html</a><br>[3] <a href="http://answers.yahoo.com/question/index?qid=20080712133952AAbDuUs" target="_blank" rel="external">http://answers.yahoo.com/question/index?qid=20080712133952AAbDuUs</a></p>
+        <p>Awesome idea for later:</p>
+<p>Cast a 3” or larger <a href="http://www.nmri.go.jp/eng/khirata/metalwork/basic/bolt/index_e.html" target="_blank" rel="external">tap</a> to cut large threads into window sill. Make same size threaded wooden plug that can screw in tightly. Remove plug to check on insulation in the sill.  Alternatively, could hold a wooden block in place that makes a perfect fit in a square hole and use embedded magnets to pull it out.</p>
+<p>This can all be done later though.  We could start by leaving it sealed up and drilling/cutting a hole in it later to check on things.</p>
 
       
     </div>
@@ -158,21 +157,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-04T00:59:04.637Z"><a href="/blog/single-instance-application-with-command-line-interface/">2015-10-03</a></time>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/window-building-musing/">2013-01-01</a></time>
       
       
   
-    <h1 class="title"><a href="/blog/single-instance-application-with-command-line-interface/"> Single Instance Application with command line interface </a></h1>
+    <h1 class="title"><a href="/blog/window-building-musing/"> Window Building Musing </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>I wanted a python gtk application to open a new window on its first execution and then have subsequent executions send their command line arguments to the initial application rather than starting a new one.  Here is the template which provides that functionality:</p>
-<p>download <a href="/files/singleinstanceapp.py">singleinstanceapp.py</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="string">"""</span><br><span class="line">This will only spawn one gtk application at a time.  If this command is executed </span><br><span class="line">while an instance is already running, the command line arguments are sent to the</span><br><span class="line">already running application.</span><br><span class="line">"""</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> pygtk</span><br><span class="line">pygtk.require(<span class="string">'2.0'</span>)</span><br><span class="line"><span class="keyword">import</span> gtk</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> SocketServer</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadedTCPRequestHandler</span><span class="params">(SocketServer.BaseRequestHandler)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(self)</span>:</span></span><br><span class="line">		data = self.request.recv(<span class="number">1024</span>)</span><br><span class="line">		cur_thread = threading.currentThread()</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># do something with the request:</span></span><br><span class="line">		self.server.app.label.set_label(data)</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># could instead of the length of the input, could return error codes, more</span></span><br><span class="line">		<span class="comment"># information (if the request was a query), etc.  Using a length function</span></span><br><span class="line">		<span class="comment"># as a simple example</span></span><br><span class="line">		response = <span class="string">'string length: %d'</span> % len(data)</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">print</span> <span class="string">'responding to'</span>,data,<span class="string">'with'</span>,response</span><br><span class="line">		self.request.send(response)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadedTCPServer</span><span class="params">(SocketServer.ThreadingMixIn, SocketServer.TCPServer)</span>:</span></span><br><span class="line">	stopped = <span class="keyword">False</span></span><br><span class="line">	allow_reuse_address = <span class="keyword">True</span></span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">serve_forever</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">while</span> <span class="keyword">not</span> self.stopped:</span><br><span class="line">			self.handle_request()</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">force_stop</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.server_close()</span><br><span class="line">		self.stopped = <span class="keyword">True</span></span><br><span class="line">		self.create_dummy_request()</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">create_dummy_request</span><span class="params">(self)</span>:</span></span><br><span class="line">		client(self.server_address[<span class="number">0</span>], self.server_address[<span class="number">1</span>], <span class="string">'last message for you'</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">client</span><span class="params">(ip, port, message)</span>:</span></span><br><span class="line">	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">	sock.connect((ip, port))</span><br><span class="line">	sock.send(message)</span><br><span class="line">	response = sock.recv(<span class="number">1024</span>)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Received: %s"</span> % response</span><br><span class="line">	sock.close()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_server</span><span class="params">(host, port)</span>:</span></span><br><span class="line"> </span><br><span class="line">	server = ThreadedTCPServer((host, port), ThreadedTCPRequestHandler)</span><br><span class="line">	ip, port = server.server_address</span><br><span class="line"> </span><br><span class="line">	<span class="comment"># Start a thread with the server -- that thread will then start one</span></span><br><span class="line">	<span class="comment"># more thread for each request</span></span><br><span class="line">	server_thread = threading.Thread(target=server.serve_forever)</span><br><span class="line">	<span class="comment"># Exit the server thread when the main thread terminates</span></span><br><span class="line">	server_thread.setDaemon(<span class="keyword">True</span>)</span><br><span class="line">	server_thread.start()</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> server</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleInstanceApp</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">destroy</span><span class="params">(self, widget, data=None)</span>:</span></span><br><span class="line">		self.server.force_stop()</span><br><span class="line">		gtk.main_quit()</span><br><span class="line">		<span class="comment">#exit(1) # I'm sorry but mozembed is making a huge pain in my ass</span></span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, server)</span>:</span></span><br><span class="line">		self.server = server</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># create a new window</span></span><br><span class="line">		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)</span><br><span class="line">		self.window.set_default_size(<span class="number">300</span>,<span class="number">30</span>)</span><br><span class="line">		self.window.connect(<span class="string">"destroy"</span>, self.destroy)</span><br><span class="line"> </span><br><span class="line">		self.label = gtk.Label(<span class="string">"hello world"</span>)</span><br><span class="line">		self.window.add(self.label)</span><br><span class="line"> </span><br><span class="line">		self.window.show_all()</span><br><span class="line"> </span><br><span class="line">		<span class="comment"># and the window</span></span><br><span class="line">		self.window.show()</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(self)</span>:</span></span><br><span class="line">		gtk.gdk.threads_init()</span><br><span class="line">		gtk.main()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">	<span class="comment"># pick some high port number here.  Should probably put this into a file </span></span><br><span class="line">	<span class="comment"># somewhere.</span></span><br><span class="line">	HOST, PORT = <span class="string">"localhost"</span>, <span class="number">50010</span></span><br><span class="line"> </span><br><span class="line">	server = <span class="keyword">None</span></span><br><span class="line">	<span class="keyword">try</span> :</span><br><span class="line">		client(HOST, PORT, <span class="string">' '</span>.join(sys.argv))</span><br><span class="line">		<span class="keyword">print</span> <span class="string">'an insance was already open'</span></span><br><span class="line">	<span class="keyword">except</span> socket.error :</span><br><span class="line">		exceptionType, exceptionValue, exceptionTraceback = sys.exc_info()</span><br><span class="line">		<span class="keyword">if</span> exceptionValue[<span class="number">0</span>] == <span class="number">111</span> :</span><br><span class="line">			<span class="keyword">print</span> <span class="string">'this is the first instance'</span></span><br><span class="line">			server = start_server(HOST, PORT)</span><br><span class="line">		<span class="keyword">else</span> :</span><br><span class="line">			<span class="comment"># don't actually know what happened ...</span></span><br><span class="line">			<span class="keyword">raise</span></span><br><span class="line"> </span><br><span class="line">		app = SingleInstanceApp(server)</span><br><span class="line">		server.app = app</span><br><span class="line">		app.main()</span><br></pre></td></tr></table></figure>
-<p>The first execution of this script starts an asynchronous server on a predetermined port.  This port is checked each time the script is run to see if another instance has already been started.  If it has, the command line arguments are sent to the existing instance which can react to them however you want.</p>
-<p>download <a href="/files/singleinstanceapp.py">singleinstanceapp.py</a></p>
+        <p>On the one hand I don’t want to deal with the time and complexity of building windows, on the other and, especially on the south wall, I like the idea of being able to build them all our selves and make them fit well …</p>
 
       
     </div>
@@ -195,7 +190,206 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-04T00:58:04.601Z"><a href="/blog/tip-ceb-blocks-zipties/">2015-10-03</a></time>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/what-species-of-wood-should-be-used-for-bond-beams-lintels-gringo-blocks-etc-when-building-a-ceb-wall-if-i-dont-want-to-treat-the-wood-with-chemicals/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/what-species-of-wood-should-be-used-for-bond-beams-lintels-gringo-blocks-etc-when-building-a-ceb-wall-if-i-dont-want-to-treat-the-wood-with-chemicals/"> What species of wood should be used for bond beams, lintels, gringo blocks, etc. when building a CEB wall, if I don&#39;t want to treat the wood with chemicals? </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>It appears no to matter much, but around here (Bloomington, Indiana) the most common rot resistant woods are Black Locust, White Oak and Cedar. I might just wind up using poplar because it is easy to source and cheap. Especially for the wood parts that aren’t in direct contact with the CEBs. Not sure if black Locust everywhere that touches the CEBs is overkill …</p>
+<p>Tip seems to think that poplar should be fine, especially if it is coated with pine tar in places it touches the CEBs.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/welcome/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/welcome/"> Welcome </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Hello, this is where I post content that I want to share.  Most of it is simple information about programming problems I’ve run into.  Hopefully there will be more posts about the house that I’m building on the land that we’re buying with a new cooperative we’re starting in Bloomington Indiana!</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/webpy-error-no-socket-could-be-created/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/webpy-error-no-socket-could-be-created/"> web.py: error: No socket could be created </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>This error message most often occurrs when trying to run web.py on an invalid address and port.  An example of an invalid address would be  example.net, instead of a proper ip address like 98.228.37.242.</p>
+<h2 id="Other_Causes:">Other Causes:</h2><p>Was just trying to get a simple web.py test running:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line"> </span><br><span class="line">urls = (</span><br><span class="line">  <span class="string">'/x'</span>, <span class="string">'X'</span>,</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> :</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span> :</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'x'</span></span><br><span class="line"> </span><br><span class="line">app = web.application(urls, globals())</span><br><span class="line">app.run()</span><br></pre></td></tr></table></figure>
+<p>but I kept getting the error:</p>
+<p> error: No socket could be created </p>
+<p>The problem was that due to the way web.py loading works, you need to have the creation and running of the app only occur if this is the main entry point of the program.  Otherwise, the class loader in web.py will reload this file again later, and wind up spawning a new server when its intent was simply to load a class:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</span><br><span class="line">  app = web.<span class="function"><span class="title">application</span><span class="params">(urls, globals()</span></span>)</span><br><span class="line">  app.<span class="function"><span class="title">run</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/ubuntu-1104-on-thinkpad-t420s/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/ubuntu-1104-on-thinkpad-t420s/"> Ubuntu 11.04 on Thinkpad T420s </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Just bought <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16834246117" title="this" target="_blank" rel="external">this</a> thinkpad 420s.  The first thing I did when I got it was install Ubuntu 11.04 on it.  Most everything worked on first install, including things which many people seemed to have problems with on the forums.</p>
+<h3>Working:</h3>
+
+<ul>
+<li>Displays work fine with 3d effects and everything (dual monitor with and without docking station) (Intel HD Graphics 3000)</li>
+<li>Built in speakers and headphone jack both work</li>
+<li>Built-in mic and web-cam both work - I used skype and google hangouts and both worked flawlessly.</li>
+<li>wireless worked with my open network connection (I haven’t yet tried it on secure networks)</li>
+<li>Bay battery seems to work.</li>
+</ul>
+<h3>Not Working:</h3>
+
+<ul>
+<li>Audio output on docking station</li>
+<li>Dual Displays sometimes reset to showing the same image on both rather than two seperate displays.  This has always been fixed by reseting the settings in the Monitor configuration page.</li>
+</ul>
+<p>I am impressed with how flawless the install was.  I was dreading it because last time I did this on my last laptop 4 years ago, I spent a few hours getting everything in working order.  So far I have not yet had to do any custom installation.  Everything that I needed working, worked out of the box!</p>
+<p>Let me know if you want me to test anything out and I’ll try if I can.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/tp-link-tl-wn722n-on-ubuntu-1004/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/tp-link-tl-wn722n-on-ubuntu-1004/"> TP-Link TL-WN722N on Ubuntu 10.04 </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Note: according <a href="http://ricardolopes.net/blog/tutorial-my-perfect-linux-setup-with-fedora-15-lovelock/" title="this guy" target="_blank" rel="external">this guy</a> this set of steps also works for Fedora 15.</p>
+<p>I had a lot of trouble getting this card to work.  Here is how I finally got it.</p>
+<p>I am running 2.6.32-30-generic-pae #59-Ubuntu SMP<br>running “lsusb” shows the following line for my device: 0cf3:9271 Atheros Communications, Inc.</p>
+<p>I tried a bunch of different compat-wireless versions and <a href="http://www.orbit-lab.org/kernel/compat-wireless-2.6-stable/v2.6.38/compat-wireless-2.6.38.2-2.tar.bz2" target="_blank" rel="external">this one</a> finally did it.  At the time, it was the latest stable release.  The daily snapshots were causing kernel panics … Download it, decompress it and build it:</p>
+<p>$ tar xvf compat-wireless-2.6.38.2-2.tar.bz2<br>$ cd compat-wireless-2.6.38.2-2<br>$ ./scripts/driver-select ath9k_htc<br>$ sudo make<br>$ sudo make install</p>
+<p>I had to download version 1.2 of htc_9271.fw the firmware from <a href="http://wireless.kernel.org/download/htc_fw/" target="_blank" rel="external">here</a> and copied the file to /lib/firmware.</p>
+<p>I was getting wlan%d instead of something reasonable like wlan0. Running sudo ifconfig wlan%d showed me the mac address which I could use to add an entry to /etc/udev/rules.d/70-persistent-net.rules.  Heres the entry I added: (note that the browser adds newlines here, but you should add just two lines: one for the comment, and one for the rule)</p>
+<h1 id="USB_device_0x0cf3:0x9271_(usb)">USB device 0x0cf3:0x9271 (usb)</h1><p>SUBSYSTEM==”net”, ACTION==”add”, DRIVERS==”?<em>“, ATTR{address}==”54:e6:fc:94:91:35”, ATTR{dev_id}==”0x0”, ATTR{type}==”1”, KERNEL==”wlan</em>“, NAME=”wlan2”</p>
+<p>reload the drivers by running:</p>
+<p>sudo modprobe ath9k_htc</p>
+<p>Now plug in the device.  There were a lot of other steps that I followed while trying to get this to work, so I may have left something out.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/tip-ceb-blocks-zipties/">2013-01-01</a></time>
       
       
   
@@ -209,204 +403,6 @@
 <p>Also got some other questions answered by Tip, though it seems like there are always a million more. It seems like we are starting to gain the confidence in ourselves to not have to ask Tip about each and every detail.</p>
 <p>We pressed some bricks with added lime &amp; sand, just lime and just sand. They definitely feel much stronger and solid. Will be interesting to see how they dry. There were some bricks that were made from some pretty big sized aggregate that turned out pretty bad, but the others are looking pretty good.</p>
 <p>Also got a switch installed to control the shaker motor which seems to be doing its job pretty well.  We added some zipties and carboard to the hydraulic cables in an effort to reduce rubbing so that they last longer. It was a little tricky, mostly because the line to the primary cylinder isn’t long enough and so is pretty taught and inflexible.  This made it hard to ziptie it in a way that would prevent it from rubbing.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-04T00:45:48.001Z"><a href="/blog/the-carbon-footprint-of-plastic/">2015-10-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/the-carbon-footprint-of-plastic/"> The Carbon Footprint of Plastic </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>We’ve been discussing the materials used in our new house and are pretty set on not using any plastic.  However, there are a few key places where it might be extremely helpful so I decided to look into how bad it really is (from a carbon footprint perspective).  I am still strongly opposed to having exposed plastic that would off-gas and degrade into the air, but if it is built into the structure maybe I wouldn’t mind quite so much.  Here are the numbers I came up with:</p>
-<ul>
-<li>600 square feet of 6 mil plastic &rarr; 100 kilowatt hours of electricity</li>
-<li>100’ of 3/4” PEX tubing &rarr; 45 kilowatt hours of electricity</li>
-</ul>
-<p>This is only counting the manufacture of the materials I believe, not the transport of the finished product.  for a reference point, our current house uses about ~120 kilowatt hours of electricity per month.  The average home in the US uses about 800 kilowatt hours.  This will be helpful in determining when we want to use plastic.</p>
-<p>Sources:</p>
-<ul>
-<li><a href="http://timeforchange.org/plastic-bags-and-plastic-bottles-CO2-emissions" target="_blank" rel="external">6 kg CO2 per kg of plastic</a></li>
-<li><a href="http://www.carbonfund.org/site/pages/carbon_calculators/category/Assumptions" target="_blank" rel="external">1.306lbs CO2 per kWh of electricity</a></li>
-<li><a href="http://www.arizonabag.com/product/Poly-Film:--6-mil/631/" target="_blank" rel="external">weight of 6 mil plastic</a></li>
-<li><a href="http://www.trueleaf.net/heat/hot_water_systems/HDX_and_GreenPEX" target="_blank" rel="external">weight of PEX</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-04T00:44:01.349Z"><a href="/blog/wmctrl/">2015-10-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/wmctrl/"> w </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Just remembered that I hadn’t published this script that I use fairly often which centers the currently active window on the screen using wmctrl (requires the patch provided)</p>
-<p><a href="/files/wmctrl.diffs">wmctrl-patch</a></p>
-<p><a href="/files/center_active_window.py">center_active_window.py</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-04T00:43:21.141Z"><a href="/blog/ceb-wheelbarrow/">2015-10-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/ceb-wheelbarrow/"> CEB Wheelbarrow </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>We have multiple wheelbarrows for moving blocks from the <a href="http://dwiel.net/blog/ceb-press-slide" target="_blank" rel="external">slide</a> to the <a href="http://dwiel.net/blog/ceb-tarping" target="_blank" rel="external">pallets</a> where we store them, but this one is the easiest and lightest. The bucket of a standard wheel barrow was removed and these pieces of wood were screwed on in its place. I’m not sure it would be worth removing the bucket from an otherwise functioning wheelbarrow, but this one is definitely easier to use than the others.</p>
-<p><a href="/images/IMG_20130813_175059.jpg"></a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-04T00:42:27.237Z"><a href="/blog/thermal-bridging-in-a-ceb-dual-wall-with-cavity-insulation-and-buttresses/">2015-10-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/thermal-bridging-in-a-ceb-dual-wall-with-cavity-insulation-and-buttresses/"> Thermal Bridging in a CEB Dual Wall with Cavity Insulation and Buttresses </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Wall systems made of two CEB walls with cavity insulation lead to unusual (to other wall systems) thermal bridging problems.</p>
-<p>Say you have two walls made of 4” wide block forming a 12” insulation cavity. CEBs have r-value of 0.25 while insulation have an r-value of 2.7. The total r-value is roughly 34.4 which is great:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.25</span>*<span class="number">4</span><span class="string">" + 2.7*12"</span> + <span class="number">0.25</span>*<span class="number">4</span><span class="string">" =&gt; 34.4</span></span><br></pre></td></tr></table></figure>
-<p>Suppose that every 4 blocks, you place a block lengthwise to add some micro-buttresses which give extra strength to the wall. According to the typical linear r-value method, you would do a weighted average of the two different situations:</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span><span class="string">" of insulation: 0.25*4"</span> + <span class="number">2.7</span>*<span class="number">12</span><span class="string">" + 0.25*4"</span> =&gt; <span class="number">34.4</span></span><br><span class="line"><span class="number">4</span><span class="string">" of insulation: 0.25*12"</span> + <span class="number">2.7</span>*<span class="number">4</span><span class="string">" + 0.25*4"</span> =&gt; <span class="number">14.8</span></span><br><span class="line">weighted average (<span class="number">24</span><span class="string">" of 12"</span> thick insulation <span class="keyword">for</span> every <span class="number">4</span><span class="string">" of 4"</span> thick insulation):</span><br><span class="line">    (<span class="number">34.4</span>*<span class="number">24</span><span class="string">" + 14.8*4"</span>)/<span class="number">28</span><span class="string">" =&gt; 31.6</span></span><br></pre></td></tr></table></figure>
-<p>This predicts only a small 8.1% decrease in average r-value resulting in 8.8% of additional heat loss. Not bad given the huge amount of extra strength the micro-buttresses add.</p>
-<p><img src="/images/wall.png" alt="/images/wall.png"></p>
-<h2 id="Therm">Therm</h2><p>I’ve modeled this wall system in THERM, and due to the conductivity of the CEB blocks the heat loss is actually much worse. A rough reading of the renderings THERM provides predicts roughly 50% more heat loss with the buttresses than without. This is because heat travels so well through the CEBs. In areas near to the 4” insulation gap, heat will collect over a large area of the CEB wall, funnel into the 4” thermal bridge and then spread out along the outside wall.</p>
-<p>In the diagrams below, you can see the top half of the wall which has no buttresses, and the wall section below which does. The color indicates heat flow in BTU/hr*ft^2. High numbers are bad. I’ve set up the scale of the left diagram so that any white section indicates that the heat loss is more than 20% higher than it would be without the buttresses. This is most of the wall. In the second diagram you can see that large sections of the wall are loosing heat at 2.5x the rate that they would without the buttresses.</p>
-<p><img src="/images/wall-20p.png" alt="/images/wall-20p.png"> <img src="/images/wall250p.png" alt="/images/wall250p.png"></p>
-<h2 id="Conclusion">Conclusion</h2><p>Adding buttresses can help with the strength of the wall, but detrimentally effect the insulating value of your cavity.</p>
-<h2 id="The_Flip_Side">The Flip Side</h2><p>On the other hand, CEBs high conductivity makes them great at quickly absorbing and evenly distributing heat throughout the house that is gained through passive solar design. They act as great heat sinks in the winter and cool sinks in the summer.</p>
-<p><a href="/files/CEB-Bridge-ose.THM">Here</a> is the THERM model used in the above examples</p>
-<p>Note to OSE Microhouse designers: I haven’t run this example with your proposed 2” thermal breaks, but I imagine that they will loose heat at least twice as fast as a linear analysis might predict.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-10-03T04:19:18.851Z"><a href="/blog/swarms/">2015-10-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/swarms/"> Swarms </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>So I’ve been experimenting with generating swarms and was able to get some basic code working pretty quickly thanks to some <a href="http://nehe.gamedev.net/data/articles/article.asp?article=06" target="_blank" rel="external">Particle Systems</a> example code on <a href="http://nehe.gamedev.net/" target="_blank" rel="external">NeHe</a>.  Here are some of my first steps:</p>
-<iframe frameborder="0" height="300" src="http://player.vimeo.com/video/4022251" width="400"></iframe>
-
-<iframe frameborder="0" height="300" src="http://player.vimeo.com/video/4022667" width="400"></iframe>
-
-<p>I think the next step is going to be to get multiple swarms each operating on different rules in the same space interacting.</p>
 
       
     </div>

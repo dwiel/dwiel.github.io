@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# echo "date: 2013-01-01" | cat - $1 > /tmp/out
+# cat $1 | awk 'NR==1{print; print "date: 2013-01-01"} NR!=1' > /tmp/out
+# mv /tmp/out $1
+for file in _posts/*;
+do
+    echo $file
+    cat $file | awk 'NR==1{print; print "date: 2013-01-01"} NR!=1' > /tmp/out
+    mv /tmp/out $file
+done
