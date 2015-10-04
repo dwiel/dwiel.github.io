@@ -83,18 +83,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.951Z"><a href="/2015/10/02/ceb-wheelbarrow/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.951Z"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/ceb-wheelbarrow/"> CEB Wheelbarrow </a></h1>
+    <h1 class="title"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>We have multiple wheelbarrows for moving blocks from the <a href="http://dwiel.net/blog/ceb-press-slide" target="_blank" rel="external">slide</a> to the <a href="http://dwiel.net/blog/ceb-tarping" target="_blank" rel="external">pallets</a> where we store them, but this one is the easiest and lightest. The bucket of a standard wheel barrow was removed and these pieces of wood were screwed on in its place. I’m not sure it would be worth removing the bucket from an otherwise functioning wheelbarrow, but this one is definitely easier to use than the others.</p>
-<p><a href="http://dwiel.net/wp-content/uploads/2013/08/IMG_20130813_175059.jpg" target="_blank" rel="external"></a></p>
+        <p>The code I had that caused this problem looked like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>If this were a normal call to foo, the error instead would be:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
+<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>Even this would be ok:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -117,24 +123,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-10-03T03:56:52.951Z"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2015-10-02</a></time>
+        <time datetime="2015-10-03T03:56:52.951Z"><a href="/2015/10/02/ceb-wheelbarrow/">2015-10-02</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/10/02/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
+    <h1 class="title"><a href="/2015/10/02/ceb-wheelbarrow/"> CEB Wheelbarrow </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>The code I had that caused this problem looked like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
-<p>If this were a normal call to foo, the error instead would be:</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
-<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
-<p>Even this would be ok:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+        <p>We have multiple wheelbarrows for moving blocks from the <a href="http://dwiel.net/blog/ceb-press-slide" target="_blank" rel="external">slide</a> to the <a href="http://dwiel.net/blog/ceb-tarping" target="_blank" rel="external">pallets</a> where we store them, but this one is the easiest and lightest. The bucket of a standard wheel barrow was removed and these pieces of wood were screwed on in its place. I’m not sure it would be worth removing the bucket from an otherwise functioning wheelbarrow, but this one is definitely easier to use than the others.</p>
+<p><a href="http://dwiel.net/wp-content/uploads/2013/08/IMG_20130813_175059.jpg" target="_blank" rel="external"></a></p>
 
       
     </div>
