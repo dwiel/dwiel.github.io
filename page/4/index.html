@@ -49,6 +49,46 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/picloud-simulation-oserror-errno-13-permission-denied/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/picloud-simulation-oserror-errno-13-permission-denied/"> PiCloud Simulation: OSError: [errno 13] permission denied </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I tried running a PiCloud simulation on Ubuntu 10.04 on linode and got the following error:</p>
+<p>OSError: [errno 13] permission denied</p>
+<p>I found the solution <a href="http://stackoverflow.com/questions/2009278/python-multiprocessing-permission-denied/2009505#2009505" target="_blank" rel="external">here</a>:</p>
+<p>add the following line to your fstab and reboot:</p>
+<p>none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0</p>
+<p>If you don’t want to reboot, a temporary fix might be:</p>
+<p>sudo chgrp $GROUP /dev/shm<br>sudo chmod g+w /dev/shm</p>
+<p>That last part might not be the best way to do it, but it worked for me.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/wmctrl/">2013-01-01</a></time>
       
       
@@ -362,43 +402,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/introducing-quiqi/">2013-01-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/introducing-quiqi/"> Introducing Quiqi </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><a href="http://quiqi.org/" target="_blank" rel="external">Quiqi</a> is a <a href="http://userscripts.org/scripts/show/63868" target="_blank" rel="external">greasemonkey script</a> and firefox plugin which shows you quick answers to your search queries inline and unobtrusively in Google searches. Quick answers are provided by users, editable by anyone.</p>
-<p>Some example answers (so far mostly answers to programming questions):</p>
-<p>ruby string to int -&gt; str.to_i<br>apt-get ab -&gt; apt-get install apache2-utils<br>jquery checkbox status -&gt; .is(\’:checked\’)<br>js string to int -&gt; parseInt(str)<br>usb 2 speed -&gt; 480Mbps<br>javascript array copy -&gt; new_copy = original.slice()<br>php referrer -&gt; $_SERVER[‘HTTP_REFERER’]<br>water couscous -&gt; 1 1/2:1 water to couscous<br>when to plant thyme -&gt; outside: 2 weeks after average last frost or when soil is &ge; 70&deg; inside: 8 weeks before last frost<br>error: &lsquo;memcpy&rsquo; was not declared in this scope -&gt; #include </p>
-<p>And an example screen shot.  Notice how the answer isn’t provided in the excerpted content.</p>
-<p><img src="/images/1.png" alt="Example 1"></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -430,7 +433,7 @@
   
     <li><a href="/tags/CEB-Press/">CEB Press</a><small>6</small></li>
   
-    <li><a href="/tags/Code/">Code</a><small>15</small></li>
+    <li><a href="/tags/Code/">Code</a><small>16</small></li>
   
     <li><a href="/tags/Data-Exploration/">Data Exploration</a><small>1</small></li>
   

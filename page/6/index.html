@@ -49,6 +49,44 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/clustering-items-by-tag/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/clustering-items-by-tag/"> Clustering items by tag </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>I write notes in axpress, my still private web front end to a triple store.  The notes have a body and a set of tags.  Most notes are thoughts about problems I encounter while programming, explanations of design decisions.  They have come in handy as a reference a few times, but the information in them is often hard to find, even with tags.  I also find writing tags tedious.  I’ve decided to look through the various set of tagged items, my notes and my bookmarks to start, to see what kind of patterns I can find.</p>
+<p>I used <a href="http://www.graphviz.org/" title="graphviz" target="_blank" rel="external">graphviz</a> to get a quick visualization of the relationships between each tag.  Each tag is a node.  Each node is labeled by the tag name and the number of notes it appears in.  The closer two nodes, the more often they occurred in the same notes.  Only tags which were connected to more than 1 other tag were included in the visualization to reduce the complexity.</p>
+<p>From here, some basic patterns can be seen.some basic subgraphs can be seen.  “trade”, “local” and “books” all stem from “economy” only.  “economy” is probably a good tag to classify that group of notes where “trade”, “local” and “books” are sub tags.  A similar pattern can be seen coming from the express tag (which is the old name of this project).  Coming from it are some tags which I don’t seem to note any more.</p>
+<p>Only visualizing pairs of tags which occurred more than 3 times, show which (common) tags are used with which other (common) tags, but not how often.  It is interesting to see which tags are independent of others.  “axpress” and “express” do not occur together often.  It might be possible to use this type of graph to find a set of tags which partition the entire set of notes efficiently.  This, hopefully small, set of tags could be used as a starting point for drilling down to find a note you are looking for.</p>
+<p>For this next graph I wanted to see how ‘thick’ the connections between each node was.  That is, from “axpress” how many links are there to “case”?  How many to “design”?  Are there any tags which occur with nearly every instance of “axpress” or are they uniformly distributed?  The darker a node is, the more occurences of that tag there are (color corresponds linearly to number in the label).  The color on the end of each link correspond to the relative number of connections represented by that link.  For example coming from “code” is a dark green node to “axpress” and a lighter cyan to “case”.  This is because there are twice as many connections from “code” to “axpress” as to “case”.  From most tags, it seems that there is a relatively uniform number of connections to each other tag.</p>
+<p>This set is rather limited, so I am considering a few different next steps.  I could use the text of the note in a similar kind of analysis - increasing the number of tags, leaving the number of tagged items alone.  Or I could use data from delicious (either my own, or a small set of users) to increase the number of tagged items while leacing the number of tags relatively small.  What would you like to see done next?  Something else entirely?</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/ceb-wheelbarrow/">2013-01-01</a></time>
       
       
@@ -390,42 +428,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/apparmor-file-locks-mysql-and-innodb/">2013-01-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/apparmor-file-locks-mysql-and-innodb/"> Apparmor, file locks, MySQL and Innodb </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>In my syslogs I was getting this:<br>Oct 10 23:48:51 dwiel-srv kernel: [  141.664049] type=1503 audit(1349927331.203:107):  operation=”file_lock” pid=2192 parent=1 profile=”/usr/sbin/mysqld” requested_mask=”k::” denied_mask=”k::” fsuid=113 ouid=113 name=”/home/mysql/ibdata1”</p>
-<p>It turns out that the problem was that the problem was because in /etc/apparmor.d/usr.sbin.mysqld I had the lines:<br>/home/mysql/ rw,<br>  /home/mysql/** rw,</p>
-<p>instead of the lines:<br>/home/mysql/ rw,<br>  /home/mysql/** rwk,</p>
-<p>Note the k at the end of the second line which enables mysqld to make file locks</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -457,7 +459,7 @@
   
     <li><a href="/tags/CEB-Press/">CEB Press</a><small>6</small></li>
   
-    <li><a href="/tags/Code/">Code</a><small>15</small></li>
+    <li><a href="/tags/Code/">Code</a><small>16</small></li>
   
     <li><a href="/tags/Data-Exploration/">Data Exploration</a><small>1</small></li>
   

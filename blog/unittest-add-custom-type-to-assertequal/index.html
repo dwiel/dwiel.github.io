@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title> Rails Headers  | Zach Dwiel</title>
+  <title>how to add a custom type to unittest.TestCase.assertEqual | Zach Dwiel</title>
   <meta name="author" content="Zach Dwiel">
   
-  <meta name="description" content="You can access header values from rails from the request.env hash.  request.env contains a lot of other non HTTP header values.  The header name is a ">
+  <meta name="description" content="If you would like your TestCase class to understand one of your custom types as if it were standard, use addTypeEqualityFunc to supply a custom compar">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content=" Rails Headers "/>
+  <meta property="og:title" content="how to add a custom type to unittest.TestCase.assertEqual"/>
   <meta property="og:site_name" content="Zach Dwiel"/>
 
   
@@ -50,28 +50,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/rails-headers/">2013-01-01</a></time>
+        <time datetime="2015-10-17T04:00:00.000Z"><a href="/blog/unittest-add-custom-type-to-assertequal/">2015-10-17</a></time>
       
       
   
-    <h1 class="title"> Rails Headers </h1>
+    <h1 class="title">how to add a custom type to unittest.TestCase.assertEqual</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>You can access header values from rails from the request.env hash.  request.env contains a lot of other non HTTP header values.  The header name is a bit transformed too:</p>
-<ul>
-<li>prepended with HTTP_</li>
-<li>converted to uppercase</li>
-<li>dashes converted to undersocres</li>
-<li>… more?</li>
-</ul>
-<p>Example:</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">curl -H <span class="string">'x-custom-value: foo'</span> <span class="string">http:</span><span class="comment">//example.com/</span></span><br></pre></td></tr></table></figure>
-<p>can be accessed in rails with:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">request<span class="class">.env</span>[<span class="string">'HTTP_X_CUSTOM_VALUE'</span>]</span><br></pre></td></tr></table></figure>
-
+        <p>If you would like your TestCase class to understand one of your custom types as if it were standard, use addTypeEqualityFunc to supply a custom comparison function.</p>
+<p>source: <a href="https://github.com/python/cpython/blob/master/Lib/unittest/case.py#L415" target="_blank" rel="external">unittest/case.py:415</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def addTypeEqualityFunc(self, typeobj, function):</span><br><span class="line">    """Add a type specific assertEqual style function to compare a type.</span><br><span class="line">    This method is for <span class="operator"><span class="keyword">use</span> <span class="keyword">by</span> TestCase subclasses that need <span class="keyword">to</span> <span class="keyword">register</span></span><br><span class="line">    their own <span class="keyword">type</span> equality functions <span class="keyword">to</span> provide nicer <span class="keyword">error</span> messages.</span><br><span class="line">    Args:</span><br><span class="line">        typeobj: The <span class="keyword">data</span> <span class="keyword">type</span> <span class="keyword">to</span> <span class="keyword">call</span> this <span class="keyword">function</span> <span class="keyword">on</span> <span class="keyword">when</span> <span class="keyword">both</span> <span class="keyword">values</span></span><br><span class="line">                <span class="keyword">are</span> <span class="keyword">of</span> the same <span class="keyword">type</span> <span class="keyword">in</span> assertEqual().</span><br><span class="line">        <span class="keyword">function</span>: The callable taking two arguments <span class="keyword">and</span> an optional</span><br><span class="line">                msg= argument that raises <span class="keyword">self</span>.failureException <span class="keyword">with</span> a</span><br><span class="line">                useful <span class="keyword">error</span> message <span class="keyword">when</span> the two arguments <span class="keyword">are</span> <span class="keyword">not</span> equal.</span><br><span class="line">    <span class="string">"""</span><br><span class="line">    self._type_equality_funcs[typeobj] = function</span></span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -106,7 +97,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://dwiel.github.io/blog/rails-headers/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://dwiel.github.io/blog/unittest-add-custom-type-to-assertequal/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

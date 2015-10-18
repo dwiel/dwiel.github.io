@@ -49,6 +49,39 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/ruby-rescue-error-message-example/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/ruby-rescue-error-message-example/"> ruby rescue error message example </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">raise</span> <span class="string">"this is an error message"</span></span><br><span class="line">rescue <span class="keyword">Exception</span> =&gt; <span class="keyword">e</span></span><br><span class="line">  # prints <span class="string">"this is an error message"</span></span><br><span class="line">  puts <span class="keyword">e</span>.message</span><br><span class="line">  # <span class="keyword">or</span> <span class="keyword">if</span> you want the entire <span class="keyword">error</span> message <span class="keyword">with</span> stack <span class="keyword">trace</span> <span class="keyword">and</span> all:</span><br><span class="line">  puts <span class="string">"failed sending weekly power usage to house: #&#123;$!&#125;"</span></span><br><span class="line"><span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/retrospective-on-concrete-foundation/">2013-01-01</a></time>
       
       
@@ -389,46 +422,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/picloud-simulation-oserror-errno-13-permission-denied/">2013-01-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/picloud-simulation-oserror-errno-13-permission-denied/"> PiCloud Simulation: OSError: [errno 13] permission denied </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I tried running a PiCloud simulation on Ubuntu 10.04 on linode and got the following error:</p>
-<p>OSError: [errno 13] permission denied</p>
-<p>I found the solution <a href="http://stackoverflow.com/questions/2009278/python-multiprocessing-permission-denied/2009505#2009505" target="_blank" rel="external">here</a>:</p>
-<p>add the following line to your fstab and reboot:</p>
-<p>none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0</p>
-<p>If you don’t want to reboot, a temporary fix might be:</p>
-<p>sudo chgrp $GROUP /dev/shm<br>sudo chmod g+w /dev/shm</p>
-<p>That last part might not be the best way to do it, but it worked for me.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -460,7 +453,7 @@
   
     <li><a href="/tags/CEB-Press/">CEB Press</a><small>6</small></li>
   
-    <li><a href="/tags/Code/">Code</a><small>15</small></li>
+    <li><a href="/tags/Code/">Code</a><small>16</small></li>
   
     <li><a href="/tags/Data-Exploration/">Data Exploration</a><small>1</small></li>
   

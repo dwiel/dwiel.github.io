@@ -49,25 +49,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2013-01-01</a></time>
+        <time datetime="2015-10-17T04:00:00.000Z"><a href="/blog/unittest-add-custom-type-to-assertequal/">2015-10-17</a></time>
       
       
   
-    <h1 class="title"><a href="/blog/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
+    <h1 class="title"><a href="/blog/unittest-add-custom-type-to-assertequal/">how to add a custom type to unittest.TestCase.assertEqual</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>The code I had that caused this problem looked like this:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
-<p>If this were a normal call to foo, the error instead would be:</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
-<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
-<p>Even this would be ok:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
-
+        <p>If you would like your TestCase class to understand one of your custom types as if it were standard, use addTypeEqualityFunc to supply a custom comparison function.</p>
+<p>source: <a href="https://github.com/python/cpython/blob/master/Lib/unittest/case.py#L415" target="_blank" rel="external">unittest/case.py:415</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def addTypeEqualityFunc(self, typeobj, function):</span><br><span class="line">    """Add a type specific assertEqual style function to compare a type.</span><br><span class="line">    This method is for <span class="operator"><span class="keyword">use</span> <span class="keyword">by</span> TestCase subclasses that need <span class="keyword">to</span> <span class="keyword">register</span></span><br><span class="line">    their own <span class="keyword">type</span> equality functions <span class="keyword">to</span> provide nicer <span class="keyword">error</span> messages.</span><br><span class="line">    Args:</span><br><span class="line">        typeobj: The <span class="keyword">data</span> <span class="keyword">type</span> <span class="keyword">to</span> <span class="keyword">call</span> this <span class="keyword">function</span> <span class="keyword">on</span> <span class="keyword">when</span> <span class="keyword">both</span> <span class="keyword">values</span></span><br><span class="line">                <span class="keyword">are</span> <span class="keyword">of</span> the same <span class="keyword">type</span> <span class="keyword">in</span> assertEqual().</span><br><span class="line">        <span class="keyword">function</span>: The callable taking two arguments <span class="keyword">and</span> an optional</span><br><span class="line">                msg= argument that raises <span class="keyword">self</span>.failureException <span class="keyword">with</span> a</span><br><span class="line">                useful <span class="keyword">error</span> message <span class="keyword">when</span> the two arguments <span class="keyword">are</span> <span class="keyword">not</span> equal.</span><br><span class="line">    <span class="string">"""</span><br><span class="line">    self._type_equality_funcs[typeobj] = function</span></span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -89,17 +83,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/wx-1b-4200jwlau-datasheet/">2013-01-01</a></time>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/">2013-01-01</a></time>
       
       
   
-    <h1 class="title"><a href="/blog/wx-1b-4200jwlau-datasheet/"> WX-1B-4200J/WLAU Datasheet </a></h1>
+    <h1 class="title"><a href="/blog/picklepicklingerror-function-to-be-pickled-has-free-variables-that-are-referenced-before-assignment-in-enclosing-scope/"> pickle.PicklingError: Function to be pickled has free variables that are referenced before assignment in enclosing scope </a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Spent a while looking for the datasheet for Nason’s WX-1B-4200J/WLAU.  Here it is: <a href="http://www.nasonptc.com/pdfs/Switches_Catalog.pdf#page=15" target="_blank" rel="external">pdf</a>, see page 15.</p>
+        <p>The code I had that caused this problem looked like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>If this were a normal call to foo, the error instead would be:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnboundLocalError: <span class="built_in">local</span> <span class="built_in">variable</span> <span class="string">'y'</span> referenced <span class="keyword">before</span> assignment</span><br></pre></td></tr></table></figure>
+<p>The fix is to make sure that all variables used in foo have values at the time that it is pickled:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
+<p>Even this would be ok:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span> :</span></span><br><span class="line">    <span class="keyword">print</span> y</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> x :</span><br><span class="line">    y = x</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    y = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">cloud.pickle(foo)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -296,6 +297,39 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/wx-1b-4200jwlau-datasheet/">2013-01-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/blog/wx-1b-4200jwlau-datasheet/"> WX-1B-4200J/WLAU Datasheet </a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Spent a while looking for the datasheet for Nason’s WX-1B-4200J/WLAU.  Here it is: <a href="http://www.nasonptc.com/pdfs/Switches_Catalog.pdf#page=15" target="_blank" rel="external">pdf</a>, see page 15.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/ubuntu-1104-on-thinkpad-t420s/">2013-01-01</a></time>
       
       
@@ -383,42 +417,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-01T05:00:00.000Z"><a href="/blog/tip-ceb-blocks-zipties/">2013-01-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/blog/tip-ceb-blocks-zipties/"> Tip, CEB Blocks, Zipties </a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>I had a great meeting with Tip, a nice day out in town and then pressed a few more bricks. One of the best parts of the meeting with Tip was his change of mind in the difficulty of building our own windows and doors. This was one of the last jobs that he didn’t think we’d be able to do, and I feel confident now that we can do it, and that we can get exactly what we want by doing it that way.</p>
-<p>Also got some other questions answered by Tip, though it seems like there are always a million more. It seems like we are starting to gain the confidence in ourselves to not have to ask Tip about each and every detail.</p>
-<p>We pressed some bricks with added lime &amp; sand, just lime and just sand. They definitely feel much stronger and solid. Will be interesting to see how they dry. There were some bricks that were made from some pretty big sized aggregate that turned out pretty bad, but the others are looking pretty good.</p>
-<p>Also got a switch installed to control the shaker motor which seems to be doing its job pretty well.  We added some zipties and carboard to the hydraulic cables in an effort to reduce rubbing so that they last longer. It was a little tricky, mostly because the line to the primary cylinder isn’t long enough and so is pretty taught and inflexible.  This made it hard to ziptie it in a way that would prevent it from rubbing.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -448,7 +446,7 @@
   
     <li><a href="/tags/CEB-Press/">CEB Press</a><small>6</small></li>
   
-    <li><a href="/tags/Code/">Code</a><small>15</small></li>
+    <li><a href="/tags/Code/">Code</a><small>16</small></li>
   
     <li><a href="/tags/Data-Exploration/">Data Exploration</a><small>1</small></li>
   
